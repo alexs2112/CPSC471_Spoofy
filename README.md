@@ -10,11 +10,29 @@ Additionally, see the [Diagrams](Diagrams/Diagrams.md) to inspect individual dia
 
 ## Code Development
 
-Using PHP as the frontend framework, with MySQL as the database.
+**Tools**:
+ - PHP as the frontend
+ - Apache as the server
+ - MySQL as the database
 
 Clone the project to a local directory:
 
  - `git clone https://github.com/alexs2112/CPSC471_Spoofy.git`
+
+
+## PHP and Apache Server Setup
+
+AppServ ([download](https://www.appserv.org/en/download/)) will handle setting up PHP and Apache. Ensure that these are added to your PATH. Don't install mysql if it is already installed.
+
+Once AppServ is installed, you need to edit the Apache default `DocumentRoot` to our working directory.
+ - Navigate to the AppServ install (default: `C:\AppServ\Apache24`)
+ - Open `conf\httpd.conf` (make a backup copy just in case)
+ - Ctrl-F to find `DocumentRoot`, set this to point to `Spoofy` in the project directory
+ - You may need to run `httpd -d C:<project_dir>\Spoofy`
+ - Restart Apache with the `Apache Restart` utility installed with AppServ
+ - Go to your webbrowser and go to `localhost` (optionally `localhost:80`)
+
+Apache logs should be stored at `C:\AppServ\Apache24\logs`
 
 ## Linking with MySQL
 The first thing that needs to be created is the `SpoofyDB` database. This can be done through the mysql command line utility.
@@ -29,7 +47,7 @@ We will be using a test user between all contributors to not have to worry about
 To add this user to MySQL through the command line utility:
 ```
 CREATE USER 'spoofyUser'@'localhost'
-    IDENTIFIED BY 'testing';
+    IDENTIFIED WITH mysql_native_password BY 'testing';
 GRANT ALL PRIVILEGES 
     ON SpoofyDB.* 
     TO 'spoofyUser'@'localhost' 
