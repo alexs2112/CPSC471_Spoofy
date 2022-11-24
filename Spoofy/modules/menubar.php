@@ -1,5 +1,4 @@
 <?php
-// @todo THESE BUTTONS CURRENTLY DON't WORK IF YOU ARENT IN THE ROOT DIRECTORY
 echo '
 <div class="topnav">
     <a href="/index.php">Home</a>
