@@ -47,6 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
 
+                        // @todo Set session variable if the user is an admin
+
                         // @todo header("location: user.php?UserID=". $row['UserID']);
                         // Get rid of this below header when you do that
                         header("location: ../index.php");

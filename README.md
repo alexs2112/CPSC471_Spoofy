@@ -21,19 +21,7 @@ Clone the project to a local directory:
 
 Small things to be done and cleaned up in the future are marked in comments with `@todo`. 
 
-## PHP and Apache Server Setup
-
-AppServ ([download](https://www.appserv.org/en/download/)) will handle setting up PHP and Apache. Ensure that these are added to your PATH. Don't install mysql if it is already installed.
-
-Once AppServ is installed, you need to edit the Apache default `DocumentRoot` to our working directory.
- - Navigate to the AppServ install (default: `C:\AppServ\Apache24`)
- - Open `conf\httpd.conf` (make a backup copy just in case)
- - Ctrl-F to find `DocumentRoot`, set this to point to `Spoofy` in the project directory
- - You may need to run `httpd -d C:<project_dir>\Spoofy`
- - Restart Apache with the `Apache Restart` utility installed with AppServ
- - Go to your webbrowser and go to `localhost` (optionally `localhost:80`)
-
-Apache logs should be stored at `C:\AppServ\Apache24\logs`
+Our required unfinished tasks are in [Tasks.md](Tasks.md)
 
 ## Linking with MySQL
 The first thing that needs to be created is the `SpoofyDB` database. This can be done through the mysql command line utility.
@@ -72,3 +60,17 @@ If the python script fails to run due to failed imports, you may need to run `pi
 Feel free to add insert queries to the `initialize_data` function in `data.py` to increase the size of our default database. Remember to `refresh` the database whenever you make changes to ensure those changes worked correctly.
 
  - The only data that does not currently have defaults are `Playlist` and `Playlist_Contains`
+
+## PHP and Apache Server Setup
+
+AppServ ([download](https://www.appserv.org/en/download/)) will handle setting up PHP and Apache. Ensure that these are added to your PATH. Don't install mysql if it is already installed.
+
+Once AppServ is installed, you need to edit the Apache default `DocumentRoot` to our working directory.
+ - Navigate to the AppServ install (default: `C:\AppServ\Apache24`)
+ - Open `conf\httpd.conf` (make a backup copy just in case)
+ - Ctrl-F to find `DocumentRoot`, set this to point to `Spoofy` in the project directory
+ - You may need to run `httpd -d C:<project_dir>\Spoofy`
+ - Restart Apache with the `Apache Restart` utility installed with AppServ
+ - Go to your webbrowser and go to `localhost` (optionally `localhost:80`)
+
+Apache logs should be stored at `C:\AppServ\Apache24\logs`. If you open `error.log` in Visual Studio Code or something, it will automatically update the file whenever new logs are created.
