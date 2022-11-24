@@ -19,6 +19,7 @@ Clone the project to a local directory:
 
  - `git clone https://github.com/alexs2112/CPSC471_Spoofy.git`
 
+Small things to be done and cleaned up in the future are marked in comments with `@todo`. 
 
 ## PHP and Apache Server Setup
 

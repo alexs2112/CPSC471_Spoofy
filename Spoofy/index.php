@@ -1,24 +1,20 @@
 <html>
     <head>
-        <title>Spoofy - CPSC 471</title>
+        <title>CPSC 471 - Spoofy</title>
     </head>
     <body>
-        <h2>Hello?</h2>
-        <?php echo "<p>Hello World</p>"; ?>
-        <?php
-            $servername = "localhost";
-            $username = "spoofyUser";
-            $password = "testing";
-            $database = "SpoofyDB";
+    <?php include "modules/menubar.php"; ?>
+    <?php 
+        session_start();
+        if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
+            echo "<h1>Welcome ".$_SESSION["Username"]."!</h1>";
+        } else {
+            echo "<h1>Welcome to Spoofy!</h1>";
+        }
+    ?>
 
-            // Create connection
-            $conn = mysqli_connect($servername, $username, $password, $database);
-
-            // Check connection
-            if (!$conn) {
-                die("<p>Connection failed: " . mysqli_connect_error() . "</p>");
-            }
-            echo "<p>Connected successfully</p>";
-        ?>
+    <!-- @todo Eventually move this to a dedicated Login/Register page -->
+    <a href="/user/login.php">Log In</a>
+    <a href="/user/register.php">Register</a>
     </body>
 </html>
