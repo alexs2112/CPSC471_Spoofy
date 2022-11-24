@@ -2,6 +2,12 @@
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+    // @todo send to user profile
+    header("location: ../index.php");
+ }
+
 // Define variables and initialize with empty values
 $username = "";
 $password = "";

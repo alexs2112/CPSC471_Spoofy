@@ -10,7 +10,7 @@
             $ID = $_GET["SongID"];
 
             // Perform mysql query
-            $result = mysqli_query($con, "SELECT * FROM Song WHERE SongID=".$ID);
+            $result = mysqli_query($con, "SELECT * FROM SONG WHERE SongID=".$ID);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
             // Display Song Details

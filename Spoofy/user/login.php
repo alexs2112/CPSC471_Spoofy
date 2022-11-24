@@ -2,9 +2,11 @@
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 
-// @todo Handle if the user is already logged in, send them to their profile
-// session_start();
-// if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { do stuff; }
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+    // @todo send to user profile
+    header("location: ../index.php");
+ }
  
 // Define variables and initialize with empty values
 $username = "";
@@ -41,13 +43,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_array($result);
                     if ($row["PasswordHash"] == hash("sha256", $password)) {
-                        // If the password hashes match, start a new session and populate the session variables
-                        session_start();
                         $_SESSION["LoggedIn"] = true;
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
 
-                        // @todo Set session variable if the user is an admin
+                        // Set the session variable Admin if the user is an administrator
+                        $_SESSION["Admin"] = false;
+                        $sql = "SELECT * FROM ADMIN WHERE AdminID = ?";
+                        $prepare = mysqli_prepare($con, $sql);
+                        if ($prepare) {
+                            $prepare -> bind_param("s", $row["UserID"]);
+                            $prepare -> execute();
+                            $result = $prepare -> get_result();
+                            if ($result && mysqli_num_rows($result) == 1) {
+                                $_SESSION["Admin"] = true;
+                            }
+                        }
 
                         // @todo header("location: user.php?UserID=". $row['UserID']);
                         // Get rid of this below header when you do that

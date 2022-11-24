@@ -1,20 +1,18 @@
 # Unfinished
 *Note: These are in no particular order, although some tasks will rely on the completion of other tasks*
  - User login and registration
-    - Dedicated login/register page
-    - Don't allow users who are already logged in to access this page
  - User page
     - Welcome navigation page? Default to playlists page?
-    - Upgrade to premium if free, cancel premium if premium
-    - Logout
+    - Only manage playlists, logout if you are logged in as the user (other users can see user pages)
  - Admin pages
-    - List users, promote user to admin
+    - Approve and revoke admin
     - List ads, add/approve ads
     - List songs, add songs and remove songs
         - Edit song page, to add `WRITES` and `ALBUM_CONTAINS` relations
         - A way to add stems to songs, probably also in the edit song page
     - List albums, add albums and remove albums
     - List artists, add artists and remove artists
+    - The three music things should all be in the same page, under different tabs?
  - Playlists
     - View Songs
     - Playlist page, create new playlist for user, delete playlist
@@ -44,9 +42,20 @@
     - Enable/Disable stems
     - View associated albums
     - View associated artists
+ - Error Page
+    - To go to if a user does not have permissions
+    - ie: simply googling `localhost/admin/songs.php` if they arent an admin should redirect them here
 
 # Stretch Goals
  - Actually being able to play music...
 
 # Finished
  - User login and registration
+ - Admin:
+    - Admin menubar for special actions
+    - Delete users
+    - List and view users
+- User Profile Page:
+    - Display user details
+    - Upgrade to Premium, Downgrade to Free
+    - Logout
