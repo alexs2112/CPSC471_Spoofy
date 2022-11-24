@@ -131,8 +131,12 @@ def initialize_data(cursor, db):
     d = DataAdder(cursor, db)
     d.add_songs([
         ("Meltdown", "00:04:28", "songs/motionless_in_white/scoring_the_end_of_the_world/meltdown.mp3"),
+        ("Scoring the End of the World", "00:03:48", "songs/motionless_in_white/scoring_the_end_of_the_world/scoring_the_end_of_the_world.mp3"),
         ("The New Eternity", "00:03:25", "songs/silent_planet/when_the_end_began/the_new_eternity.mp3"),
-        ("22 Faces", "00:03:51", "songs/periphery/juggernaut_omega/22_faces.mp3"),
+        ("Northern Fires (Guernica)", "00:03:54", "songs/silent_planet/when_the_end_began/northern_fires.mp3"),
+        ("Share the Body", "00:03:33", "songs/silent_planet/when_the_end_began/sharing_the_body.mp3"),
+        ("22 Faces", "00:03:51", "songs/periphery/juggernaut_alpha/22_faces.mp3"),
+        ("Omega", "00:11:45", "songs/periphery/juggernaut_omega/omega.mp3"),
     ])
     d.add_artists([
         # Try not to make the about long because then the database is impossible to manually parse
@@ -143,28 +147,47 @@ def initialize_data(cursor, db):
     d.add_albums([
         ("Scoring the End of the World", "Metal", datetime(2022, 6, 10), "scoring_the_end_of_the_world", False),
         ("When the End Began", "Metal", datetime(2018, 11, 2), "when_the_end_began", False),
+        ("Juggernaut: Alpha", "Djent", datetime(2015, 1, 27), "juggernaut_alpha", False),
         ("Juggernaut: Omega", "Djent", datetime(2015, 1, 27), "juggernaut_omega", False),
     ])
     d.add_writes([
         ("Meltdown", "Motionless in White"),
+        ("Scoring the End of the World", "Motionless in White"),
         ("The New Eternity", "Silent Planet"),
+        ("Northern Fires (Guernica)", "Silent Planet"),
+        ("Share the Body", "Silent Planet"),
         ("22 Faces", "Periphery"),
+        ("Omega", "Periphery"),
     ])
     d.add_has([
         ("Scoring the End of the World", "Motionless in White"),
         ("When the End Began", "Silent Planet"),
+        ("Juggernaut: Alpha", "Periphery"),
         ("Juggernaut: Omega", "Periphery"),
     ])
     d.add_album_contains([
         ("Scoring the End of the World", "Meltdown"),
+        ("Scoring the End of the World", "Scoring the End of the World"),
         ("When the End Began", "The New Eternity"),
-        ("Juggernaut: Omega", "22 Faces"),
+        ("When the End Began", "Northern Fires (Guernica)"),
+        ("When the End Began", "Share the Body"),
+        ("Juggernaut: Alpha", "22 Faces"),
+        ("Juggernaut: Omega", "Omega"),
     ])
     d.add_stems([
         ("Meltdown", 0, "stems/motionless_in_white/meltdown/0.mp3"),
         ("Meltdown", 1, "stems/motionless_in_white/meltdown/1.mp3"),
+        ("Scoring the End of the World", 0, "stems/motionless_in_white/scoring_the_end_of_the_world/0.mp3"),
+        ("Scoring the End of the World", 1, "stems/motionless_in_white/scoring_the_end_of_the_world/1.mp3"),
         ("The New Eternity", 0, "stems/silent_planet/the_new_eternity/0.mp3"),
+        ("Northern Fires (Guernica)", 0, "stems/silent_planet/northern_fires/0.mp3"),
+        ("Northern Fires (Guernica)", 1, "stems/silent_planet/northern_fires/1.mp3"),
+        ("Northern Fires (Guernica)", 2, "stems/silent_planet/northern_fires/2.mp3"),
+        ("Share the Body", 0, "stems/silent_planet/share_the_body/0.mp3"),
         ("22 Faces", 0, "stems/periphery/22_faces/0.mp3"),
+        ("Omega", 0, "stems/periphery/omega/0.mp3"),
+        ("Omega", 1, "stems/periphery/omega/1.mp3"),
+        ("Omega", 2, "stems/periphery/omega/2.mp3"),
     ])
     d.add_distributors([
         "The Big Distributor",
