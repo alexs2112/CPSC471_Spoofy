@@ -8,7 +8,9 @@
             include "modules/mysql_connect.php";
 
             // Display songs
-            $result = mysqli_query($con, "SELECT * FROM Song");
+            $prepare = mysqli_prepare($con, "SELECT * FROM SONG");
+            $prepare -> execute();
+            $result = $prepare -> get_result();
 
             echo "<table border='1'>
             <tr>
@@ -22,7 +24,7 @@
                 <td>" . $row['SongID'] . "</td>
                 <td>" . $row['Title'] . "</td>
                 <td>" . $row['Duration'] . "</td>
-                <td><a href='view_song.php?SongID= " . $row['SongID'] . "'>View</a></td>
+                <td><a href='music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
                 </tr>";
             }
             echo "</table>";

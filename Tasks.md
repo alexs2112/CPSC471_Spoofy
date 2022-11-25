@@ -26,22 +26,12 @@
     - View songs, albums, artists
     - Add song to playlist
  - Album page
-    - Album details
-    - View artist
-    - View song
     - Play album
- - Artist Page
-    - Artist details
-    - Tab to view albums
-    - Tab to view songs
  - Song Page
-    - Song details
     - Add song to playlist
     - Add song to queue
         - Play song (set the queue as `[SongID]`)
     - Enable/Disable stems
-    - View associated albums
-    - View associated artists
  - Error Page
     - To go to if a user does not have permissions
     - ie: simply googling `localhost/admin/songs.php` if they arent an admin should redirect them here
@@ -55,7 +45,19 @@
     - Admin menubar for special actions
     - Delete users
     - List and view users
-- User Profile Page:
+ - User Profile Page:
     - Display user details
     - Upgrade to Premium, Downgrade to Free
     - Logout
+ - Album Page:
+    - Album details
+    - View artist
+    - View song
+ - Artist Page
+    - Artist details
+    - View albums
+    - View songs
+ - Song Page
+    - Song details
+    - View associated albums
+    - View associated artists

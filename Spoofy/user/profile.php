@@ -10,8 +10,11 @@
             $ID = $_GET["UserID"];
 
             // Perform mysql query
-            $result = mysqli_query($con, "SELECT * FROM USER WHERE UserID=".$ID);
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $prepare = mysqli_prepare($con, "SELECT * FROM USER WHERE UserID=?");
+            $prepare -> bind_param("s", $ID);
+            $prepare -> execute();
+            $result = $prepare -> get_result();
+            $row = mysqli_fetch_array($result);
 
             // Display Account Details
             // @todo: add Admin to account type
@@ -22,7 +25,7 @@
             if(!isset($_SESSION)) { session_start(); }
             if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["UserID"] == $ID) { 
                 // Logout button
-                echo '<a href="/user/logout.php">Logout</a>';
+                echo '<a href="/user/logout.php">Logout</a><p></p>';
 
                 // Upgrade or cancel premium
                 if ($row['IsPremium']) {

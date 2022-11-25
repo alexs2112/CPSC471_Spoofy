@@ -29,12 +29,4 @@
         // Someone not logged in is trying to update premium
         header("location: ../login.php");
     }
-
-    $sql = "SELECT UserID, Username, PasswordHash FROM USER WHERE Username = ?";
-    $prepare = mysqli_prepare($con, $sql);
-    if($prepare) {
-        $prepare -> bind_param("s", $username);
-        $prepare -> execute();
-        $result = $prepare -> get_result();
-    }
 ?>
