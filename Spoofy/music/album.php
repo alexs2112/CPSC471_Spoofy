@@ -30,7 +30,8 @@ $result = $prepare -> get_result();
 
 // Display Album Details
 $row = mysqli_fetch_array($result);
-echo "<h1>".$row["Title"]."</h1>";
+$albumTitle = $row["Title"];
+echo "<h1>".$albumTitle."</h1>";
 echo "<p>Cover Art: ".$row["CoverArt"]."</p>";
 if ($row["IsSingle"]) { echo "<p>Single</p>"; }
 echo "<p>Genre: ".$row["Genre"]."</p>";
@@ -51,8 +52,8 @@ while ($row = mysqli_fetch_array($result)) {
     $result = $prepare -> get_result();
 
     // Display Artist Details
-    while ($row = mysqli_fetch_array($result)) {
-        echo "<p></p><a href='/music/artist.php?ArtistID=" . $artistID . "'>Artist: ".$row["Name"]."</a>";
+    while ($artist = mysqli_fetch_array($result)) {
+        echo "<p></p><a href='/music/artist.php?ArtistID=" . $artistID . "'>Artist: ".$artist["Name"]."</a>";
     };
 }
 
@@ -89,7 +90,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <title>View Album - Spoofy</title>
+        <title><?php echo $albumTitle; ?> - Spoofy</title>
     </head>
     <body>
         <form method="post">

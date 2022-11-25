@@ -25,7 +25,8 @@ $result = $prepare -> get_result();
 
 // Display Song Details
 $row = mysqli_fetch_array($result);
-echo "<h1>".$row["Title"]."</h1>";
+$songTitle = $row["Title"];
+echo "<h1>".$songTitle."</h1>";
 echo "<p>Total Plays: ".($row["TotalPlays"] ?? "0")."</p>";
 echo "<p>Monthly Plays: ".($row["MonthlyPlays"] ?? "0")."</p>";
 echo "<p>Duration: ".$row["Duration"]."</p>";
@@ -74,7 +75,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <title>View Song - Spoofy</title>
+        <title><?php echo $songTitle; ?> - Spoofy</title>
     </head>
     <body>
         <form method="post">

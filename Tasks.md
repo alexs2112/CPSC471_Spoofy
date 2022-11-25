@@ -28,11 +28,12 @@
  - Error Page
     - To go to if a user does not have permissions
     - ie: simply googling `localhost/admin/songs.php` if they arent an admin should redirect them here
+ - Clean up all things tagged with `@todo`
 
-# Stretch Goals
+## Stretch Goals
  - Actually being able to play music...
 
-# Weird Bugs
+## Weird Bugs
 *Unexpected functionalities that arent strictly incorrect*
  - Clicking `Next`/`Previous` on the song queue means that each time the page is reloaded the `NextSong` command is called again. (Resubmitting the button action)
 
