@@ -4,7 +4,6 @@
     - Welcome navigation page? Default to playlists page?
     - Only manage playlists, logout if you are logged in as the user (other users can see user pages)
  - Admin pages
-    - Approve and revoke admin
     - List ads, add/approve ads
     - List songs, add songs and remove songs
         - Edit song page, to add `WRITES` and `ALBUM_CONTAINS` relations
@@ -41,6 +40,7 @@
 # Finished
  - User login and registration
  - Admin:
+    - Approve and revoke admin
     - Admin menubar for special actions
     - Delete users
     - List and view users

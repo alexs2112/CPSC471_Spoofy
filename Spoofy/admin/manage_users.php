@@ -27,8 +27,22 @@
                 <td>" . ($row['IsPremium'] ? "Premium" : "Free") . "</td>
                 <td>" . $row['SubRenewDate'] . "</td>
                 <td><a href='/user/profile.php?UserID= " . $row['UserID'] . "'>View</a></td>
-                <td><a href='/admin/delete_user.php?UserID= " . $row['UserID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>
-                </tr>";
+                <td><a href='/admin/delete_user.php?UserID= " . $row['UserID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
+
+                // Determine admin status
+                $sql = "SELECT AdminID FROM ADMIN WHERE AdminID=?";
+                $prepare = mysqli_prepare($con, $sql);
+                if ($prepare) {
+                    $prepare -> bind_param("s", $row['UserID']);
+                    $prepare -> execute();
+                    $is_admin = $prepare -> get_result();
+                    $make_admin = mysqli_num_rows($is_admin) == 0;
+
+                    // @todo Make these nice little icons
+                    echo "<td><a href='/admin/adminship.php?UserID= " . $row['UserID'] . "&Admin=".($make_admin)."' onclick=\"return confirm('Are you sure?')\";>".($make_admin ? "Adminify" : "Userify")."</a></td>";
+                }
+
+                "</tr>";
             }
             echo "</table>";
 
