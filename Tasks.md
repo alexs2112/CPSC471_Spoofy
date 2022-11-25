@@ -1,6 +1,5 @@
 # Unfinished
 *Note: These are in no particular order, although some tasks will rely on the completion of other tasks*
- - User login and registration
  - User page
     - Welcome navigation page? Default to playlists page?
     - Only manage playlists, logout if you are logged in as the user (other users can see user pages)

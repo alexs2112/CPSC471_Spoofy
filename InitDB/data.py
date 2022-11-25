@@ -59,7 +59,8 @@ class DataAdder:
     def add_stems(self, stems):
         values = []
         for s in stems:
-            values.append((self.song_id_by_name(s[0]), s[1], s[2]))
+            for i in range(s[1]):
+                values.append((self.song_id_by_name(s[0]), i, f"{s[2]}/{str(i)}.mp3"))
         self.cursor.executemany("INSERT INTO STEM (SongID, StemNo, MusicFile) VALUES (%s, %s, %s)", values)
 
     def add_distributors(self, distributors):
@@ -135,20 +136,28 @@ def initialize_data(cursor, db):
         ("The New Eternity", "00:03:25", "songs/silent_planet/when_the_end_began/the_new_eternity.mp3"),
         ("Northern Fires (Guernica)", "00:03:54", "songs/silent_planet/when_the_end_began/northern_fires.mp3"),
         ("Share the Body", "00:03:33", "songs/silent_planet/when_the_end_began/sharing_the_body.mp3"),
+        ("Firstborn (Ya'aburnee)", "00:05:07", "songs/silent_planet/when_the_end_began/firstborn.mp3"),
         ("22 Faces", "00:03:51", "songs/periphery/juggernaut_alpha/22_faces.mp3"),
         ("Omega", "00:11:45", "songs/periphery/juggernaut_omega/omega.mp3"),
+        ("The Pot", "00:06:18", "songs/tool/10000_days/the_pot.mp3"),
+        ("Rosetta Stoned", "00:11:13", "songs/tool/10000_days/rosetta_stoned.mp3"),
+        ("Elysium", "00:04:49", "songs/invent_animate/elysium/elysium.mp3"),
     ])
     d.add_artists([
         # Try not to make the about long because then the database is impossible to manually parse
         ("Motionless in White", "American metalcore band from Pennsylvania", "motionless_in_white"),
         ("Silent Planet", "American metalcore band formed in California", "silent_planet"),
         ("Periphery", "American progressive metal band formed in Washington, D.C", "periphery"),
+        ("Tool", "American rock band from Los Angeles", "tool"),
+        ("Invent Animate", "American progressive metalcore band from Port Neches, Texas", "invent_animate"),
     ])
     d.add_albums([
         ("Scoring the End of the World", "Metal", datetime(2022, 6, 10), "scoring_the_end_of_the_world", False),
         ("When the End Began", "Metal", datetime(2018, 11, 2), "when_the_end_began", False),
         ("Juggernaut: Alpha", "Djent", datetime(2015, 1, 27), "juggernaut_alpha", False),
         ("Juggernaut: Omega", "Djent", datetime(2015, 1, 27), "juggernaut_omega", False),
+        ("10,000 Days", "Rock", datetime(2006, 4, 28), "10000_days", False),
+        ("Elysium", "Metal", datetime(2022, 11, 8), "elysium", True),
     ])
     d.add_writes([
         ("Meltdown", "Motionless in White"),
@@ -156,14 +165,20 @@ def initialize_data(cursor, db):
         ("The New Eternity", "Silent Planet"),
         ("Northern Fires (Guernica)", "Silent Planet"),
         ("Share the Body", "Silent Planet"),
+        ("Firstborn (Ya'aburnee)", "Silent Planet"),
         ("22 Faces", "Periphery"),
         ("Omega", "Periphery"),
+        ("The Pot", "Tool"),
+        ("Rosetta Stoned", "Tool"),
+        ("Elysium", "Invent Animate"),
     ])
     d.add_has([
         ("Scoring the End of the World", "Motionless in White"),
         ("When the End Began", "Silent Planet"),
         ("Juggernaut: Alpha", "Periphery"),
         ("Juggernaut: Omega", "Periphery"),
+        ("10,000 Days", "Tool"),
+        ("Elysium", "Invent Animate"),
     ])
     d.add_album_contains([
         ("Scoring the End of the World", "Meltdown"),
@@ -171,32 +186,37 @@ def initialize_data(cursor, db):
         ("When the End Began", "The New Eternity"),
         ("When the End Began", "Northern Fires (Guernica)"),
         ("When the End Began", "Share the Body"),
+        ("When the End Began", "Firstborn (Ya'aburnee)"),
         ("Juggernaut: Alpha", "22 Faces"),
         ("Juggernaut: Omega", "Omega"),
+        ("10,000 Days", "The Pot"),
+        ("10,000 Days", "Rosetta Stoned"),
+        ("Elysium", "Elysium"),
     ])
     d.add_stems([
-        ("Meltdown", 0, "stems/motionless_in_white/meltdown/0.mp3"),
-        ("Meltdown", 1, "stems/motionless_in_white/meltdown/1.mp3"),
-        ("Scoring the End of the World", 0, "stems/motionless_in_white/scoring_the_end_of_the_world/0.mp3"),
-        ("Scoring the End of the World", 1, "stems/motionless_in_white/scoring_the_end_of_the_world/1.mp3"),
-        ("The New Eternity", 0, "stems/silent_planet/the_new_eternity/0.mp3"),
-        ("Northern Fires (Guernica)", 0, "stems/silent_planet/northern_fires/0.mp3"),
-        ("Northern Fires (Guernica)", 1, "stems/silent_planet/northern_fires/1.mp3"),
-        ("Northern Fires (Guernica)", 2, "stems/silent_planet/northern_fires/2.mp3"),
-        ("Share the Body", 0, "stems/silent_planet/share_the_body/0.mp3"),
-        ("22 Faces", 0, "stems/periphery/22_faces/0.mp3"),
-        ("Omega", 0, "stems/periphery/omega/0.mp3"),
-        ("Omega", 1, "stems/periphery/omega/1.mp3"),
-        ("Omega", 2, "stems/periphery/omega/2.mp3"),
+        ("Meltdown", 2, "stems/motionless_in_white/meltdown"),
+        ("Scoring the End of the World", 4, "stems/motionless_in_white/scoring_the_end_of_the_world"),
+        ("The New Eternity", 3, "stems/silent_planet/the_new_eternity"),
+        ("Northern Fires (Guernica)", 3, "stems/silent_planet/northern_fires"),
+        ("Share the Body", 2, "stems/silent_planet/share_the_body"),
+        ("Firstborn (Ya'aburnee)", 4, "stems/silent_planet/firstborn"),
+        ("22 Faces", 3, "stems/periphery/22_faces"),
+        ("Omega", 5, "stems/periphery/omega"),
+        ("The Pot", 3, "stems/tool/the_pot"),
+        ("Rosetta Stoned", 5, "stems/tool/rosetta_stoned"),
+        ("Elysium", 3, "stems/invent_animate/elysium"),
     ])
     d.add_distributors([
-        "The Big Distributor",
-        "The Little Distributor",
+        "BigDistribute",
+        "Yeet",
+        "DistributorA",
     ])
     d.add_represents([
-        ("Motionless in White", "The Big Distributor"),
-        ("Silent Planet", "The Big Distributor"),
-        ("Periphery", "The Big Distributor"),
+        ("Motionless in White", "BigDistribute"),
+        ("Silent Planet", "BigDistribute"),
+        ("Periphery", "BigDistribute"),
+        ("Tool", "Yeet"),
+        ("Invent Animate", "DistributorA"),
     ])
     d.add_users([
         ("Alex", sha256(b'1qaz@WSX').hexdigest(), False),
