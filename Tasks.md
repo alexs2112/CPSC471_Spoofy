@@ -17,18 +17,13 @@
     - Playlist page, view song, remove song, play playlist, delete playlist
     - Songs will be added to playlists from the song details/song list/search pages
  - Music Queue
-    - Can be stored as a list of song IDs and a current index in a session
-    - Page for the queue, shuffle, remove from queue, next song, previous song, view song
+    - Page to view the queue
  - Search page
     - Need to perform a mysql select query on Song, Album, Artist
     - View songs, albums, artists
     - Add song to playlist
- - Album page
-    - Play album
  - Song Page
     - Add song to playlist
-    - Add song to queue
-        - Play song (set the queue as `[SongID]`)
     - Enable/Disable stems
  - Error Page
     - To go to if a user does not have permissions
@@ -36,6 +31,10 @@
 
 # Stretch Goals
  - Actually being able to play music...
+
+# Weird Bugs
+*Unexpected functionalities that arent strictly incorrect*
+ - Clicking `Next`/`Previous` on the song queue means that each time the page is reloaded the `NextSong` command is called again. (Resubmitting the button action)
 
 # Finished
  - User login and registration
@@ -52,6 +51,7 @@
     - Album details
     - View artist
     - View song
+    - Play Album
  - Artist Page
     - Artist details
     - View albums
@@ -60,3 +60,8 @@
     - Song details
     - View associated albums
     - View associated artists
+    - Add Song to Queue/Play Song
+ - Music Queue
+    - List of SongIDs and the SongIndex stored in the session
+    - Inspect current song, next song, prev song, clear queue, shuffle queue from menubar
+    - Menubar only appears if the queue is not null

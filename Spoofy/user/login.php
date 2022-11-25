@@ -47,6 +47,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
 
+                        // Set up the playlist
+                        $_SESSION["Queue"] = null;
+                        $_SESSION["SongIndex"] = 0;
+
                         // Set the session variable Admin if the user is an administrator
                         $_SESSION["Admin"] = false;
                         $sql = "SELECT * FROM ADMIN WHERE AdminID = ?";
