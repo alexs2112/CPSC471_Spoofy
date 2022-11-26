@@ -47,30 +47,36 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
         $_SESSION["Queue"] = null;
         $_SESSION["SongIndex"] = 0;
     } else {
-        $SID = $_SESSION["Queue"][$_SESSION["SongIndex"]];
-        include "mysql_connect.php";
+        // Make sure the song index is valid
+        if ($_SESSION["SongIndex"] >= 0 && $_SESSION["SongIndex"] < count($_SESSION["Queue"])) {
 
-        // Fetch current song details
-        $prepare = mysqli_prepare($con, "SELECT Title FROM SONG WHERE SongID=?");
-        $prepare -> bind_param("s", $SID);
-        $prepare -> execute();
-        $result = $prepare -> get_result();
-        $row = mysqli_fetch_array($result);
+            // Display current song information
+            $SID = $_SESSION["Queue"][$_SESSION["SongIndex"]];
+            include "mysql_connect.php";
 
-        echo '
-        <div class="topnav">
-            <a><strong>Current Song:</strong></a>
-            <a href="/music/song.php?SongID='.$SID.'">'.$row["Title"].'</a>
-            <a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
-        </div>';
-        echo "
-        <form method=\"post\">
-            <input type=\"submit\" name=\"PrevSong\" class=\"button\" value=\"Previous\" />
-            <input type=\"submit\" name=\"NextSong\" class=\"button\" value=\"Next\" />
-            <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
-            <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
-        </form>
-        ";
+            // Fetch current song details
+            $prepare = mysqli_prepare($con, "SELECT Title FROM SONG WHERE SongID=?");
+            $prepare -> bind_param("s", $SID);
+            $prepare -> execute();
+            $result = $prepare -> get_result();
+            $row = mysqli_fetch_array($result);
+
+            echo '
+            <div class="topnav">
+                <a><strong>Current Song:</strong></a>
+                <a href="/music/song.php?SongID='.$SID.'">'.$row["Title"].'</a>
+                <a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
+                <a href="/music/queue.php">Queue</a>
+            </div>';
+            echo "
+            <form method=\"post\">
+                <input type=\"submit\" name=\"PrevSong\" class=\"button\" value=\"Previous\" />
+                <input type=\"submit\" name=\"NextSong\" class=\"button\" value=\"Next\" />
+                <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
+                <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
+            </form>
+            ";
+        }
     }
 }
 ?>

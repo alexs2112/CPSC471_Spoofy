@@ -15,7 +15,7 @@ $row = mysqli_fetch_array($result);
 $artistName = $row["Name"];
 echo "<h1>".$artistName."</h1>";
 echo "<p>Profile Picture: ".$row["ProfilePicture"]."</p>";
-echo "<p>Banner Photo: ".$row["BannerPhoto"]."</p>";
+echo "<p>Banner Picture: ".$row["BannerPicture"]."</p>";
 echo "<p>About: ".$row["About"]."</p>";
 
 // Get all song IDs
