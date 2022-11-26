@@ -29,7 +29,7 @@ def establish_connection():
     return db
 
 if __name__ == "__main__":
-    if (len(sys.argv) < 1 or "help" == sys.argv[1]):
+    if (len(sys.argv) < 2 or "help" == sys.argv[1]):
         help()
         exit(0)
 
