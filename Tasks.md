@@ -17,8 +17,6 @@
     - Playlist page, view song, remove song, play playlist, delete playlist
     - Songs will be added to playlists from the song details/song list/search pages
  - Search page
-    - Need to perform a mysql select query on Song, Album, Artist
-    - View songs, albums, artists
     - Add song to playlist
  - Song Page
     - Add song to playlist
@@ -65,3 +63,6 @@
     - Inspect current song, next song, prev song, clear queue, shuffle queue from menubar
     - Menubar only appears if the queue is not null
     - Page to display the queue, remove songs, play songs, shuffle and clear queue
+ - Search Page
+    - Need to perform a mysql select query on Song, Album, Artist
+    - View songs, albums, artists
