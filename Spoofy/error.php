@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>error - Spoofy</title>
+        <title>Error - Spoofy</title>
     </head>
     <body>
         <?php
