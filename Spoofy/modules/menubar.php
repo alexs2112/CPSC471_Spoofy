@@ -4,6 +4,7 @@ echo '
 <div class="topnav">
     <a href="/index.php">Home</a>
     <a href="/songs.php">Songs</a>
+    <a href="/music/search.php">Search</a>
 ';
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
