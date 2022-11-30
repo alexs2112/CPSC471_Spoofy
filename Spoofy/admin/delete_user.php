@@ -13,6 +13,6 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
     $prepare -> close();
     header("location: manage_users.php");
 } else {
-    header("location: ../index.php");
+    header("location: ../error.php");
 }
 ?>

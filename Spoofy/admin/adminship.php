@@ -35,6 +35,6 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
     header("location: /admin/manage_users.php");
 } else {
     // Someone not logged in is trying to update premium
-    header("location: ../login.php");
+    header("location: ../error.php");
 }
 ?>
