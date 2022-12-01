@@ -1,5 +1,4 @@
 <?php
-include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 include "../modules/playlist_functions.php";
 
@@ -25,10 +24,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($row = mysqli_fetch_array($result)) {
             if (array_key_exists("clear_playlist_".$row["PlaylistID"], $_POST)) {
                 delete_playlist($con, $row["PlaylistID"]);
+            } else if (array_key_exists("play_playlist_".$row["PlaylistID"], $_POST)) {
+                play_playlist($con, $row["PlaylistID"]);
             }
         }
     }
 }
+
+// Playing the playlist will modify the menubar
+include "../modules/menubar.php";
 
 // Perform mysql query
 $prepare = mysqli_prepare($con, "SELECT * FROM USER WHERE UserID=?");
@@ -67,11 +71,15 @@ if (mysqli_num_rows($result) < 1) {
         echo "<tr>
             <td>" . $playlist["PlaylistName"] . "</td>
             <td>" . $song_count . "</td>
-            <td><a href='/music/playlist.php?PlaylistID= " . $playlist["PlaylistID"] . "'>View</a></td>
+            <td><a href='/music/playlist.php?PlaylistID=" . $playlist["PlaylistID"] . "'>View</a></td>
             <td><form method=\"post\">
                 <input type=\"submit\" name=\"clear_playlist_" . $playlist["PlaylistID"] . "\"
                     onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
                     class=\"button\" value=\"Delete\" />
+            </form></td>
+            <td><form method=\"post\">
+                <input type=\"submit\" name=\"play_playlist_" . $playlist["PlaylistID"] . "\"
+                    class=\"button\" value=\"Play Playlist\" />
             </form></td>
             </tr>";
     }

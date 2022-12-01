@@ -1,5 +1,4 @@
 <?php
-include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 include "../modules/playlist_functions.php";
 
@@ -24,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     } else if (array_key_exists("play_playlist", $_POST)) {
-        play_playlist($PlaylistID);
+        play_playlist($con, $PlaylistID);
     }
 
     // See if a song is being removed
@@ -38,6 +37,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// Playing the playlist will modify the menubar
+include "../modules/menubar.php";
 
 // Get playlist information
 $prepare = mysqli_prepare($con, "SELECT * FROM PLAYLIST WHERE PlaylistID=?");
@@ -91,6 +93,8 @@ if (mysqli_num_rows($result) < 1) {
         <input type=\"submit\" name=\"delete_playlist\"
             onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
             class=\"button\" value=\"Delete\" />
+        <input type=\"submit\" name=\"play_playlist\"
+            class=\"button\" value=\"Play Playlist\" />
     </form>";
 }
 ?>

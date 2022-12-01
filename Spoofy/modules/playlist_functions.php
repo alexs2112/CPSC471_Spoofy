@@ -31,12 +31,17 @@ function remove_song($con, $playlistID, $songID) {
 }
 
 function play_playlist($con, $playlistID) {
+    if(!isset($_SESSION)) { session_start(); }
     $prepare = mysqli_prepare($con, "SELECT SongID FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
-    $prepare -> bind_param("s", $PlaylistID);
+    $prepare -> bind_param("s", $playlistID);
     $prepare -> execute();
     $result = $prepare -> get_result();
+
+    if (mysqli_num_rows($result) == 0) { return; }
+    $_SESSION["Queue"] = array();
+    $_SESSION["SongIndex"] = 0;
     while($row = mysqli_fetch_array($result)) {
-        // @todo
+        array_push($_SESSION["Queue"], $row["SongID"]);
     }
 }
 ?>
