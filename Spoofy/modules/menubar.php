@@ -8,7 +8,7 @@ echo '
 ';
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
-    echo "<td><a href='/user/profile.php?UserID= " . $_SESSION['UserID'] . "'>Profile</a></td>";
+    echo "<td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a></td>";
     echo '<a href="/user/logout.php">Logout</a>';
 } else {
     echo '<a href="/user/login.php">Login</a>';

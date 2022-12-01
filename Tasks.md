@@ -12,18 +12,14 @@
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
  - Playlists
-    - View Songs
-    - Playlist page, create new playlist for user, delete playlist
-    - Playlist page, view song, remove song, play playlist, delete playlist
+    - Playlist page, remove song, play playlist
     - Songs will be added to playlists from the song details/song list/search pages
+    - Shouldnt be able to add songs that are already present in the playlist, causes problems when deleting songs that have multiple entries
  - Search page
     - Add song to playlist
  - Song Page
     - Add song to playlist
     - Enable/Disable stems
- - Error Page
-    - To go to if a user does not have permissions
-    - ie: simply googling `localhost/admin/songs.php` if they arent an admin should redirect them here
  - Clean up all things tagged with `@todo`
 
 ## Stretch Goals
@@ -44,6 +40,7 @@
     - Display user details
     - Upgrade to Premium, Downgrade to Free
     - Logout
+    - See user playlists, create and delete playlists from here
  - Album Page:
     - Album details
     - View artist
@@ -66,3 +63,5 @@
  - Search Page
     - Need to perform a mysql select query on Song, Album, Artist
     - View songs, albums, artists
+ - Playlist Page
+    - View songs
