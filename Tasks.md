@@ -11,19 +11,14 @@
     - List albums, add albums and remove albums
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
- - Playlists
-    - View Songs
-    - Playlist page, create new playlist for user, delete playlist
-    - Playlist page, view song, remove song, play playlist, delete playlist
-    - Songs will be added to playlists from the song details/song list/search pages
- - Search page
-    - Add song to playlist
+ - Module for Queue functions similar to playlist_functions
+    - Call to play individual songs from Search Page, Album Page, Artist Page, Songs Page, Playlist Page
+        - Add to Queue button?
+    - Call to play albums from Artist Page, Search Page
  - Song Page
-    - Add song to playlist
     - Enable/Disable stems
- - Error Page
-    - To go to if a user does not have permissions
-    - ie: simply googling `localhost/admin/songs.php` if they arent an admin should redirect them here
+ - Advertisements
+    - What are we doing with these? How does the user interact with them?
  - Clean up all things tagged with `@todo`
 
 ## Stretch Goals
@@ -44,6 +39,7 @@
     - Display user details
     - Upgrade to Premium, Downgrade to Free
     - Logout
+    - See user playlists, create, delete, and play playlists from here
  - Album Page:
     - Album details
     - View artist
@@ -57,7 +53,8 @@
     - Song details
     - View associated albums
     - View associated artists
-    - Add Song to Queue/Play Song
+    - Add song to Queue/Play Song
+    - Add song to playlist
  - Music Queue
     - List of SongIDs and the SongIndex stored in the session
     - Inspect current song, next song, prev song, clear queue, shuffle queue from menubar
@@ -66,3 +63,8 @@
  - Search Page
     - Need to perform a mysql select query on Song, Album, Artist
     - View songs, albums, artists
+    - Add song to playlist
+ - Playlist Page
+    - View songs, remove songs
+    - Play playlist
+    - Delete playlist

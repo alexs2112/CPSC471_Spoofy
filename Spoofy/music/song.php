@@ -3,15 +3,19 @@ $SongID = $_GET["SongID"];
 
 // Buttons to Add to Queue, Play Song
 if(!isset($_SESSION)) { session_start(); }
-if (array_key_exists("PlaySong", $_POST)) {
-    $_SESSION["Queue"] = array($SongID);
-    $_SESSION["SongIndex"] = 0;
-} else if (array_key_exists("AddToQueue", $_POST)) {
-    if ($_SESSION["Queue"] == null) {
-        $_SESSION["Queue"] = array();
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (array_key_exists("PlaySong", $_POST)) {
+        $_SESSION["Queue"] = array($SongID);
         $_SESSION["SongIndex"] = 0;
+    } else if (array_key_exists("AddToQueue", $_POST)) {
+        if ($_SESSION["Queue"] == null) {
+            $_SESSION["Queue"] = array();
+            $_SESSION["SongIndex"] = 0;
+        }
+        array_push($_SESSION["Queue"], $SongID);
+    } else if (array_key_exists("AddToPlaylist", $_POST)) {
+        header("location: /music/add_song.php?SongID=".$SongID);
     }
-    array_push($_SESSION["Queue"], $SongID);
 }
 
 include "../modules/menubar.php";
@@ -81,6 +85,7 @@ mysqli_close($con);
         <form method="post">
             <input type="submit" name="PlaySong" class="button" value="Play Song" />
             <input type="submit" name="AddToQueue" class="button" value="Add to Queue" />
+            <input type="submit" name="AddToPlaylist" class="button" value="Add to Playlist" />
         </form>
     </body>
 </html>
