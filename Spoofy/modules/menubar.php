@@ -23,7 +23,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
     <div class="topnav">
         <a><strong>Admin:</strong></a>
         <a href="/admin/manage_users.php">Manage Users</a>
-        <a href="/admin/manage_music.php">Manage Music</a>
+        <a href="/admin/manage_songs.php">Manage Music</a>
         <a href="/admin/manage_ads.php">Manage Advertisements</a>
     </div>';
 }
