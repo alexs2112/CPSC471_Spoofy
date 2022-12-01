@@ -33,23 +33,22 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         $soundfile = trim($_POST["soundfile"]);
         if(empty($soundfile)) {
             $error_string = "company can't be empty.";
-        } elseif(!preg_match('/^[a-zA-Z0-9_\/]+$/', trim($_POST["soundfile"]))) {
-            $error_string = "soundfile can only contain letters, numbers, underscores, and forward slashes";
+        } elseif(!preg_match('/^[a-zA-Z0-9_.\/]+$/', trim($_POST["soundfile"]))) {
+            $error_string = "soundfile can only contain letters, numbers, underscores, forward slashes, and .";
         }
 
         // If there are no errors, insert into the database
         if(empty($error_string)) {
-            
             // Prepare an insert statement
             $sql = "INSERT INTO ADVERTISEMENT (duration, company, soundfile) VALUES (?, ?, ?)";
             $prepare = mysqli_prepare($con, $sql);
             if($prepare) {
-                $prepare -> bind_param("ss", $duration, $company, $soundfile);    //no idea what the ss does
+                $prepare -> bind_param("sss", $duration, $company, $soundfile);    //no idea what the ss does
 
                 $prepare -> execute();
                 $result = $prepare -> get_result();
                 
-                // Redirect to login page after registering
+                // Reload the page after adding an ad
                 header("location: manage_ads.php");
                 $prepare -> close();
             }
@@ -58,10 +57,13 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         // Close connection
         mysqli_close($con);
     }
-} else {
+} 
+else {
     header("location: ../error.php");
 }
 ?>
+
+
 <html>
     <head>
         <title>Manage Advertisements - Spoofy</title>
@@ -88,6 +90,29 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 </div>
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
             </form>
+            <?php 
+                $result = mysqli_query($con, "SELECT * FROM ADVERTISEMENT");
+                echo "<table border='1'>
+                <tr>
+                <th>AdID</th>
+                <th>Duration</th>
+                <th>Company</th>
+                <th>SoundFile</th>
+                </tr>";
+
+                while($row = mysqli_fetch_array($result)) {
+                    echo "<tr>
+                    <td>" . $row['AdID'] . "</td>
+                    <td>" . $row['Duration'] . "</td>
+                    <td>" . $row['Company'] . "</td>
+                    <td>" . $row['SoundFile'] . "</td>
+                    <td><a href='/admin/delete_ad.php?AdID= " . $row['AdID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
+                    "</tr>";
+                }
+                echo "</table>";
+
+                mysqli_close($con); 
+            ?>
         </div>
     </body>
 </html>
