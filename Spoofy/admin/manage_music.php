@@ -14,6 +14,6 @@
                 header("location: ../error.php");
             }
         ?>
-        <p>Manage Musics...</p>
+        <p>Manage Music...</p>
     </body>
 </html>
