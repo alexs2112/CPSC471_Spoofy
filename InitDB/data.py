@@ -142,6 +142,9 @@ def initialize_data(cursor, db):
         ("The Pot", "00:06:18", "songs/tool/10000_days/the_pot.mp3"),
         ("Rosetta Stoned", "00:11:13", "songs/tool/10000_days/rosetta_stoned.mp3"),
         ("Elysium", "00:04:49", "songs/invent_animate/elysium/elysium.mp3"),
+        ("Blinded", "00:03:22", "songs/as_i_lay_dying/blinded.mp3"),
+        ("Stabbing in the Dark", "00:04:40", "songs/ice_nine_kills/stabbing_in_the_dark.mp3"),
+        ("A Grave Mistake", "00:03:04", "songs/ice_nine_kills/a_grave_mistake.mp3"),
     ])
     d.add_artists([
         # Try not to make the about long because then the database is impossible to manually parse
@@ -150,6 +153,8 @@ def initialize_data(cursor, db):
         ("Periphery", "American progressive metal band formed in Washington, D.C", "periphery"),
         ("Tool", "American rock band from Los Angeles", "tool"),
         ("Invent Animate", "American progressive metalcore band from Port Neches, Texas", "invent_animate"),
+        ("As I Lay Dying", "American metalcore band from San Diego, California", "as_i_lay_dying"),
+        ("Ice Nine Kills", "Best known for its horror-inspired lyrics, Ice Nine Kills formed in 2000", "ice_nine_kills"),
     ])
     d.add_albums([
         ("Scoring the End of the World", "Metal", datetime(2022, 6, 10), "scoring_the_end_of_the_world", False),
@@ -158,6 +163,8 @@ def initialize_data(cursor, db):
         ("Juggernaut: Omega", "Djent", datetime(2015, 1, 27), "juggernaut_omega", False),
         ("10,000 Days", "Rock", datetime(2006, 4, 28), "10000_days", False),
         ("Elysium", "Metal", datetime(2022, 11, 8), "elysium", True),
+        ("Shaped by Fire", "Metal", datetime(2019, 9, 20), "shaped_by_fire", False),
+        ("The Silver Scream", "Metal", datetime(2018, 10, 5), "the_silver_scream", False),
     ])
     d.add_writes([
         ("Meltdown", "Motionless in White"),
@@ -171,6 +178,9 @@ def initialize_data(cursor, db):
         ("The Pot", "Tool"),
         ("Rosetta Stoned", "Tool"),
         ("Elysium", "Invent Animate"),
+        ("Blinded", "As I Lay Dying"),
+        ("Stabbing in the Dark", "Ice Nine Kills"),
+        ("A Grave Mistake", "Ice Nine Kills"),
     ])
     d.add_has([
         ("Scoring the End of the World", "Motionless in White"),
@@ -179,6 +189,8 @@ def initialize_data(cursor, db):
         ("Juggernaut: Omega", "Periphery"),
         ("10,000 Days", "Tool"),
         ("Elysium", "Invent Animate"),
+        ("Shaped by Fire", "As I Lay Dying"),
+        ("The Silver Scream", "Ice Nine Kills"),
     ])
     d.add_album_contains([
         ("Scoring the End of the World", "Meltdown"),
@@ -192,6 +204,9 @@ def initialize_data(cursor, db):
         ("10,000 Days", "The Pot"),
         ("10,000 Days", "Rosetta Stoned"),
         ("Elysium", "Elysium"),
+        ("Shaped by Fire", "Blinded"),
+        ("The Silver Scream", "Stabbing in the Dark"),
+        ("The Silver Scream", "A Grave Mistake"),
     ])
     d.add_stems([
         ("Meltdown", 2, "stems/motionless_in_white/meltdown"),
@@ -205,11 +220,15 @@ def initialize_data(cursor, db):
         ("The Pot", 3, "stems/tool/the_pot"),
         ("Rosetta Stoned", 5, "stems/tool/rosetta_stoned"),
         ("Elysium", 3, "stems/invent_animate/elysium"),
+        ("Blinded", 4, "stems/as_i_lay_dying/blinded"),
+        ("Stabbing in the Dark", 2, "stems/ice_nine_kills/stabbing_in_the_dark"),
+        ("A Grave Mistake", 3, "stems/ice_nine_kills/a_grave_mistake"),
     ])
     d.add_distributors([
         "BigDistribute",
         "Yeet",
         "DistributorA",
+        "Diztributor",
     ])
     d.add_represents([
         ("Motionless in White", "BigDistribute"),
@@ -217,6 +236,8 @@ def initialize_data(cursor, db):
         ("Periphery", "BigDistribute"),
         ("Tool", "Yeet"),
         ("Invent Animate", "DistributorA"),
+        ("As I Lay Dying", "DistributorA"),
+        ("Ice Nine Kills", "Diztributor"),
     ])
     d.add_users([
         ("Alex", sha256(b'1qaz@WSX').hexdigest(), False),
