@@ -18,100 +18,99 @@ echo '
     </div>
 </form>';
 
-if (strlen($query) > 0) {
-    $query = "%".$query."%";
-    include "../modules/mysql_connect.php";
+$query = "%".$query."%";
+include "../modules/mysql_connect.php";
 
-    // Get all songs that match the query
-    $sql = "SELECT * FROM SONG WHERE Title LIKE ?";
-    $prepare = mysqli_prepare($con, $sql);
-    if($prepare) {
-        $prepare -> bind_param("s", $query);
-        $prepare -> execute();
-        $result = $prepare -> get_result();
+// Get all songs that match the query
+$sql = "SELECT * FROM SONG WHERE Title LIKE ?";
+$prepare = mysqli_prepare($con, $sql);
+if($prepare) {
+    $prepare -> bind_param("s", $query);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
 
-        echo "<h3>Songs</h3>";
-        if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
-        } else {
-            // Display table information for songs
-            echo "<table border='1'>
-            <tr>
-            <th>Title</th>
-            <th>Duration</th>
+    echo "<h3>Songs</h3>";
+    if (mysqli_num_rows($result) < 1) {
+        echo "<p>No Results</p>";
+    } else {
+        // Display table information for songs
+        echo "<table border='1'>
+        <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        </tr>";
+
+        // For each song, display their information
+        while ($row = mysqli_fetch_array($result)) {
+            echo "<tr>
+            <td>" . $row['Title'] . "</td>
+            <td>" . $row['Duration'] . "</td>
+            <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>
+            <td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
             </tr>";
-
-            // For each song, display their information
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<tr>
-                <td>" . $row['Title'] . "</td>
-                <td>" . $row['Duration'] . "</td>
-                <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
-                </tr>";
-            }
-            echo "</table>";
         }
+        echo "</table>";
     }
+}
 
-    // Get all albums that match the query
-    $sql = "SELECT * FROM ALBUM WHERE Title LIKE ?";
-    $prepare = mysqli_prepare($con, $sql);
-    if($prepare) {
-        $prepare -> bind_param("s", $query);
-        $prepare -> execute();
-        $result = $prepare -> get_result();
+// Get all albums that match the query
+$sql = "SELECT * FROM ALBUM WHERE Title LIKE ?";
+$prepare = mysqli_prepare($con, $sql);
+if($prepare) {
+    $prepare -> bind_param("s", $query);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
 
-        echo "<h3>Albums</h3>";
-        if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
-        } else {
-            // Display table information for songs
-            echo "<table border='1'>
-            <tr>
-            <th>Title</th>
-            <th>Release Date</th>
+    echo "<h3>Albums</h3>";
+    if (mysqli_num_rows($result) < 1) {
+        echo "<p>No Results</p>";
+    } else {
+        // Display table information for songs
+        echo "<table border='1'>
+        <tr>
+        <th>Title</th>
+        <th>Release Date</th>
+        </tr>";
+
+        // For each song, display their information
+        while ($row = mysqli_fetch_array($result)) {
+            echo "<tr>
+            <td>" . $row['Title'] . "</td>
+            <td>" . $row['ReleaseDate'] . "</td>
+            <td><a href='/music/album.php?AlbumID= " . $row['AlbumID'] . "'>View</a></td>
             </tr>";
-
-            // For each song, display their information
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<tr>
-                <td>" . $row['Title'] . "</td>
-                <td>" . $row['ReleaseDate'] . "</td>
-                <td><a href='/music/album.php?AlbumID= " . $row['AlbumID'] . "'>View</a></td>
-                </tr>";
-            }
-            echo "</table>";
         }
+        echo "</table>";
     }
+}
 
-    // Get all artists that match the query
-    $sql = "SELECT * FROM ARTIST WHERE Name LIKE ?";
-    $prepare = mysqli_prepare($con, $sql);
-    if($prepare) {
-        $prepare -> bind_param("s", $query);
-        $prepare -> execute();
-        $result = $prepare -> get_result();
+// Get all artists that match the query
+$sql = "SELECT * FROM ARTIST WHERE Name LIKE ?";
+$prepare = mysqli_prepare($con, $sql);
+if($prepare) {
+    $prepare -> bind_param("s", $query);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
 
-        echo "<h3>Artists</h3>";
+    echo "<h3>Artists</h3>";
 
-        if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
-        } else {
-            // Display table information for songs
-            echo "<table border='1'>
-            <tr>
-            <th>Name</th>
+    if (mysqli_num_rows($result) < 1) {
+        echo "<p>No Results</p>";
+    } else {
+        // Display table information for songs
+        echo "<table border='1'>
+        <tr>
+        <th>Name</th>
+        </tr>";
+
+        // For each song, display their information
+        while ($row = mysqli_fetch_array($result)) {
+            echo "<tr>
+            <td>" . $row['Name'] . "</td>
+            <td><a href='/music/artist.php?ArtistID= " . $row['ArtistID'] . "'>View</a></td>
             </tr>";
-
-            // For each song, display their information
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<tr>
-                <td>" . $row['Name'] . "</td>
-                <td><a href='/music/artist.php?ArtistID= " . $row['ArtistID'] . "'>View</a></td>
-                </tr>";
-            }
-            echo "</table>";
         }
+        echo "</table>";
     }
 }
 ?>

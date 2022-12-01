@@ -23,6 +23,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("location: /user/profile.php?UserID=".$creatorID);
             }
         }
+    } else if (array_key_exists("play_playlist", $_POST)) {
+        play_playlist($PlaylistID);
+    }
+
+    // See if a song is being removed
+    $prepare = mysqli_prepare($con, "SELECT SongID FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
+    $prepare -> bind_param("s", $PlaylistID);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    while ($row = mysqli_fetch_array($result)) {
+        if (array_key_exists("remove".$row["SongID"], $_POST)) {
+            remove_song($con, $PlaylistID, $row["SongID"]);
+        }
     }
 }
 
@@ -38,7 +51,7 @@ if (mysqli_num_rows($result) < 1) {
     echo "<h1>".$playlist["PlaylistName"]."</h1>";
 
     // List off each song in the playlist
-    $prepare = mysqli_prepare($con, "SELECT * FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
+    $prepare = mysqli_prepare($con, "SELECT SongID FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
     $prepare -> bind_param("s", $PlaylistID);
     $prepare -> execute();
     $result = $prepare -> get_result();
@@ -54,10 +67,19 @@ if (mysqli_num_rows($result) < 1) {
 
         // For each song, display their information
         while ($row = mysqli_fetch_array($result)) {
+            $prepare = mysqli_prepare($con, "SELECT * FROM SONG WHERE SongID=?");
+            $prepare -> bind_param("s", $row["SongID"]);
+            $prepare -> execute();
+            $song_details = $prepare -> get_result();
+            $song = mysqli_fetch_array($song_details);
+
             echo "<tr>
-            <td>" . $row['Title'] . "</td>
-            <td>" . $row['Duration'] . "</td>
-            <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
+            <td>" . $song['Title'] . "</td>
+            <td>" . $song['Duration'] . "</td>
+            <td><a href='/music/song.php?SongID= " . $song['SongID'] . "'>View</a></td>
+            <td><form method=\"post\">
+                <input type=\"submit\" name=\"remove" . $song["SongID"] . "\" class=\"button\" value=\"Remove\" />
+            </form></td>
             </tr>";
         }
         echo "</table>";

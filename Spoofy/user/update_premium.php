@@ -27,6 +27,6 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
     header("location: profile.php?UserID=".$UserID);
 } else {
     // Someone not logged in is trying to update premium
-    header("location: ../login.php");
+    header("location: login.php");
 }
 ?>

@@ -12,9 +12,7 @@
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
  - Playlists
-    - Playlist page, remove song, play playlist
-    - Songs will be added to playlists from the song details/song list/search pages
-    - Shouldnt be able to add songs that are already present in the playlist, causes problems when deleting songs that have multiple entries
+    - Play playlist
  - Search page
     - Add song to playlist
  - Song Page
@@ -54,7 +52,8 @@
     - Song details
     - View associated albums
     - View associated artists
-    - Add Song to Queue/Play Song
+    - Add song to Queue/Play Song
+    - Add song to playlist
  - Music Queue
     - List of SongIDs and the SongIndex stored in the session
     - Inspect current song, next song, prev song, clear queue, shuffle queue from menubar
@@ -63,5 +62,7 @@
  - Search Page
     - Need to perform a mysql select query on Song, Album, Artist
     - View songs, albums, artists
+    - Add song to playlist
  - Playlist Page
-    - View songs
+    - View songs, remove songs
+    - Delete playlist
