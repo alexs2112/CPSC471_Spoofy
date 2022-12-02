@@ -9,10 +9,7 @@
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
  - Module for Queue functions similar to playlist_functions
-    - Call to play individual songs from Search Page, Album Page, Artist Page, Songs Page, Playlist Page
-        - Add to Queue button?
     - Call to play/add to queue individual ads from Search Page, Advertisement Page
-    - Call to play albums from Artist Page, Search Page
  - Song Page
     - Enable/Disable stems
  - Advertisements
@@ -46,10 +43,12 @@
     - View artist
     - View song
     - Play Album
+    - Play songs
  - Artist Page
     - Artist details
     - View albums
     - View songs
+    - Play songs, albums
  - Song Page
     - Song details
     - View associated albums
@@ -65,10 +64,12 @@
     - Need to perform a mysql select query on Song, Album, Artist
     - View songs, albums, artists
     - Add song to playlist
+    - Play songs, albums
  - Playlist Page
     - View songs, remove songs
     - Play playlist
     - Delete playlist
+    - Play songs
  - Advertisements
     - Free users can only access advertisements.
     - Anywhere they could see songs, ensure they have permissions, otherwise they only get the list of ads

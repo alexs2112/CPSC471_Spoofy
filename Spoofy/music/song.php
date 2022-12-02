@@ -4,15 +4,11 @@ $SongID = $_GET["SongID"];
 // Buttons to Add to Queue, Play Song
 if(!isset($_SESSION)) { session_start(); }
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "../modules/queue_functions.php";
     if (array_key_exists("PlaySong", $_POST)) {
-        $_SESSION["Queue"] = array($SongID);
-        $_SESSION["SongIndex"] = 0;
+        play_song($SongID);
     } else if (array_key_exists("AddToQueue", $_POST)) {
-        if ($_SESSION["Queue"] == null) {
-            $_SESSION["Queue"] = array();
-            $_SESSION["SongIndex"] = 0;
-        }
-        array_push($_SESSION["Queue"], $SongID);
+        add_song_to_queue($SongID);
     } else if (array_key_exists("AddToPlaylist", $_POST)) {
         header("location: /music/add_song.php?SongID=".$SongID);
     }

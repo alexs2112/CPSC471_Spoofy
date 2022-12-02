@@ -1,6 +1,32 @@
 <?php
-include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "../modules/queue_functions.php";
+
+    // See if a song is being interacted with
+    $prepare = mysqli_prepare($con, "SELECT SongID FROM SONG");
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    while ($row = mysqli_fetch_array($result)) {
+        if (array_key_exists("play".$row["SongID"], $_POST)) {
+            play_song($row["SongID"]);
+        } else if (array_key_exists("queue".$row["SongID"], $_POST)) {
+            add_song_to_queue($row["SongID"]);
+        }
+    }
+
+    // See if an album is being interacted with
+    $prepare = mysqli_prepare($con, "SELECT AlbumID FROM ALBUM");
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    while ($row = mysqli_fetch_array($result)) {
+        if (array_key_exists("play_album".$row["AlbumID"], $_POST)) {
+            play_album($con, $row["AlbumID"]);
+        }
+    }
+}
+include "../modules/menubar.php";
 
 $ArtistID = $_GET["ArtistID"];
 
@@ -41,6 +67,12 @@ while($row = mysqli_fetch_array($result)) {
     <td>" . $details['Title'] . "</td>
     <td>" . $details['Duration'] . "</td>
     <td><a href='/music/song.php?SongID= " . $details['SongID'] . "'>View</a></td>
+    <td><form method=\"post\">
+        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+    </form></td>
+    <td><form method=\"post\">
+        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+    </form></td>
     </tr>";
 }
 echo "</table>";
@@ -70,6 +102,9 @@ while($row = mysqli_fetch_array($result)) {
     <td>" . $details['Title'] . "</td>
     <td>" . $details['ReleaseDate'] . "</td>
     <td><a href='/music/album.php?AlbumID= " . $albumID . "'>View</a></td>
+    <td><form method=\"post\">
+        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+    </form></td>
     </tr>";
 }
 
