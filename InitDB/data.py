@@ -135,6 +135,7 @@ def initialize_data(cursor, db):
         ("Scoring the End of the World", "00:03:48", "songs/motionless_in_white/scoring_the_end_of_the_world/scoring_the_end_of_the_world.mp3"),
         ("The New Eternity", "00:03:25", "songs/silent_planet/when_the_end_began/the_new_eternity.mp3"),
         ("Northern Fires (Guernica)", "00:03:54", "songs/silent_planet/when_the_end_began/northern_fires.mp3"),
+        ("Afterdusk", "00:03:55", "songs/silent_planet/when_the_end_began/afterdusk.mp3"),
         ("Share the Body", "00:03:33", "songs/silent_planet/when_the_end_began/sharing_the_body.mp3"),
         ("Firstborn (Ya'aburnee)", "00:05:07", "songs/silent_planet/when_the_end_began/firstborn.mp3"),
         ("22 Faces", "00:03:51", "songs/periphery/juggernaut_alpha/22_faces.mp3"),
@@ -171,6 +172,7 @@ def initialize_data(cursor, db):
         ("Scoring the End of the World", "Motionless in White"),
         ("The New Eternity", "Silent Planet"),
         ("Northern Fires (Guernica)", "Silent Planet"),
+        ("Afterdusk", "Silent Planet"),
         ("Share the Body", "Silent Planet"),
         ("Firstborn (Ya'aburnee)", "Silent Planet"),
         ("22 Faces", "Periphery"),
@@ -197,6 +199,7 @@ def initialize_data(cursor, db):
         ("Scoring the End of the World", "Scoring the End of the World"),
         ("When the End Began", "The New Eternity"),
         ("When the End Began", "Northern Fires (Guernica)"),
+        ("When the End Began", "Afterdusk"),
         ("When the End Began", "Share the Body"),
         ("When the End Began", "Firstborn (Ya'aburnee)"),
         ("Juggernaut: Alpha", "22 Faces"),
@@ -213,6 +216,7 @@ def initialize_data(cursor, db):
         ("Scoring the End of the World", 4, "stems/motionless_in_white/scoring_the_end_of_the_world"),
         ("The New Eternity", 3, "stems/silent_planet/the_new_eternity"),
         ("Northern Fires (Guernica)", 3, "stems/silent_planet/northern_fires"),
+        ("Afterdusk", 4, "stems/silent_planet/afterdusk"),
         ("Share the Body", 2, "stems/silent_planet/share_the_body"),
         ("Firstborn (Ya'aburnee)", 4, "stems/silent_planet/firstborn"),
         ("22 Faces", 3, "stems/periphery/22_faces"),
@@ -247,6 +251,8 @@ def initialize_data(cursor, db):
         "AlexAdmin",
     ])
     d.add_ads([
-        ("01:00:01", "Live Nation", "ads/live_nation_0.mp3")
+        ("01:00:01", "Live Nation", "ads/live_nation_0.mp3"),
+        ("00:04:21", "Spotify", "ads/spotify_0.mp3"),
+        ("00:03:51", "Apple Music", "ads/apple_music_0.mp3"),
     ])
     d.commit()

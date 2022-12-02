@@ -16,9 +16,7 @@
  - Song Page
     - Enable/Disable stems
  - Advertisements
-    - Add more ads to default database
     - Edit our previous reports and deliverables that mention ad functionality that is inconsistent with the work done
-    - Setting yourself to premium/free messes up the queue if there is a queue. Clear the queue when `update_premium.php` is called
  - Clean up all things tagged with `@todo`
     - Make sure that all `href` blocks are using project root (their paths should always start with `/`)
     - Make sure all `$prepare`s are closed
