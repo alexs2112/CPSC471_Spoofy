@@ -13,6 +13,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
             $renew_date = date("Y-m-d", strtotime("+1 month"));
             $prepare -> bind_param("ss", $renew_date, $UserID);
             $prepare -> execute();
+            $_SESSION["IsPremium"] = true;
         }
         $prepare -> close();
     } else {
@@ -21,6 +22,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         if ($prepare) {
             $prepare -> bind_param("s", $UserID);
             $prepare -> execute();
+            $_SESSION["IsPremium"] = false;
         }
         $prepare -> close();
     }

@@ -11,15 +11,21 @@
  - Module for Queue functions similar to playlist_functions
     - Call to play individual songs from Search Page, Album Page, Artist Page, Songs Page, Playlist Page
         - Add to Queue button?
+    - Call to play/add to queue individual ads from Search Page, Advertisement Page
     - Call to play albums from Artist Page, Search Page
  - Song Page
     - Enable/Disable stems
  - Advertisements
-    - What are we doing with these? How does the user interact with them?
+    - Add more ads to default database
+    - Edit our previous reports and deliverables that mention ad functionality that is inconsistent with the work done
+    - Setting yourself to premium/free messes up the queue if there is a queue. Clear the queue when `update_premium.php` is called
  - Clean up all things tagged with `@todo`
+    - Make sure that all `href` blocks are using project root (their paths should always start with `/`)
+    - Make sure all `$prepare`s are closed
 
 ## Stretch Goals
  - Actually being able to play music...
+ - Fix songs having multiple albums/artists
 
 ## Weird Bugs
 *Unexpected functionalities that arent strictly incorrect*
@@ -65,3 +71,7 @@
     - View songs, remove songs
     - Play playlist
     - Delete playlist
+ - Advertisements
+    - Free users can only access advertisements.
+    - Anywhere they could see songs, ensure they have permissions, otherwise they only get the list of ads
+    - Ad page, add ad to queue, play ad

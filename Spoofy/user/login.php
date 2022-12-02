@@ -46,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["LoggedIn"] = true;
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
+                        $_SESSION["IsPremium"] = boolval($row["IsPremium"]);
 
                         // Set up the playlist
                         $_SESSION["Queue"] = null;

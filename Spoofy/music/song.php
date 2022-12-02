@@ -21,6 +21,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 
+// Make sure the user is a premium user
+if (!array_key_exists("IsPremium", $_SESSION) || !$_SESSION["IsPremium"]) {
+    header("location: /error.php");
+}
+
 // Perform mysql query
 $prepare = mysqli_prepare($con, "SELECT * FROM SONG WHERE SongID=?");
 $prepare -> bind_param("s", $SongID);
