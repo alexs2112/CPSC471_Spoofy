@@ -63,7 +63,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
-        <title>Register - Spoofy</title>
+        <title>Add a Song - Spoofy</title>
     </head>
     <body>
         <div class="wrapper">

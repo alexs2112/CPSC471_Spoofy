@@ -2,15 +2,23 @@
 	include "../modules/menubar.php";
 	include "../modules/mysql_connect.php";
 	
-	//links to artists and albums pages
-	
-	//list the songs
+	//title
 	echo "<h2>Manage Songs:</h2>";
 	
+	//links to artists and albums pages
+	echo "<button onclick='location.href=\"manage_artists.php\"' type='button'>
+		Manage Artists
+	</button>\n";
+	echo "<button onclick='location.href=\"manage_albums.php\"' type='button'>
+		Manage Albums
+	</button><br><br>";
+	
+	//add a song
 	echo "<button onclick='location.href=\"add_song.php\"' type='button'>
 		Add Song
 	</button><br>";
 
+	//fetch all songs
 	$result = mysqli_query($con, "SELECT * FROM Song");
 	echo "<table border='1'>
 	<tr>
