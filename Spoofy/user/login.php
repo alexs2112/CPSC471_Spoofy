@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if(empty($error_string)) {
         // Prepare a select statement
-        $sql = "SELECT UserID, Username, PasswordHash FROM USER WHERE Username = ?";
+        $sql = "SELECT * FROM USER WHERE Username = ?";
         $prepare = mysqli_prepare($con, $sql);
         if($prepare) {
             $prepare -> bind_param("s", $username);

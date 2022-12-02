@@ -43,7 +43,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
     $result = $prepare -> get_result();
     if (mysqli_num_rows($result) < 1) {
         echo "<h3>No Playlists.</h3>";
-        echo "<p>Playlists can be created from the <a href='/user/profile.php'>Profile Page</a>.</p>";
+        echo "<p>Playlists can be created from the <a href='/user/profile.php?UserID=".$UserID."'>Profile Page</a>.</p>";
     } else {
         echo "<h3>Playlists:</h3>";
         echo "<table border='1'>

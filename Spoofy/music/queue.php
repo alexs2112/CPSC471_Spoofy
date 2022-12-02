@@ -1,9 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
 
-// Title
-echo "<h1>Music Queue</h1>";
-
 if(!isset($_SESSION)) { session_start(); }
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
 
@@ -23,6 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 include "../modules/menubar.php";
+
+// Title
+echo "<h1>Music Queue</h1>";
 
 // Do this again after menubar, clearing the queue in menubar can do weird stuff
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
