@@ -1,12 +1,10 @@
 <html>
     <head>
-        <title>PageTitle - Spoofy</title>
+        <title>Error - Spoofy</title>
     </head>
     <body>
-        <?php
-            // These include statments are relative to the file you are editing
-            include "modules/menubar.php";
-            echo "<h1>Error 401 Authorization Required</h1>";
-        ?>
+        <?php include "modules/menubar.php"; ?>
+        <h3>Error 401 Authorization Required.</h3>
+        <p>Your account does not have permission to view this page.</p>
     </body>
 </html>

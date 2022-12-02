@@ -1,12 +1,13 @@
 <?php
-// Basic Menubar
-echo '
-<div class="topnav">
-    <a href="/index.php">Home</a>
-    <a href="/songs.php">Songs</a>
-    <a href="/music/search.php">Search</a>
-';
+
 if(!isset($_SESSION)) { session_start(); }
+echo '<div class="topnav">';
+echo '<a href="/index.php">Home</a>';
+$isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
+if ($isPremium) { echo '<a href="/music/songs.php">Songs</a>'; }
+else { echo '<a href="/music/advertisements.php">Advertisements</a>'; }
+echo '<a href="/music/search.php">Search</a>';
+
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
     echo "<td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a></td>";
     echo '<a href="/user/logout.php">Logout</a>';
@@ -56,17 +57,26 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
             include "mysql_connect.php";
 
             // Fetch current song details
-            $prepare = mysqli_prepare($con, "SELECT Title FROM SONG WHERE SongID=?");
+            if ($isPremium) {
+                $prepare = mysqli_prepare($con, "SELECT Title FROM SONG WHERE SongID=?");
+            } else {
+                $prepare = mysqli_prepare($con, "SELECT Company FROM ADVERTISEMENT WHERE AdID=?");
+            }
             $prepare -> bind_param("s", $SID);
             $prepare -> execute();
             $result = $prepare -> get_result();
             $row = mysqli_fetch_array($result);
 
+            $title = $isPremium ? $row["Title"] : $row["Company"];
             echo '
             <div class="topnav">
-                <a><strong>Current Song:</strong></a>
-                <a href="/music/song.php?SongID='.$SID.'">'.$row["Title"].'</a>
-                <a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
+                <a><strong>Current Song:</strong></a>';
+            if ($isPremium) {
+                echo '<a href="/music/song.php?SongID='.$SID.'">'.$title.'</a>';
+            } else {
+                echo '<a href="/music/advertisement.php?AdID='.$SID.'">'.$title.'</a>';
+            }
+            echo '<a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
                 <a href="/music/queue.php">Queue</a>
             </div>';
             echo "
