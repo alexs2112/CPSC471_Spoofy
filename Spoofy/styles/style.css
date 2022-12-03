@@ -2,7 +2,6 @@
 body {
     background-color: #252526;
     color: lightgrey;
-    text-decoration: none;
 }
 
 /*global text*/
@@ -19,6 +18,8 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #303031;
+    width: 100%;
+    height: 5%;
 }
 
 /*menu bar text placement*/
@@ -26,8 +27,17 @@ li {
     float: left;
 }
 
+/*menu bar text*/
+li a {
+    display: block;
+    color: lightgrey;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
 /*menu bar hover*/
 li a:hover {
-    background-color: #202021;
+    background-color: #8a0e0e5d;
     color: white;
 }

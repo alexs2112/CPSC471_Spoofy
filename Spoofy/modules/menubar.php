@@ -10,24 +10,20 @@ echo '<li><a href="/music/search.php">Search</a>&nbsp';
 
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
     echo "<li><td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a>&nbsp</td>";
-    echo '<li><a href="/user/logout.php">Logout</a>&nbsp';
+    echo '<li style="float:right"><a href="/user/logout.php">Logout</a>&nbsp';
 } else {
     echo '<li><a href="/user/login.php">Login</a>&nbsp';
     echo '<li><a href="/user/register.php">Register</a>&nbsp';
 }
 
-echo '</ul>';
-
 // Admin Menubar
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
     echo '
-    <ul class="topnav">
-        <li><a><strong>Admin:</strong></a>
-        <li><a href="/admin/manage_users.php">Manage Users</a>
-        <li><a href="/admin/manage_songs.php">Manage Music</a>
-        <li><a href="/admin/manage_ads.php">Manage Advertisements</a>
-    </ul>';
+        <li><a href="/admin/manage_users.php">Manage Users</a>&nbsp
+        <li><a href="/admin/manage_songs.php">Manage Music</a>&nbsp
+        <li><a href="/admin/manage_ads.php">Manage Advertisements</a>&nbsp';
 }
+echo '</ul>';
 
 // Song Queue
 if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
