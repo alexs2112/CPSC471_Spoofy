@@ -1,0 +1,66 @@
+/*global page*/
+body {
+    background-color: #252526;
+    color: lightgrey;
+}
+
+/*global text*/
+a {color:lightgrey}
+a:visited { text-decoration: none; color:lightgrey; }
+a:hover { text-decoration: none; color:lightgrey; }
+a:focus { text-decoration: none; color:lightgrey; }
+a:hover, a:active { text-decoration: none; color:#e63939a6}
+
+/*menu bar background*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #303031;
+    width: 100%;
+    height: 5%;
+}
+
+/*menu bar text placement*/
+li {
+    float: left;
+}
+
+/*menu bar text*/
+li a {
+    display: block;
+    color: lightgrey;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/*menu bar hover*/
+li a:hover {
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+/*table attributes*/
+table {
+    border-collapse: collapse;
+    border: 0px;
+}
+
+/*th is the title row*/
+th {
+    padding: 10px;
+    background-color: #252526;
+    border: 0px;
+}
+
+/*td are the actual rows*/
+td {
+    padding: 5px 15px;
+    border: 0px;
+}
+
+/*table striping*/
+tr:nth-child(even) {background-color: #404041;}
+tr:nth-child(odd) {background-color: #303031;}

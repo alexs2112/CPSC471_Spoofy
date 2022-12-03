@@ -8,6 +8,7 @@ include "modules/menubar.php";
 
 <html>
     <head>
+        <link href="styles/style.css" rel="stylesheet" />
         <title>PageTitle - Spoofy</title>
     </head>
 </html>

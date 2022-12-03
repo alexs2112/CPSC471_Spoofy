@@ -1,33 +1,29 @@
 <?php
 
 if(!isset($_SESSION)) { session_start(); }
-echo '<div class="topnav">';
-echo '<a href="/index.php">Home</a>';
+echo '<ul class="topnav">';
+echo '<li><a href="/index.php">Home</a>&nbsp';
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
-if ($isPremium) { echo '<a href="/music/songs.php">Songs</a>'; }
-else { echo '<a href="/music/advertisements.php">Advertisements</a>'; }
-echo '<a href="/music/search.php">Search</a>';
+if ($isPremium) { echo '<li><a href="/music/songs.php">Songs</a>&nbsp'; }
+else { echo '<li><a href="/music/advertisements.php">Advertisements</a>&nbsp'; }
+echo '<li><a href="/music/search.php">Search</a>&nbsp';
 
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
-    echo "<td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a></td>";
-    echo '<a href="/user/logout.php">Logout</a>';
+    echo "<li><td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a>&nbsp</td>";
+    echo '<li style="float:right"><a href="/user/logout.php">Logout</a>&nbsp';
 } else {
-    echo '<a href="/user/login.php">Login</a>';
-    echo '<a href="/user/register.php">Register</a>';
+    echo '<li><a href="/user/login.php">Login</a>&nbsp';
+    echo '<li><a href="/user/register.php">Register</a>&nbsp';
 }
-
-echo '</div>';
 
 // Admin Menubar
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
     echo '
-    <div class="topnav">
-        <a><strong>Admin:</strong></a>
-        <a href="/admin/manage_users.php">Manage Users</a>
-        <a href="/admin/manage_songs.php">Manage Music</a>
-        <a href="/admin/manage_ads.php">Manage Advertisements</a>
-    </div>';
+        <li><a href="/admin/manage_users.php">Manage Users</a>&nbsp
+        <li><a href="/admin/manage_songs.php">Manage Music</a>&nbsp
+        <li><a href="/admin/manage_ads.php">Manage Advertisements</a>&nbsp';
 }
+echo '</ul>';
 
 // Song Queue
 if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {

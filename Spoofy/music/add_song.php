@@ -77,6 +77,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Adding <?php echo $SongTitle; ?> - Spoofy</title>
     </head>
 </html>

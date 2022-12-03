@@ -66,6 +66,7 @@ else {
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Manage Advertisements - Spoofy</title>
     </head>
     <body>

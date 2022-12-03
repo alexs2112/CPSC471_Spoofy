@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link href="styles/style.css" rel="stylesheet" />
         <title>Error - Spoofy</title>
     </head>
     <body>

@@ -65,6 +65,7 @@
 
 <html>
     <head>
+		<link href="../styles/style.css" rel="stylesheet" />
         <title>Manage Music - Spoofy</title>
     </head>
 </html>
