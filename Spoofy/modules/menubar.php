@@ -1,14 +1,18 @@
 <?php
+include_once "mysql_connect.php";
+include_once "queue_functions.php";
 
 if(!isset($_SESSION)) { session_start(); }
+$isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
+$loggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
+
 echo '<ul class="topnav">';
 echo '<li><a href="/index.php">Home</a>&nbsp';
-$isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
-if ($isPremium) { echo '<li><a href="/music/songs.php">Songs</a>&nbsp'; }
+if ($isPremium || !$loggedIn) { echo '<li><a href="/music/songs.php">Songs</a>&nbsp'; }
 else { echo '<li><a href="/music/advertisements.php">Advertisements</a>&nbsp'; }
 echo '<li><a href="/music/search.php">Search</a>&nbsp';
 
-if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
+if ($loggedIn) { 
     echo "<li><td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a>&nbsp</td>";
     echo '<li style="float:right"><a href="/user/logout.php">Logout</a>&nbsp';
 } else {
@@ -17,7 +21,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
 }
 
 // Admin Menubar
-if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
+if ($loggedIn && $_SESSION["Admin"]) {
     echo '
         <li><a href="/admin/manage_users.php">Manage Users</a>&nbsp
         <li><a href="/admin/manage_songs.php">Manage Music</a>&nbsp
@@ -32,13 +36,16 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
         $i = $_SESSION["SongIndex"] + 1;
         if ($i >= count($_SESSION["Queue"])) { $i = 0; }
         $_SESSION["SongIndex"] = $i;
+        increment_song_plays($con, $_SESSION["Queue"][$i]);
     } else if (array_key_exists("PrevSong", $_POST)) {
         $i = $_SESSION["SongIndex"] - 1;
         if ($i < 0) { $i = count($_SESSION["Queue"]) - 1; }
         $_SESSION["SongIndex"] = $i;
+        increment_song_plays($con, $_SESSION["Queue"][$i]);
     } else if (array_key_exists("Shuffle", $_POST)) {
         shuffle($_SESSION["Queue"]);
         $_SESSION["SongIndex"] = 0;
+        increment_song_plays($con, $_SESSION["Queue"][0]);
     }
 
     if (array_key_exists("ClearQueue", $_POST)) {
@@ -50,7 +57,6 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
 
             // Display current song information
             $SID = $_SESSION["Queue"][$_SESSION["SongIndex"]];
-            include "mysql_connect.php";
 
             // Fetch current song details
             if ($isPremium) {

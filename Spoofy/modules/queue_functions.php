@@ -30,6 +30,9 @@ function play_album($con, $albumID) {
         array_push($_SESSION["Queue"], $row["SongID"]);
     }
     if (count($_SESSION["Queue"]) == 0) { $_SESSION["Queue"] = null; }
+    else {
+        increment_song_plays($con, $_SESSION["Queue"][0]);
+    }
 }
 
 function increment_song_plays($con, $songID) {

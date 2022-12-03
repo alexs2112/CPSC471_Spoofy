@@ -142,35 +142,38 @@ while($row = mysqli_fetch_array($result)) {
     echo "<p></p><a href=\"/music/album.php?AlbumID=".$albumID."\">Album: ".$album["Title"]."</a>";
 }
 
-// Buttons to Play, Add to Queue, Add to Playlist
-echo '
-<form method="post">
-    <input type="submit" name="PlaySong" class="button" value="Play Song" />
-    <input type="submit" name="AddToQueue" class="button" value="Add to Queue" />
-    <input type="submit" name="AddToPlaylist" class="button" value="Add to Playlist" />
-</form>
-';
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
 
-// Display the stems, with buttons to disable/enable them
-$prepare = mysqli_prepare($con, "SELECT StemNo, Musicfile FROM STEM WHERE SongID=?");
-$prepare -> bind_param("s", $SongID);
-$prepare -> execute();
-$result = $prepare -> get_result();
+    // Buttons to Play, Add to Queue, Add to Playlist
+    echo '
+    <form method="post">
+        <input type="submit" name="PlaySong" class="button" value="Play Song" />
+        <input type="submit" name="AddToQueue" class="button" value="Add to Queue" />
+        <input type="submit" name="AddToPlaylist" class="button" value="Add to Playlist" />
+    </form>
+    ';
 
-echo "<h3>Stems:</h3>";
-echo "<table border='1'>
-<tr>
-<th>Stem</th>
-<th>File</th>
-</tr>";
-while($row = mysqli_fetch_array($result)) {
-    echo "<tr>
-        <td>" . $row['StemNo'] . "</td>
-        <td>" . $row['Musicfile'] . "</td>";
-    echo "<td><form method=\"post\">
-        <input type=\"submit\" name=\"enable" . $row["StemNo"] . "\" class=\"button\" value=\"".(is_stem_disabled($row['StemNo']) ? "Enable" : "Disable")."\" />
-    </form></td>";
-    echo "</tr>";
+    // Display the stems, with buttons to disable/enable them
+    $prepare = mysqli_prepare($con, "SELECT StemNo, Musicfile FROM STEM WHERE SongID=?");
+    $prepare -> bind_param("s", $SongID);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+
+    echo "<h3>Stems:</h3>";
+    echo "<table border='1'>
+    <tr>
+    <th>Stem</th>
+    <th>File</th>
+    </tr>";
+    while($row = mysqli_fetch_array($result)) {
+        echo "<tr>
+            <td>" . $row['StemNo'] . "</td>
+            <td>" . $row['Musicfile'] . "</td>";
+        echo "<td><form method=\"post\">
+            <input type=\"submit\" name=\"enable" . $row["StemNo"] . "\" class=\"button\" value=\"".(is_stem_disabled($row['StemNo']) ? "Enable" : "Disable")."\" />
+        </form></td>";
+        echo "</tr>";
+    }
 }
 
 $prepare -> close();

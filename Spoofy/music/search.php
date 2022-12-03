@@ -9,6 +9,7 @@ $query = trim($query);
 // Free users can only access ads, premium users can access songs, albums, artists
 if(!isset($_SESSION)) { session_start(); }
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
+$isLoggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     include "../modules/queue_functions.php";
@@ -66,7 +67,7 @@ echo '
 
 $query = "%".$query."%";
 
-if ($isPremium) {
+if ($isPremium || !$isLoggedIn) {
     // Get all songs that match the query
     $sql = "SELECT * FROM SONG WHERE Title LIKE ?";
     $prepare = mysqli_prepare($con, $sql);
@@ -91,15 +92,19 @@ if ($isPremium) {
                 echo "<tr>
                 <td>" . $row['Title'] . "</td>
                 <td>" . $row['Duration'] . "</td>
-                <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>
-                <td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
-                <td><form method=\"post\">
-                    <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
-                </form></td>
-                <td><form method=\"post\">
-                    <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
-                </form></td>
-                </tr>";
+                <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>";
+                
+                if ($isLoggedIn) {
+                    echo "<td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
+                    <td><form method=\"post\">
+                        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+                    </form></td>
+                    <td><form method=\"post\">
+                        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+                    </form></td>";
+                }
+                
+                echo "</tr>";
             }
             echo "</table>";
         }
@@ -129,11 +134,14 @@ if ($isPremium) {
                 echo "<tr>
                 <td>" . $row['Title'] . "</td>
                 <td>" . $row['ReleaseDate'] . "</td>
-                <td><a href='/music/album.php?AlbumID= " . $row['AlbumID'] . "'>View</a></td>
-                <td><form method=\"post\">
-                    <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
-                </form></td>
-                </tr>";
+                <td><a href='/music/album.php?AlbumID= " . $row['AlbumID'] . "'>View</a></td>";
+
+                if ($isLoggedIn) {
+                    echo "<td><form method=\"post\">
+                        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+                    </form></td>";
+                }
+                echo "</tr>";
             }
             echo "</table>";
         }
