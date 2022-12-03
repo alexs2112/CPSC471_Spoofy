@@ -65,7 +65,7 @@ if ($numSongs > 0) {
         // Bold the title if it is currently playing
         echo $i == $_SESSION["SongIndex"] ? "<td><b>" . $title . "</b></td>" : "<td>" . $title . "</td>";
         echo "<td>" . $row['Duration'] . "</td>";
-        if ($isPremium) { echo "<td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>"; }
+        if ($isPremium) { echo "<td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>"; }
         echo "<td>
             <form method=\"post\">
                 <input type=\"submit\" name=\"Play".$i."\" class=\"button\" value=\"Play\" />

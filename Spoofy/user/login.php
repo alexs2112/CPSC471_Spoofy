@@ -43,6 +43,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_array($result);
                     if ($row["PasswordHash"] == hash("sha256", $password)) {
+
+                        // Basic user info
                         $_SESSION["LoggedIn"] = true;
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
@@ -51,6 +53,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         // Set up the playlist
                         $_SESSION["Queue"] = null;
                         $_SESSION["SongIndex"] = 0;
+
+                        // Set up the list of disabled stems
+                        // This is an associative array, of [song_id => [array_of_stems]]
+                        $_SESSION["DisabledStems"] = array();
 
                         // Set the session variable Admin if the user is an administrator
                         $_SESSION["Admin"] = false;

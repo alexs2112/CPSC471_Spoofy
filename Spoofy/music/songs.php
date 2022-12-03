@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     while ($row = mysqli_fetch_array($result)) {
         if (array_key_exists("play".$row["SongID"], $_POST)) {
             play_song($row["SongID"]);
+            increment_song_plays($con, $row["SongID"]);
         } else if (array_key_exists("queue".$row["SongID"], $_POST)) {
             add_song_to_queue($row["SongID"]);
         }
@@ -38,18 +39,18 @@ echo "<table border='1'>
 
 // @todo: don't display the SongID here once managing songs is good to go
 while($row = mysqli_fetch_array($result)) {
-echo "<tr>
-    <td>" . $row['SongID'] . "</td>
-    <td>" . $row['Title'] . "</td>
-    <td>" . $row['Duration'] . "</td>
-    <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
-    <td><form method=\"post\">
-        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
-    </form></td>
-    <td><form method=\"post\">
-        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
-    </form></td>
-    </tr>";
+    echo "<tr>
+        <td>" . $row['SongID'] . "</td>
+        <td>" . $row['Title'] . "</td>
+        <td>" . $row['Duration'] . "</td>
+        <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
+        <td><form method=\"post\">
+            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+        </form></td>
+        <td><form method=\"post\">
+            <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+        </form></td>
+        </tr>";
 }
 echo "</table>";
 

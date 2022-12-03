@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     while ($row = mysqli_fetch_array($result)) {
         if (array_key_exists("play".$row["SongID"], $_POST)) {
             play_song($row["SongID"]);
+            increment_song_plays($con, $row["SongID"]);
         } else if (array_key_exists("queue".$row["SongID"], $_POST)) {
             add_song_to_queue($row["SongID"]);
         }
@@ -40,9 +41,11 @@ $result = $prepare -> get_result();
 $row = mysqli_fetch_array($result);
 $artistName = $row["Name"];
 echo "<h1>".$artistName."</h1>";
-echo "<p>Profile Picture: ".$row["ProfilePicture"]."</p>";
-echo "<p>Banner Picture: ".$row["BannerPicture"]."</p>";
-echo "<p>About: ".$row["About"]."</p>";
+echo "<p><b>Profile Picture:</b> ".$row["ProfilePicture"]."</p>";
+echo "<p><b>Banner Picture:</b> ".$row["BannerPicture"]."</p>";
+echo "<p><b>About:</b> ".$row["About"]."</p>";
+echo "<p><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</p>";
+echo "<p><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</p>";
 
 // Get all song IDs
 $prepare = mysqli_prepare($con, "SELECT SongID FROM WRITES WHERE ArtistID=?");
