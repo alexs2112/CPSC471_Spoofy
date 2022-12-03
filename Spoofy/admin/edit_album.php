@@ -2,25 +2,43 @@
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 
+
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]){
+
+	$AlbumID = $_GET["AlbumID"];
+
+	$prepare = mysqli_prepare($con, "SELECT * FROM ALBUM WHERE AlbumID=?");
+	$prepare -> bind_param("s", $AlbumID);
+	$prepare -> execute();
+	$result = $prepare -> get_result();
+	$row = mysqli_fetch_array($result);
+
+	//set default values
+	$titleDef = $row["Title"];
+	$singleDef = $row["IsSingle"];
+	$coverDef = $row["CoverArt"];
+	$releaseDef = $row["ReleaseDate"];
+	$genreDef = $row["Genre"];
 
 	// Define variables and initialize with empty values
 	$error_string = "";
 	$title = "";
 	$single = "";
 	$cover = "";
-	$release = "";
 	$genre = "";
+	$release = "";
 
 	// Processing form data when form is submitted
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+		$AlbumID = trim($_POST["AlbumID"]);
 
 		// Validate title
 		$title = trim($_POST["title"]);
 		if(empty($title)) {
 			$error_string = "Title can't be empty.";
-		} 
+		}
 		
 		// Validate issingle
 		$single = trim($_POST["single"]);
@@ -53,12 +71,12 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		if(empty($error_string)) {
 			
 			// Prepare an insert statement
-			$sql = "INSERT INTO ALBUM (Title, IsSingle, CoverArt, ReleaseDate, Genre, NumSongs, TotalDuration) VALUES (?, ?, ?, ?, ?, 0, '00:00:00')";
+			$sql = "UPDATE ALBUM SET Title=?, IsSingle=?, CoverArt=?, ReleaseDate=?, Genre=? WHERE AlbumID=?";
 			$prepare = mysqli_prepare($con, $sql);
 			if($prepare) {
 				
 				// Bind all values
-				$prepare -> bind_param("sssss", $title, $single, $cover, $release, $genre);
+				$prepare -> bind_param("ssssss", $title, $single, $cover, $release, $genre, $AlbumID);
 				$prepare -> execute();
 				$result = $prepare -> get_result();
 				
@@ -78,32 +96,36 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
-        <title>Add an Album - Spoofy</title>
+        <title>Edit Album - Spoofy</title>
     </head>
     <body>
         <div class="wrapper">
-        <h2>Add an Album</h2>
-        <p>Fill in album information:</p>
+        <h2>Edit Album</h2>
+        <p>Update album information:</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+			    <div class="form-group">
+                    <label>Album ID</label>
+					<input type="text" name="AlbumID" class="form-control" value="<?php echo $AlbumID; ?>" readonly>
+                </div>
                 <div class="form-group">
-                    <label>Album Title</label>
-                    <input type="text" name="title" class="form-control" value="<?php echo $title; ?>">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" value="<?php echo $titleDef; ?>">
                 </div>    
                 <div class="form-group">
                     <label>Single or Not? (1 or 0)</label>
-                    <input type="text" name="single" class="form-control" value="<?php echo $single; ?>">
+                    <input type="text" name="single" class="form-control" value="<?php echo $singleDef; ?>">
                 </div>
 				<div class="form-group">
                     <label>Path to Cover Art</label>
-                    <input type="text" name="cover" class="form-control" value="<?php echo $cover; ?>">
+                    <input type="text" name="cover" class="form-control" value="<?php echo $coverDef; ?>">
                 </div> 
 				<div class="form-group">
                     <label>Release Date</label>
-                    <input type="text" name="release" class="form-control" value="<?php echo $release; ?>">
+                    <input type="text" name="release" class="form-control" value="<?php echo $releaseDef; ?>">
                 </div> 
 				<div class="form-group">
                     <label>Genre</label>
-                    <input type="text" name="genre" class="form-control" value="<?php echo $genre; ?>">
+                    <input type="text" name="genre" class="form-control" value="<?php echo $genreDef; ?>">
                 </div> 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Submit">
