@@ -18,8 +18,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		$title = trim($_POST["title"]);
 		if(empty($title)) {
 			$error_string = "Title can't be empty.";
-		} elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["title"]))) {
-			$error_string = "Title can only contain letters, numbers, and underscores.";
+		} elseif(!preg_match('/^[a-zA-Z0-9_ ]+$/', trim($_POST["title"]))) {
+			$error_string = "Title can only contain letters, numbers, spaces, and underscores.";
 		}
 		
 		// Validate duration
@@ -38,7 +38,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		if(empty($error_string)) {
 			
 			// Prepare an insert statement
-			$sql = "INSERT INTO SONG (Title, Duration, MusicFile) VALUES (?, ?, ?)";
+			$sql = "INSERT INTO SONG (Title, Duration, MusicFile, TotalPlays, MonthlyPlays) VALUES (?, ?, ?, 0, 0)";
 			$prepare = mysqli_prepare($con, $sql);
 			if($prepare) {
 				
