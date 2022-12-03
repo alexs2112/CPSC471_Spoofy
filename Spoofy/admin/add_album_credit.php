@@ -4,18 +4,18 @@ include "../modules/mysql_connect.php";
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$SongID = $_POST["SongID"];
 		$AlbumID = $_POST["AlbumID"];
+		$ArtistID = $_POST["ArtistID"];
 
-		$sql = "INSERT INTO ALBUM_CONTAINS VALUES(?,?)";
+		$sql = "INSERT INTO HAS VALUES(?,?)";
 		$prepare = mysqli_prepare($con, $sql);
 		if($prepare) {
 			// Bind all values
-			$prepare -> bind_param("ss", $AlbumID, $SongID);
+			$prepare -> bind_param("ss", $AlbumID, $ArtistID);
 			$prepare -> execute();
 			$result = $prepare -> get_result();
 			
-			header("location: manage_songs.php");
+			header("location: manage_albums.php");
 			$prepare -> close();
 		}
 	}
@@ -25,29 +25,29 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 ?>
 <html>
     <head>
-        <title>Add Song to Album - Spoofy</title>
+        <title>Add Album Credit - Spoofy</title>
     </head>
     <body>
-        <h1>Add Song to Album</h1>
+        <h1>Add Album Credit</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>SongID</label>
-                <input type="text" name="SongID" class="form-control">
-            </div>   
             <div class="form-group">
                 <label>AlbumID</label>
                 <input type="text" name="AlbumID" class="form-control">
+            </div>   
+            <div class="form-group">
+                <label>ArtistID</label>
+                <input type="text" name="ArtistID" class="form-control">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Add to Album">
+                <input type="submit" class="btn btn-primary" value="Add Credit">
             </div>
 			<button onclick='location.href="manage_songs.php"' type='button'>
 				Return to Manage Songs
 			</button><br>
         </form>
-		<?php echo "<h3>Songs:</h3>";
+		<?php echo "<h3>Albums:</h3>";
 		
-		$result = mysqli_query($con, "SELECT * FROM Song");
+		$result = mysqli_query($con, "SELECT * FROM Album");
 		echo "<table border='1'>
 		<th>ID</th>
 		<th>Title</th>
@@ -55,25 +55,25 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 		while($row = mysqli_fetch_array($result)) {
 			echo "<tr>
-			<td>" . $row['SongID'] . "</td>
+			<td>" . $row['AlbumID'] . "</td>
 			<td>" . $row['Title'] . "</td>";
 			
 			"</tr>";
 		}
 		echo "</table>";
 		
-		echo "<h3>Albums:</h3>";
+		echo "<h3>Artists:</h3>";
 		
-		$result2 = mysqli_query($con, "SELECT * FROM Album");
+		$result2 = mysqli_query($con, "SELECT * FROM Artist");
 		echo "<table border='1'>
 		<th>ID</th>
-		<th>Title</th>
+		<th>Name</th>
 		</tr>";
 
 		while($row2 = mysqli_fetch_array($result2)) {
 			echo "<tr>
-			<td>" . $row2['AlbumID'] . "</td>
-			<td>" . $row2['Title'] . "</td>";
+			<td>" . $row2['ArtistID'] . "</td>
+			<td>" . $row2['Name'] . "</td>";
 			
 			"</tr>";
 		}

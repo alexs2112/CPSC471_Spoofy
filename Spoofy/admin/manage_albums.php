@@ -15,12 +15,17 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		Manage Songs
 	</button><br><br>";
 	
+	echo "<button onclick='location.href=\"add_album_credit.php\"' type='button'>
+		Add Album Credit
+	</button><br>";
+	
 	//fetch all albums
 	$result = mysqli_query($con, "SELECT * FROM Album");
 	echo "<table border='1'>
 	<tr>
 	<th>ID</th>
 	<th>Title</th>
+	<th>Artist Name</th>
 	<th>Single?</th>
 	<th>Cover Art</th>
 	<th>Release Data</th>
@@ -33,8 +38,19 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		// @todo: add Admin to account type
 		echo "<tr>
 		<td>" . $row['AlbumID'] . "</td>
-		<td>" . $row['Title'] . "</td>
-		<td>" . $row['IsSingle'] . "</td>
+		<td>" . $row['Title'] . "</td>";
+		
+		$sql = "SELECT * FROM HAS, ARTIST WHERE AlbumID=? AND HAS.ArtistID=ARTIST.ArtistID";
+		$prepare = mysqli_prepare($con, $sql);
+		if ($prepare) {
+			$prepare -> bind_param("s", $row['AlbumID']);
+			$prepare -> execute();
+			$album = $prepare -> get_result();
+			$row2 = mysqli_fetch_array($album);
+			echo"<td>".$row2['Name']."</td>";
+		}
+		
+		echo "<td>" . $row['IsSingle'] . "</td>
 		<td>" . $row['CoverArt'] . "</td>
 		<td>" . $row['ReleaseDate'] . "</td>
 		<td>" . $row['Genre'] . "</td>

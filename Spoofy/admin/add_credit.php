@@ -25,7 +25,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 ?>
 <html>
     <head>
-        <title>Add Writes - Spoofy</title>
+        <title>Add Artist Credit - Spoofy</title>
     </head>
     <body>
         <h1>Add Artist Credit</h1>
