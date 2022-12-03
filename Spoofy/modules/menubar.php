@@ -89,6 +89,7 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
                 <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
             </form>
             ";
+            $prepare -> close();
         }
     }
 }

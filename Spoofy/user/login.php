@@ -4,8 +4,7 @@ include "../modules/mysql_connect.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
-    // @todo send to user profile
-    header("location: ../index.php");
+    header("location: /user/profile.php?UserID=".$_SESSION["UserID"]);
  }
  
 // Define variables and initialize with empty values
@@ -71,9 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                         }
 
-                        // @todo header("location: user.php?UserID=". $row['UserID']);
-                        // Get rid of this below header when you do that
-                        header("location: ../index.php");
+                        header("location: /index.php");
                     } else {
                         $error_string = "Invalid username or password.";
                     }
@@ -92,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Login - Spoofy</title>
     </head>
     <body>
@@ -110,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
             <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
-            <p>Don't have an account? <a href="register.php">Register</a>.</p>
+            <p>Don't have an account? <a href="/user/register.php">Register</a>.</p>
         </form>
     </body>
 </html>

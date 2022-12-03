@@ -58,12 +58,13 @@ while($row = mysqli_fetch_array($result)) {
 }
 echo "</table>";
 
+$prepare -> close();
 mysqli_close($con);
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Songs - Spoofy</title>
     </head>
 </html>

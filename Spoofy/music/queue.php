@@ -86,6 +86,9 @@ if ($numSongs > 0) {
         <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
         <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
     </form>";
+
+    $prepare -> close();
+    mysqli_close($con);
 } else {
     echo "<h3>No songs playing.</h3>";
 }
@@ -93,7 +96,7 @@ if ($numSongs > 0) {
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Queue - Spoofy</title>
     </head>
 </html>

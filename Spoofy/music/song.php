@@ -85,11 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include "../modules/menubar.php";
 
-// Make sure the user is a premium user
-if (!array_key_exists("IsPremium", $_SESSION) || !$_SESSION["IsPremium"]) {
-    header("location: /error.php");
-}
-
 // Perform mysql query
 $prepare = mysqli_prepare($con, "SELECT * FROM SONG WHERE SongID=?");
 $prepare -> bind_param("s", $SongID);
@@ -182,7 +177,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $songTitle; ?> - Spoofy</title>
     </head>
 </html>

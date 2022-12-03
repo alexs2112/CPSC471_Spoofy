@@ -8,17 +8,13 @@
     - List albums, add albums and remove albums
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
- - Clean up all things tagged with `@todo`
-    - Make sure that all `href` blocks are using project root (their paths should always start with `/`)
-    - Make sure all `$prepare`s are closed
+ - Clean up all things tagged with `@todo` in the Admin module
+    - Not done yet due to active work
+    - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
+    - Make sure all `$prepare`s and `mysqli` connections are closed
+ - Report Changes
     - Make sure the SQL statements in the functional model are up to date
        - The CREATE_TABLES commands need to be changed to account for default 0 values in plays, and removing NumSongs and TotalDuration from ALBUM
- - The NumSongs and TotalDuration problem
-    - The `ALBUM` MySQL table contains two fields: `NumSongs` and `TotalDuration`
-    - These are totally unnecessary as they can be handled programmatically
-    - Delete them from the create tables field in the python InitDB scripts (`InitDB/create_tables.py`)
-    - Update the Relational Model and any other document that references these fields
- - Advertisements
     - Edit our previous reports and deliverables that mention ad functionality that is inconsistent with the work done
 
 ## Stretch Goals

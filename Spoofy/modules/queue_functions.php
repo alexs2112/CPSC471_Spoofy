@@ -33,6 +33,7 @@ function play_album($con, $albumID) {
     else {
         increment_song_plays($con, $_SESSION["Queue"][0]);
     }
+    $prepare -> close();
 }
 
 function increment_song_plays($con, $songID) {
@@ -49,6 +50,7 @@ function increment_song_plays($con, $songID) {
     $prepare = mysqli_prepare($con, $sql);
     $prepare -> bind_param("s", $songID);
     $prepare -> execute();
+    $prepare -> close();
 }
 
 /* Notes:

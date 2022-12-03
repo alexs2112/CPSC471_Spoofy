@@ -216,11 +216,14 @@ if ($isPremium || !$isLoggedIn) {
         }
     }
 }
+
+$prepare -> close();
+mysqli_close($con);
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Search - Spoofy</title>
     </head>
 </html>

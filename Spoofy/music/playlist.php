@@ -65,7 +65,7 @@ if (mysqli_num_rows($result) < 1) {
     $result = $prepare -> get_result();
     if (mysqli_num_rows($result) < 1) {
         echo "<p>No songs.</p>";
-        echo "<p>Add songs from the <a href='search.php'>search page</a>.</p>";
+        echo "<p>Add songs from the <a href='/music/search.php'>search page</a>.</p>";
     } else {
         echo "<table border='1'>
         <tr>
@@ -120,12 +120,14 @@ if (mysqli_num_rows($result) < 1) {
     }
 
     echo "</form>";
+    $prepare -> close();
+    mysqli_close($con);
 }
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Playlist - Spoofy</title>
     </head>
 </html>
