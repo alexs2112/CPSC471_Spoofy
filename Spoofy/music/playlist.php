@@ -37,6 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             remove_song($con, $PlaylistID, $row["SongID"]);
         } else if (array_key_exists("play".$row["SongID"], $_POST)) {
             play_song($row["SongID"]);
+            increment_song_plays($con, $row["SongID"]);
         } else if (array_key_exists("queue".$row["SongID"], $_POST)) {
             add_song_to_queue($row["SongID"]);
         }

@@ -32,6 +32,22 @@ function play_album($con, $albumID) {
     if (count($_SESSION["Queue"]) == 0) { $_SESSION["Queue"] = null; }
 }
 
+function increment_song_plays($con, $songID) {
+    // This cannot go in play_song due to ads
+    $sql = "UPDATE SONG SET TotalPlays = TotalPlays + 1, MonthlyPlays = MonthlyPlays + 1 WHERE SongID=?";
+    $prepare = mysqli_prepare($con, $sql);
+    $prepare -> bind_param("s", $songID);
+    $prepare -> execute();
+
+    $sql = "UPDATE ARTIST SET TotalPlays = TotalPlays + 1, MonthlyPlays = MonthlyPlays + 1 
+            WHERE ArtistID IN (
+                SELECT ArtistID FROM WRITES WHERE SongID=?
+            )";
+    $prepare = mysqli_prepare($con, $sql);
+    $prepare -> bind_param("s", $songID);
+    $prepare -> execute();
+}
+
 /* Notes:
  - play_playlist is handled in playlist_functions.php
  - play_song and add_song_to_queue work identically for ads
