@@ -12,10 +12,6 @@
     - Not done yet due to active work
     - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
     - Make sure all `$prepare`s and `mysqli` connections are closed
- - Report Changes
-    - Make sure the SQL statements in the functional model are up to date
-       - The CREATE_TABLES commands need to be changed to account for default 0 values in plays, and removing NumSongs and TotalDuration from ALBUM
-    - Edit our previous reports and deliverables that mention ad functionality that is inconsistent with the work done
 
 ## Stretch Goals
  - Actually being able to play music...
