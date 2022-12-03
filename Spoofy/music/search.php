@@ -211,6 +211,7 @@ if ($isPremium) {
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Search - Spoofy</title>
     </head>
 </html>

@@ -58,6 +58,7 @@ mysqli_close($con);
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Songs - Spoofy</title>
     </head>
 </html>

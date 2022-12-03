@@ -86,6 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Login - Spoofy</title>
     </head>
     <body>

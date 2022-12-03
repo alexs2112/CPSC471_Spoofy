@@ -112,6 +112,7 @@ if (mysqli_num_rows($result) < 1) {
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Playlist - Spoofy</title>
     </head>
 </html>

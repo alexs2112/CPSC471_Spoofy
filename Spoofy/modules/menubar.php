@@ -2,18 +2,18 @@
 
 if(!isset($_SESSION)) { session_start(); }
 echo '<div class="topnav">';
-echo '<a href="/index.php">Home</a>';
+echo '<a href="/index.php">Home</a>&nbsp';
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
-if ($isPremium) { echo '<a href="/music/songs.php">Songs</a>'; }
-else { echo '<a href="/music/advertisements.php">Advertisements</a>'; }
-echo '<a href="/music/search.php">Search</a>';
+if ($isPremium) { echo '<a href="/music/songs.php">Songs</a>&nbsp'; }
+else { echo '<a href="/music/advertisements.php">Advertisements</a>&nbsp'; }
+echo '<a href="/music/search.php">Search</a>&nbsp';
 
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
-    echo "<td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a></td>";
-    echo '<a href="/user/logout.php">Logout</a>';
+    echo "<td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a>&nbsp</td>";
+    echo '<a href="/user/logout.php">Logout</a>&nbsp';
 } else {
-    echo '<a href="/user/login.php">Login</a>';
-    echo '<a href="/user/register.php">Register</a>';
+    echo '<a href="/user/login.php">Login</a>&nbsp';
+    echo '<a href="/user/register.php">Register</a>&nbsp';
 }
 
 echo '</div>';

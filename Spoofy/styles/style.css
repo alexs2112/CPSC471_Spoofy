@@ -1,0 +1,11 @@
+body {
+    background-color: #252526;
+    color: lightgrey;
+    text-decoration: none;
+}
+
+a {color:lightgrey}
+a:visited { text-decoration: none; color:lightgrey; }
+a:hover { text-decoration: none; color:lightgrey; }
+a:focus { text-decoration: none; color:lightgrey; }
+a:hover, a:active { text-decoration: none; color:lightgrey }
