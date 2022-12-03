@@ -19,6 +19,9 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	echo "<button onclick='location.href=\"add_song.php\"' type='button'>
 		Add Song
 	</button>&nbsp;";
+	echo "<button onclick='location.href=\"add_song_to_album.php\"' type='button'>
+		Add Song to Album
+	</button>&nbsp;";
 	echo "<button onclick='location.href=\"add_credit.php\"' type='button'>
 		Add Artist Credit
 	</button><br>";
