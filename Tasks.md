@@ -8,8 +8,6 @@
     - List albums, add albums and remove albums
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
- - Module for Queue functions similar to playlist_functions
-    - Call to play/add to queue individual ads from Search Page, Advertisement Page
  - Song Page
     - Enable/Disable stems
  - Advertisements
@@ -65,6 +63,7 @@
     - View songs, albums, artists
     - Add song to playlist
     - Play songs, albums
+    - If the user is a free user they can only access and play advertisements
  - Playlist Page
     - View songs, remove songs
     - Play playlist

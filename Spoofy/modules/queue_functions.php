@@ -32,5 +32,8 @@ function play_album($con, $albumID) {
     if (count($_SESSION["Queue"]) == 0) { $_SESSION["Queue"] = null; }
 }
 
-// Play Playlist is handled in playlist_functions.php
+/* Notes:
+ - play_playlist is handled in playlist_functions.php
+ - play_song and add_song_to_queue work identically for ads
+*/
 ?>
