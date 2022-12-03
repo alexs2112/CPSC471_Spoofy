@@ -10,15 +10,19 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	//links to artists and albums pages
 	echo "<button onclick='location.href=\"manage_artists.php\"' type='button'>
 		Manage Artists
-	</button>\n";
+	</button>&nbsp;";
 	echo "<button onclick='location.href=\"manage_albums.php\"' type='button'>
 		Manage Albums
 	</button><br><br>";
-	
+
 	//add a song
 	echo "<button onclick='location.href=\"add_song.php\"' type='button'>
 		Add Song
+	</button>&nbsp;";
+	echo "<button onclick='location.href=\"add_credit.php\"' type='button'>
+		Add Artist Credit
 	</button><br>";
+	
 
 	//fetch all songs
 	$result = mysqli_query($con, "SELECT * FROM Song");
