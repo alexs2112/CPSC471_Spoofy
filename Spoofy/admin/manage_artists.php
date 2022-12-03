@@ -1,7 +1,9 @@
 <?php
-	include "../modules/menubar.php";
-	include "../modules/mysql_connect.php";
+include "../modules/menubar.php";
+include "../modules/mysql_connect.php";
 
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
 	//title
 	echo "<h2>Manage Artists:</h2>";
 
@@ -39,6 +41,9 @@
 	echo "</table>";
 
 	mysqli_close($con);
+} else {
+    header("location: ../error.php");
+}
 
 ?>
 

@@ -1,5 +1,4 @@
 <?php
-include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
 
 if(!isset($_SESSION)) { session_start(); }
@@ -14,36 +13,17 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	// Processing form data when form is submitted
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-		// Validate title
-		$title = trim($_POST["title"]);
-		if(empty($title)) {
-			$error_string = "Title can't be empty.";
-		} elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["title"]))) {
-			$error_string = "Title can only contain letters, numbers, and underscores.";
-		}
-		
-		// Validate duration
-		$duration = trim($_POST["duration"]);
-		if(empty($duration)) {
-			$error_string = "Duration can't be empty.";     
-		} elseif(!preg_match('/^[0-5][0-9]:[0-5][0-9]:[0-5][0-9]$/', trim($_POST["duration"]))) {
-			$error_string = "Duration should be formatted as 'hh:mm:ss'";
-		}
-		
-		// Validate filepath
-		// TODO: Actual validation checks
-		$filepath = trim($_POST["filepath"]);
-
 		// If there are no errors, insert into the database
 		if(empty($error_string)) {
 			
 			// Prepare an insert statement
-			$sql = "INSERT INTO SONG (Title, Duration, MusicFile) VALUES (?, ?, ?)";
+			$sql = "INSERT INTO WRITES VALUES (?, ?)";
 			$prepare = mysqli_prepare($con, $sql);
 			if($prepare) {
-				
 				// Bind all values
-				$prepare -> bind_param("sss", $title, $duration, $filepath);
+				$prepare -> bind_param("ii", $title, $duration);
+				$title = intval($title);
+				$duration = intval($duration);
 				$prepare -> execute();
 				$result = $prepare -> get_result();
 				
@@ -71,16 +51,12 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         <p>Fill in song information:</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
-                    <label>Song Title</label>
+                    <label>Song ID</label>
                     <input type="text" name="title" class="form-control" value="<?php echo $title; ?>">
                 </div>    
                 <div class="form-group">
-                    <label>Duration</label>
+                    <label>Artist ID</label>
                     <input type="text" name="duration" class="form-control" value="<?php echo $duration; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Song File Path</label>
-                    <input type="text" name="filepath" class="form-control" value="<?php echo $filepath; ?>">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Submit">

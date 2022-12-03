@@ -1,7 +1,9 @@
 <?php
-	include "../modules/menubar.php";
-	include "../modules/mysql_connect.php";
-	
+include "../modules/menubar.php";
+include "../modules/mysql_connect.php";
+
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {	
 	//title
 	echo "<h2>Manage Songs:</h2>";
 	
@@ -64,11 +66,15 @@
 		
 		echo "<td><a href='/admin/delete_song.php?SongID= " . $row['SongID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		echo "<td><a href='/admin/clear_monthly.php?SongID= " . $row['SongID'] . "' onclick=\"return confirm('Are you sure?')\";>Reset Monthly Plays</a></td>";
+		//echo "<td><a href='/admin/add_credit.php?SongID=" . $row['SongID'] . "&Title=" . $row['Title'] . "'>Add Artist Credit</a></td>";
 		"</tr>";
 	}
 	echo "</table>";
 
 	mysqli_close($con);
+} else {
+    header("location: ../error.php");
+}
 ?>
 
 <html>

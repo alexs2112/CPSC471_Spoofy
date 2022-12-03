@@ -1,7 +1,9 @@
 <?php
-	include "../modules/menubar.php";
-	include "../modules/mysql_connect.php";
+include "../modules/menubar.php";
+include "../modules/mysql_connect.php";
 
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
 	//title
 	echo "<h2>Manage Albums:</h2>";
 
@@ -39,12 +41,15 @@
 		<td>" . $row['NumSongs'] . "</td>
 		<td>" . $row['TotalDuration'] . "</td>";
 		
-		//echo "<td><a href='/admin/delete_artist.php?ArtistID= " . $row['ArtistID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
+		echo "<td><a href='/admin/delete_album.php?AlbumID= " . $row['AlbumID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		"</tr>";
 	}
 	echo "</table>";
 
 	mysqli_close($con);
+} else {
+    header("location: ../error.php");
+}
 ?>
 
 <html>
