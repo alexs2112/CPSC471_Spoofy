@@ -9,7 +9,7 @@ a {color:lightgrey}
 a:visited { text-decoration: none; color:lightgrey; }
 a:hover { text-decoration: none; color:lightgrey; }
 a:focus { text-decoration: none; color:lightgrey; }
-a:hover, a:active { text-decoration: none; color:lightgrey }
+a:hover, a:active { text-decoration: none; color:#e63939a6}
 
 /*menu bar background*/
 ul {
@@ -41,3 +41,26 @@ li a:hover {
     background-color: #8a0e0e5d;
     color: white;
 }
+
+/*table attributes*/
+table {
+    border-collapse: collapse;
+    border: 0px;
+}
+
+/*th is the title row*/
+th {
+    padding: 10px;
+    background-color: #252526;
+    border: 0px;
+}
+
+/*td are the actual rows*/
+td {
+    padding: 5px 15px;
+    border: 0px;
+}
+
+/*table striping*/
+tr:nth-child(even) {background-color: #404041;}
+tr:nth-child(odd) {background-color: #303031;}
