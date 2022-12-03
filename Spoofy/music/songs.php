@@ -21,7 +21,7 @@ include "../modules/menubar.php";
 
 if(!isset($_SESSION)) { session_start(); }
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
-if (!$isPremium) {
+if (!$isPremium && isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
     header("location: /music/advertisements.php");
 }
 
@@ -43,23 +43,28 @@ while($row = mysqli_fetch_array($result)) {
         <td>" . $row['SongID'] . "</td>
         <td>" . $row['Title'] . "</td>
         <td>" . $row['Duration'] . "</td>
-        <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
-        <td><form method=\"post\">
-            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
-        </form></td>
-        <td><form method=\"post\">
-            <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
-        </form></td>
-        </tr>";
+        <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>";
+
+        if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+            echo "<td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
+            <td><form method=\"post\">
+                <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+            </form></td>
+            <td><form method=\"post\">
+                <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+            </form></td>";
+        }
+        echo "</tr>";
 }
 echo "</table>";
 
+$prepare -> close();
 mysqli_close($con);
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Songs - Spoofy</title>
     </head>
 </html>

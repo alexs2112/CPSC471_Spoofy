@@ -45,12 +45,13 @@ echo "<tr>
 }
 echo "</table>";
 
+$prepare -> close();
 mysqli_close($con);
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Advertisements - Spoofy</title>
     </head>
 </html>

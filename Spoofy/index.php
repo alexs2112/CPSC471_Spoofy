@@ -26,7 +26,7 @@ if ($isPremium) {
 
 <html>
     <head>
-        <link href="styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>CPSC 471 - Spoofy</title>
     </head>
 </html>

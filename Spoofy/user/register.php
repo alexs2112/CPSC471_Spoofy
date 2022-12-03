@@ -5,7 +5,7 @@ include "../modules/mysql_connect.php";
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
     // @todo send to user profile
-    header("location: ../index.php");
+    header("location: /index.php");
  }
 
 // Define variables and initialize with empty values
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = $prepare -> get_result();
             
             // Redirect to login page after registering
-            header("location: login.php");
+            header("location: /user/login.php");
             $prepare -> close();
         }
     }
@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Register - Spoofy</title>
     </head>
     <body>
@@ -114,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 </div>
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
-                <p>Already have an account? <a href="login.php">Login here</a>.</p>
+                <p>Already have an account? <a href="/user/login.php">Login here</a>.</p>
             </form>
         </div>
     </body>

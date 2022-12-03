@@ -18,8 +18,6 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		$title = trim($_POST["title"]);
 		if(empty($title)) {
 			$error_string = "Title can't be empty.";
-		} elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["title"]))) {
-			$error_string = "Title can only contain letters, numbers, and underscores.";
 		}
 		
 		// Validate duration
@@ -63,8 +61,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
-		<link href="../styles/style.css" rel="stylesheet" />
-        <title>Register - Spoofy</title>
+		<link href="/styles/style.css" rel="stylesheet" />
+        <title>Add Song - Spoofy</title>
     </head>
     <body>
         <div class="wrapper">
@@ -88,7 +86,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                     <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 </div>
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
-				<button onclick='location.href="add_song.php"' type='button'>
+				<button onclick='location.href="/admin/add_song.php"' type='button'>
 					Return to Manage Songs
 				</button><br>
             </form>

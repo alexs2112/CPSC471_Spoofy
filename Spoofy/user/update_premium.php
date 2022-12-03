@@ -29,9 +29,9 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
 
     $_SESSION["Queue"] = null;
     $_SESSION["SongIndex"] = 0;
-    header("location: profile.php?UserID=".$UserID);
+    header("location: /user/profile.php?UserID=".$UserID);
 } else {
     // Someone not logged in is trying to update premium
-    header("location: login.php");
+    header("location: /user/login.php");
 }
 ?>

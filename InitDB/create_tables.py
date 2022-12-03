@@ -43,8 +43,6 @@ def create_tables(cursor):
         CoverArt VARCHAR(255),
         ReleaseDate DATE,
         Genre VARCHAR(255),
-        NumSongs INT,
-        TotalDuration VARCHAR(32),
         Title VARCHAR(32),
         PRIMARY KEY (AlbumID)) """)
     cursor.execute("""CREATE TABLE USER

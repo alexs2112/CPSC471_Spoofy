@@ -83,16 +83,26 @@ while($row = mysqli_fetch_array($result)) {
     echo "<tr>
     <td>" . $details['Title'] . "</td>
     <td>" . $details['Duration'] . "</td>
-    <td><a href='/music/song.php?SongID=" . $details['SongID'] . "'>View</a></td>
-    <td><form method=\"post\">
-        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
-    </form></td>
-    <td><form method=\"post\">
-        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
-    </form></td>
-    </tr>";
+    <td><a href='/music/song.php?SongID=" . $details['SongID'] . "'>View</a></td>";
+    
+    if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+        echo "<td><form method=\"post\">
+            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+        </form></td>
+        <td><form method=\"post\">
+            <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+        </form></td>";
+    }
+    echo "</tr>";
 }
 echo "</table>";
+
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+    echo '
+    <form method="post">
+        <input type="submit" name="PlayAlbum" class="button" value="Play Album" />
+    </form>';
+}
 
 $prepare -> close();
 mysqli_close($con);
@@ -100,12 +110,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $albumTitle; ?> - Spoofy</title>
     </head>
-    <body>
-        <form method="post">
-            <input type="submit" name="PlayAlbum" class="button" value="Play Album" />
-        </form>
-    </body>
 </html>

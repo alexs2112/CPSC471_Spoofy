@@ -47,6 +47,7 @@ $row = mysqli_fetch_array($result);
 
 // Display Account Details
 // @todo: add Admin to account type
+// @todo: display SubRenewDate for free accounts
 echo "<h1>".$row["Username"]."</h1>";
 echo "<p>Account Type: ".($row['IsPremium'] ? "Premium" : "Free")."</p>";
 
@@ -87,6 +88,7 @@ if ($isPremium) {
                         class=\"button\" value=\"Play Playlist\" />
                 </form></td>
                 </tr>";
+            $prepare -> close();
         }
         echo "</table>";
     }
@@ -130,7 +132,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Profile - Spoofy</title>
     </head>
 </html>

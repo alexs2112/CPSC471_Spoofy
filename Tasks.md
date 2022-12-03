@@ -8,23 +8,14 @@
     - List albums, add albums and remove albums
     - List artists, add artists and remove artists
     - The three music things should all be in the same page, under different tabs?
- - Menubar update Song Plays
-    - Once the css changes for menubar has been merged, we need to include `increment_song_plays($con, <current_song_id>);` whenever the Next or Previous buttons are pressed
- - Clean up all things tagged with `@todo`
-    - Make sure that all `href` blocks are using project root (their paths should always start with `/`)
-    - Make sure all `$prepare`s are closed
-    - Make sure the SQL statements in the functional model are up to date
-       - The CREATE_TABLES commands need to be changed to account for default 0 values in plays, and removing NumSongs and TotalDuration from ALBUM
- - The NumSongs and TotalDuration problem
-    - The `ALBUM` MySQL table contains two fields: `NumSongs` and `TotalDuration`
-    - These are totally unnecessary as they can be handled programmatically
-    - Delete them from the create tables field in the python InitDB scripts (`InitDB/create_tables.py`)
-    - Update the Relational Model and any other document that references these fields
- - Advertisements
-    - Edit our previous reports and deliverables that mention ad functionality that is inconsistent with the work done
+ - Clean up all things tagged with `@todo` in the Admin module
+    - Not done yet due to active work
+    - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
+    - Make sure all `$prepare`s and `mysqli` connections are closed
 
 ## Stretch Goals
  - Actually being able to play music...
+    - Yeah this isn't going to happen lol, last stretch goal
  - Fix songs having multiple albums/artists
  - Display album covers whenever album info is displayed. This can get the cover art path from the DB, and then load the image stored in the repo locally. With a default image if the expected image is not found.
  - We have a bunch of places that user redirections to other php files to call functionalities (the old admin functions mostly). These should be cleaned up to use buttons that call POST. Instead of redirecting to a page and relying on GET.
@@ -86,3 +77,4 @@
     - Ad page, add ad to queue, play ad
  - Incrementing Song Plays
     - Playing a song directly will increment the number of TotalPlays and MonthlyPlays in both Song and Artist
+    - Next, Previous, Shuffle all increment the number of plays

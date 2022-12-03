@@ -3,18 +3,21 @@ function create_playlist($con, $playlist_name, $userID) {
     $prepare = mysqli_prepare($con, "INSERT INTO PLAYLIST (PlaylistName, CreatorID) VALUES (?, ?)");
     $prepare -> bind_param("ss", $playlist_name, $userID);
     $prepare -> execute();
+    $prepare -> close();
 }
 
 function delete_playlist($con, $playlistID) {
     $prepare = mysqli_prepare($con, "DELETE FROM PLAYLIST WHERE PlaylistID=?");
     $prepare -> bind_param("s", $playlistID);
     $prepare -> execute();
+    $prepare -> close();
 }
 
 function add_song($con, $playlistID, $songID) {
     $prepare = mysqli_prepare($con, "INSERT INTO PLAYLIST_CONTAINS (PlaylistID, SongID) VALUES (?, ?)");
     $prepare -> bind_param("ss", $playlistID, $songID);
     $prepare -> execute();
+    $prepare -> close();
 }
 
 function remove_song($con, $playlistID, $songID) {
@@ -23,11 +26,13 @@ function remove_song($con, $playlistID, $songID) {
     $prepare -> bind_param("ss", $playlistID, $songID);
     $prepare -> execute();
     $result = $prepare -> get_result();
+    $prepare -> close();
     if (mysqli_num_rows($result) > 0) { return; }
 
     $prepare = mysqli_prepare($con, "DELETE FROM PLAYLIST_CONTAINS WHERE PlaylistID=? AND SongID=?");
     $prepare -> bind_param("ss", $playlistID, $songID);
     $prepare -> execute();
+    $prepare -> close();
 }
 
 function play_playlist($con, $playlistID) {
@@ -36,6 +41,7 @@ function play_playlist($con, $playlistID) {
     $prepare -> bind_param("s", $playlistID);
     $prepare -> execute();
     $result = $prepare -> get_result();
+    $prepare -> close();
 
     if (mysqli_num_rows($result) == 0) { return; }
     $_SESSION["Queue"] = array();
@@ -43,5 +49,6 @@ function play_playlist($con, $playlistID) {
     while($row = mysqli_fetch_array($result)) {
         array_push($_SESSION["Queue"], $row["SongID"]);
     }
+    $prepare -> close();
 }
 ?>

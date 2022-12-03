@@ -3,13 +3,13 @@ include "../modules/mysql_connect.php";
 include "../modules/playlist_functions.php";
 
 $PlaylistID = $_GET["PlaylistID"];
+if (!isset($_SESSION)) { session_start(); }
 
 // Button POST requests for removing songs, playing songs, playing playlist
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     include "../modules/queue_functions.php";
     if (array_key_exists("delete_playlist", $_POST)) {
         // Make sure the user is the creator of this playlist before deleting it
-        if (!isset($_SESSION)) { session_start(); }
         if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
             $prepare = mysqli_prepare($con, "SELECT CreatorID FROM PLAYLIST WHERE PlaylistID=?");
             $prepare -> bind_param("s", $PlaylistID);
@@ -65,7 +65,7 @@ if (mysqli_num_rows($result) < 1) {
     $result = $prepare -> get_result();
     if (mysqli_num_rows($result) < 1) {
         echo "<p>No songs.</p>";
-        echo "<p>Add songs from the <a href='search.php'>search page</a>.</p>";
+        echo "<p>Add songs from the <a href='/music/search.php'>search page</a>.</p>";
     } else {
         echo "<table border='1'>
         <tr>
@@ -84,36 +84,50 @@ if (mysqli_num_rows($result) < 1) {
             echo "<tr>
             <td>" . $song['Title'] . "</td>
             <td>" . $song['Duration'] . "</td>
-            <td><a href='/music/song.php?SongID= " . $song['SongID'] . "'>View</a></td>
-            <td><form method=\"post\">
-                <input type=\"submit\" name=\"remove" . $song["SongID"] . "\" class=\"button\" value=\"Remove\" />
-            </form></td>
-            <td><form method=\"post\">
-                <input type=\"submit\" name=\"play" . $song["SongID"] . "\" class=\"button\" value=\"Play\" />
-            </form></td>
-            <td><form method=\"post\">
-                <input type=\"submit\" name=\"queue" . $song["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
-            </form></td>
-            </tr>";
+            <td><a href='/music/song.php?SongID= " . $song['SongID'] . "'>View</a></td>";
+
+            if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["UserID"] == $playlist["CreatorID"]) {
+                "<td><form method=\"post\">
+                    <input type=\"submit\" name=\"remove" . $song["SongID"] . "\" class=\"button\" value=\"Remove\" />
+                </form></td>";
+            }
+
+            if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+                "<td><form method=\"post\">
+                    <input type=\"submit\" name=\"play" . $song["SongID"] . "\" class=\"button\" value=\"Play\" />
+                </form></td>
+                <td><form method=\"post\">
+                    <input type=\"submit\" name=\"queue" . $song["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+                </form></td>";
+            }
+
+            "</tr>";
         }
         echo "</table>";
     }
 
     // Buttons to play or delete this playlist
-    echo "
-    <form method=\"post\">
-        <input type=\"submit\" name=\"delete_playlist\"
-            onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
-            class=\"button\" value=\"Delete\" />
-        <input type=\"submit\" name=\"play_playlist\"
-            class=\"button\" value=\"Play Playlist\" />
-    </form>";
+    echo "<form method=\"post\">";
+
+    if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["UserID"] == $playlist["CreatorID"]) {
+        echo "<input type=\"submit\" name=\"delete_playlist\"
+                onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
+                class=\"button\" value=\"Delete\" />";
+    }
+    if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+        echo "<input type=\"submit\" name=\"play_playlist\"
+                class=\"button\" value=\"Play Playlist\" />";
+    }
+
+    echo "</form>";
+    $prepare -> close();
+    mysqli_close($con);
 }
 ?>
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Playlist - Spoofy</title>
     </head>
 </html>
