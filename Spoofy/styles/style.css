@@ -1,11 +1,33 @@
+/*global page*/
 body {
     background-color: #252526;
     color: lightgrey;
     text-decoration: none;
 }
 
+/*global text*/
 a {color:lightgrey}
 a:visited { text-decoration: none; color:lightgrey; }
 a:hover { text-decoration: none; color:lightgrey; }
 a:focus { text-decoration: none; color:lightgrey; }
 a:hover, a:active { text-decoration: none; color:lightgrey }
+
+/*menu bar background*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #303031;
+}
+
+/*menu bar text placement*/
+li {
+    float: left;
+}
+
+/*menu bar hover*/
+li a:hover {
+    background-color: #202021;
+    color: white;
+}
