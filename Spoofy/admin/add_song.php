@@ -18,8 +18,6 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		$title = trim($_POST["title"]);
 		if(empty($title)) {
 			$error_string = "Title can't be empty.";
-		} elseif(!preg_match('/^[a-zA-Z0-9_ ]+$/', trim($_POST["title"]))) {
-			$error_string = "Title can only contain letters, numbers, spaces, and underscores.";
 		}
 		
 		// Validate duration
