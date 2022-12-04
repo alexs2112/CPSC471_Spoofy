@@ -30,4 +30,34 @@ function album_cover($con, $albumID) {
     $prepare -> close();
     return $path;
 }
+function artist_profile($con, $artistID) {
+    $sql = "SELECT ProfilePicture FROM ARTIST WHERE ArtistID=?";
+    $prepare = mysqli_prepare($con, $sql);
+    $prepare -> bind_param("s", $artistID);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    $row = mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) == 0 || !file_exists('../resources/'.$row["ProfilePicture"])) {
+        $path = "profiles/unknown.png";
+    } else {
+        $path = $row["ProfilePicture"];
+    }
+    $prepare -> close();
+    return $path;
+}
+function artist_banner($con, $artistID) {
+    $sql = "SELECT BannerPicture FROM ARTIST WHERE ArtistID=?";
+    $prepare = mysqli_prepare($con, $sql);
+    $prepare -> bind_param("s", $artistID);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    $row = mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) == 0 || !file_exists('../resources/'.$row["BannerPicture"])) {
+        $path = "banners/unknown.png";
+    } else {
+        $path = $row["BannerPicture"];
+    }
+    $prepare -> close();
+    return $path;
+}
 ?>

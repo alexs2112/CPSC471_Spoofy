@@ -41,12 +41,22 @@ $result = $prepare -> get_result();
 // Display Artist Details
 $row = mysqli_fetch_array($result);
 $artistName = $row["Name"];
-echo "<h1>".$artistName."</h1>";
-echo "<p><b>Profile Picture:</b> ".$row["ProfilePicture"]."</p>";
-echo "<p><b>Banner Picture:</b> ".$row["BannerPicture"]."</p>";
+
+echo "<img id='artist_banner' src='/resources/" . artist_banner($con, $ArtistID) . "' alt='banner' />";
+echo "
+<div class='flex_container'>
+    <div>
+        <ul class='invisible'>
+            <li><h1>".$artistName."</h1></li>
+            <li><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</li>
+            <li><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</li>
+        </ul>
+    </div>
+    <div>
+        <img id='cover_header' src='/resources/" . artist_profile($con, $ArtistID) . "' alt='profile' />
+    </div>
+</div>";
 echo "<p><b>About:</b> ".$row["About"]."</p>";
-echo "<p><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</p>";
-echo "<p><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</p>";
 
 // Get all song IDs
 $prepare = mysqli_prepare($con, "SELECT SongID FROM WRITES WHERE ArtistID=?");

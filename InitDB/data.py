@@ -149,13 +149,13 @@ def initialize_data(cursor, db):
     ])
     d.add_artists([
         # Try not to make the about long because then the database is impossible to manually parse
-        ("Motionless in White", "American metalcore band from Pennsylvania", "motionless_in_white"),
-        ("Silent Planet", "American metalcore band formed in California", "silent_planet"),
-        ("Periphery", "American progressive metal band formed in Washington, D.C", "periphery"),
-        ("Tool", "American rock band from Los Angeles", "tool"),
-        ("Invent Animate", "American progressive metalcore band from Port Neches, Texas", "invent_animate"),
-        ("As I Lay Dying", "American metalcore band from San Diego, California", "as_i_lay_dying"),
-        ("Ice Nine Kills", "Best known for its horror-inspired lyrics, Ice Nine Kills formed in 2000", "ice_nine_kills"),
+        ("Motionless in White", 'Motionless in White is an American heavy metal band from Scranton, Pennsylvania. Formed in 2004, the band consists of lead vocalist Chris "Motionless" Cerulli, guitarists Ryan Sitkowski and Ricky "Horror" Olson, drummer Vinny Mauro and bassist Justin Morrow. The band has stated that their band name derived from the Eighteen Visions song "Motionless and White".', "motionless_in_white"),
+        ("Silent Planet", "Silent Planet is an American metalcore band formed in Azusa, California, in 2009. Their name is derived from C. S. Lewis' science fiction novel Out of the Silent Planet. The group consists of vocalist Garrett Russell, guitarist Mitchell Stark, bassist Thomas Freckleton and drummer Alex Camarena.", "silent_planet"),
+        ("Periphery", "Periphery is an American progressive metal band formed in Washington, D.C. in 2005. Their musical style has been described as progressive metal, djent, and progressive metalcore. They are considered one of the pioneers of the djent movement within progressive metal. They have also received a Grammy nomination.", "periphery"),
+        ("Tool", "Tool is an American rock band from Los Angeles. Formed in 1990, the group's line-up includes vocalist Maynard James Keenan, guitarist Adam Jones and drummer Danny Carey. Justin Chancellor has been the band's bassist since 1995, replacing their original bassist Paul D'Amour.", "tool"),
+        ("Invent Animate", "Invent Animate is an American progressive metalcore band from Port Neches, Texas. The band formed in late 2011 and self-released their debut EP titled Waves on March 13, 2012.", "invent_animate"),
+        ("As I Lay Dying", "As I Lay Dying is an American metalcore band from San Diego, California. Founded in 2000 by vocalist Tim Lambesis, the band's first full lineup was completed in 2001. The band has released seven albums, one split album, and two compilation albums.", "as_i_lay_dying"),
+        ("Ice Nine Kills", "Ice Nine Kills is an American heavy metal band from Boston, Massachusetts, who are signed to Fearless Records. Best known for its horror-inspired lyrics, Ice Nine Kills formed in its earliest incarnation in 2000 by high school friends Spencer Charnas and Jeremy Schwartz.", "ice_nine_kills"),
     ])
     d.add_albums([
         ("Scoring the End of the World", "Metal", datetime(2022, 6, 10), "scoring_the_end_of_the_world", False),
