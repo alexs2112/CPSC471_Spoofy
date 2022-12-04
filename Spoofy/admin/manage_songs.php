@@ -8,7 +8,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	echo "<h2>Manage Songs:</h2>";
 	
 	//links to artists and albums pages
-	echo "<button onclick='location.href=\"manage_artists.php\"' type='button'>
+	echo "<button onclick='location.href=\"manage_artists.php\"' type='submitForm'>
 		Manage Artists
 	</button>&nbsp;";
 	echo "<button onclick='location.href=\"manage_albums.php\"' type='button'>

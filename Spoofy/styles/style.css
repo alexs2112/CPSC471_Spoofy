@@ -128,6 +128,18 @@ tr:nth-child(odd) {background-color: #303031;}
     align-items: center;
 }
 
+button{
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+button:hover {
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
 /*style of text form fields*/
 input[type=text] {
     width: 20%;
@@ -164,6 +176,19 @@ input[type=password] {
 }
 
 .submitForm:hover{
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+/*style of reset buttons*/
+input[type=reset] {
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+input[type=reset]:hover{
     background-color: #8a0e0e5d;
     color: white;
 }
@@ -233,6 +258,20 @@ input[type=password] {
     height: 30px;
     width: 30px;
     border: none;
+}
+
+/*this is just for the submit button on the search page*/
+.submitButton{
+    width: 100%;
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+.submitButton:hover {
+    background-color: #8a0e0e5d;
+    color: white;
 }
 
 .center {
