@@ -131,18 +131,18 @@ def initialize_data(cursor, db):
     print("Populating tables with default data.")
     d = DataAdder(cursor, db)
     d.add_songs([
-        ("Meltdown", "00:04:28", "songs/motionless_in_white/scoring_the_end_of_the_world/meltdown.mp3"),
-        ("Scoring the End of the World", "00:03:48", "songs/motionless_in_white/scoring_the_end_of_the_world/scoring_the_end_of_the_world.mp3"),
-        ("The New Eternity", "00:03:25", "songs/silent_planet/when_the_end_began/the_new_eternity.mp3"),
-        ("Northern Fires (Guernica)", "00:03:54", "songs/silent_planet/when_the_end_began/northern_fires.mp3"),
-        ("Afterdusk", "00:03:55", "songs/silent_planet/when_the_end_began/afterdusk.mp3"),
-        ("Share the Body", "00:03:33", "songs/silent_planet/when_the_end_began/sharing_the_body.mp3"),
-        ("Firstborn (Ya'aburnee)", "00:05:07", "songs/silent_planet/when_the_end_began/firstborn.mp3"),
-        ("22 Faces", "00:03:51", "songs/periphery/juggernaut_alpha/22_faces.mp3"),
-        ("Omega", "00:11:45", "songs/periphery/juggernaut_omega/omega.mp3"),
-        ("The Pot", "00:06:18", "songs/tool/10000_days/the_pot.mp3"),
-        ("Rosetta Stoned", "00:11:13", "songs/tool/10000_days/rosetta_stoned.mp3"),
-        ("Elysium", "00:04:49", "songs/invent_animate/elysium/elysium.mp3"),
+        ("Meltdown", "00:04:28", "songs/motionless_in_white/meltdown.mp3"),
+        ("Scoring the End of the World", "00:03:48", "songs/motionless_in_white/scoring_the_end_of_the_world.mp3"),
+        ("The New Eternity", "00:03:25", "songs/silent_planet/the_new_eternity.mp3"),
+        ("Northern Fires (Guernica)", "00:03:54", "songs/silent_planet/northern_fires.mp3"),
+        ("Afterdusk", "00:03:55", "songs/silent_planet/afterdusk.mp3"),
+        ("Share the Body", "00:03:33", "songs/silent_planet/share_the_body.mp3"),
+        ("Firstborn (Ya'aburnee)", "00:05:07", "songs/silent_planet/firstborn.mp3"),
+        ("22 Faces", "00:03:51", "songs/periphery/22_faces.mp3"),
+        ("Omega", "00:11:45", "songs/periphery/omega.mp3"),
+        ("The Pot", "00:06:18", "songs/tool/the_pot.mp3"),
+        ("Rosetta Stoned", "00:11:13", "songs/tool/rosetta_stoned.mp3"),
+        ("Elysium", "00:04:49", "songs/invent_animate/elysium.mp3"),
         ("Blinded", "00:03:22", "songs/as_i_lay_dying/blinded.mp3"),
         ("Stabbing in the Dark", "00:04:40", "songs/ice_nine_kills/stabbing_in_the_dark.mp3"),
         ("A Grave Mistake", "00:03:04", "songs/ice_nine_kills/a_grave_mistake.mp3"),
@@ -246,7 +246,7 @@ def initialize_data(cursor, db):
     d.add_users([
         ("Alex", sha256(b'1qaz@WSX').hexdigest(), False),
         ("AlexAdmin", sha256(b'1qaz@WSX').hexdigest(), True, datetime(2025, 1, 1)),
-        ("RyanAdmin", "06c0bf82cee370b32ab6194299edc8231350d8effbe96cb7f904a47d3188baa1", True, datetime(2023-1-4)),
+        ("RyanAdmin", "06c0bf82cee370b32ab6194299edc8231350d8effbe96cb7f904a47d3188baa1", True, datetime(2023, 1, 4)),
     ])
     d.add_admins([
         "AlexAdmin",

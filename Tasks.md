@@ -15,6 +15,9 @@
     - Not done yet due to active work
     - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
     - Make sure all `$prepare`s and `mysqli` connections are closed
+ - Final Changes
+    - CSS styles for buttons and text input fields
+    - Make the menubar look better
 
 ## Stretch Goals
  - Actually being able to play music...

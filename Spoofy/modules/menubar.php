@@ -2,6 +2,22 @@
 include_once "mysql_connect.php";
 include_once "queue_functions.php";
 
+function get_song($con, $songID) {
+    $sql = "SELECT MusicFile FROM SONG WHERE SongID=?";
+    $prepare = mysqli_prepare($con, $sql);
+    $prepare -> bind_param("s", $songID);
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    $row = mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) == 0 || !file_exists('../resources/'.$row["MusicFile"])) {
+        return false;
+    } else {
+        $path = $row["MusicFile"];
+    }
+    $prepare -> close();
+    return $path;
+}
+
 if(!isset($_SESSION)) { session_start(); }
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 $loggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
@@ -79,8 +95,18 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
                 echo '<a href="/music/advertisement.php?AdID='.$SID.'">'.$title.'</a>';
             }
             echo '<a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
-                <a href="/music/queue.php">Queue</a>
-            </div>';
+                <a href="/music/queue.php">Queue</a>';
+
+            if ($isPremium) {
+                $path = get_song($con, $SID);
+                if ($path != false) {
+                    echo '<audio controls>
+                        <source src="/resources/'.$path.'" type="audio/mpeg">
+                    </audio>';
+                }
+            }
+            
+            echo '</div>';
             echo "
             <form method=\"post\">
                 <input type=\"submit\" name=\"PrevSong\" class=\"button\" value=\"Previous\" />
