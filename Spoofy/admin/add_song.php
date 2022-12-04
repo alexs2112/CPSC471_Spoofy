@@ -36,7 +36,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		if(empty($error_string)) {
 			
 			// Prepare an insert statement
-			$sql = "INSERT INTO SONG (Title, Duration, MusicFile) VALUES (?, ?, ?)";
+			$sql = "INSERT INTO SONG (Title, Duration, MusicFile, TotalPlays, MonthlyPlays) VALUES (?, ?, ?, 0, 0)";
 			$prepare = mysqli_prepare($con, $sql);
 			if($prepare) {
 				
@@ -62,7 +62,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 <html>
     <head>
 		<link href="/styles/style.css" rel="stylesheet" />
-        <title>Add Song - Spoofy</title>
+        <title>Add a Song - Spoofy</title>
     </head>
     <body>
         <div class="wrapper">
@@ -78,7 +78,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 				<input type="submit" class="btn btn-primary" value="Submit">
 				<input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
-				<button onclick='location.href="/admin/add_song.php"' type='button'>
+				<button onclick='location.href="manage_songs.php"' type='button'>
+
 					Return to Manage Songs
 				</button><br>
             </form>
