@@ -20,8 +20,6 @@
     - Make the menubar look better
 
 ## Stretch Goals
- - Actually being able to play music...
-    - Yeah this isn't going to happen lol, last stretch goal
  - Fix songs having multiple albums/artists
  - We have a bunch of places that user redirections to other php files to call functionalities (the old admin functions mostly). These should be cleaned up to use buttons that call POST. Instead of redirecting to a page and relying on GET.
     - We can simple refactor the php functions into actual functions, then button presses will include the file and call the function
