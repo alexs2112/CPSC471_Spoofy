@@ -49,6 +49,5 @@ function play_playlist($con, $playlistID) {
     while($row = mysqli_fetch_array($result)) {
         array_push($_SESSION["Queue"], $row["SongID"]);
     }
-    $prepare -> close();
 }
 ?>

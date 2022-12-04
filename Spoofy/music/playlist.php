@@ -54,11 +54,11 @@ $prepare -> bind_param("s", $PlaylistID);
 $prepare -> execute();
 $result = $prepare -> get_result();
 if (mysqli_num_rows($result) < 1) {
-    echo "<h3>Could not find playlist.</h3>";
+    echo "<h3 class='centered_text'>Could not find playlist.</h3>";
 } else {
     $playlist = mysqli_fetch_array($result);
     $playlistName = $playlist["PlaylistName"];
-    echo "<h1>".$playlistName."</h1>";
+    echo "<h1 class='centered_text'>".$playlistName."</h1>";
 
     // List off each song in the playlist
     $prepare = mysqli_prepare($con, "SELECT SongID FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
@@ -66,10 +66,10 @@ if (mysqli_num_rows($result) < 1) {
     $prepare -> execute();
     $result = $prepare -> get_result();
     if (mysqli_num_rows($result) < 1) {
-        echo "<p>No songs.</p>";
-        echo "<p>Add songs from the <a href='/music/search.php'>search page</a>.</p>";
+        echo "<p class='centered_text'>No songs.</p>";
+        echo "<p class='centered_text'>Add songs from the <a href='/music/search.php'>search page</a>.</p>";
     } else {
-        echo "<table border='1'>
+        echo "<table border='1' class='centered_table'>
         <tr>
         <th></th>
         <th>Title</th>
@@ -111,19 +111,20 @@ if (mysqli_num_rows($result) < 1) {
     }
 
     // Buttons to play or delete this playlist
-    echo "<form method=\"post\">";
+    echo "<div class='wrap_form'>";
+    echo "<form method=\"post\" class='centered_form'>";
 
     if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["UserID"] == $playlist["CreatorID"]) {
         echo "<input type=\"submit\" name=\"delete_playlist\"
                 onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
-                class=\"button\" value=\"Delete\" />";
+                class=\"button\" value=\"Delete\"/>";
     }
     if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         echo "<input type=\"submit\" name=\"play_playlist\"
-                class=\"button\" value=\"Play Playlist\" />";
+                class=\"button\" value=\"Play Playlist\"/>";
     }
 
-    echo "</form>";
+    echo "</form></div>";
     $prepare -> close();
     mysqli_close($con);
 }

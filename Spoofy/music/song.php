@@ -101,6 +101,7 @@ echo "
     <div>
         <ul class='invisible'>
             <li><h1>".$songTitle."</h1></li>
+            <li><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</li>
             <li><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</li>
             <li><b>Duration:</b> ".$row["Duration"]."</li>
         </ul>

@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 include "../modules/menubar.php";
 
 // Title
-echo "<h1>Music Queue</h1>";
+echo "<h1 class='centered_text'>Music Queue</h1>";
 
 // Do this again after menubar, clearing the queue in menubar can do weird stuff
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
@@ -32,14 +32,14 @@ $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 // Display song information
 if ($numSongs > 0) {
     if ($isPremium) {
-        echo "<table border='1'>
+        echo "<table border='1' class='centered_table'>
         <tr>
         <th></th>
         <th>Title</th>
         <th>Duration</th>
         </tr>";
     } else {
-        echo "<table border='1'>
+        echo "<table border='1' class='centered_table'>
         <tr>
         <th>Company</th>
         <th>Duration</th>
@@ -85,10 +85,11 @@ if ($numSongs > 0) {
 
     // Display shuffle and clear buttons, these call 'POST' and are handled when menubar is included
     echo "
-    <form method=\"post\">
+    <div class=\"wrap_form\">
+    <form method=\"post\" class=\"centered_form\">
         <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
         <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
-    </form>";
+    </form></div>";
 
     $prepare -> close();
     mysqli_close($con);
