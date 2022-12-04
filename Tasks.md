@@ -1,8 +1,6 @@
 # Unfinished
 *Note: These are in no particular order, although some tasks will rely on the completion of other tasks*
  - Final Changes
-    - CSS styles for buttons and text input fields
-    - Make the menubar look better
 
 ## Stretch Goals
  - Fix songs having multiple albums/artists
