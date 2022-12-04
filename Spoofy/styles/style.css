@@ -160,7 +160,7 @@ input[type=password] {
     font-size: medium;
     color: rgb(224, 224, 224);
     border: 0px;
-    background-color: #303031;
+    background-color: #404041;
 }
 
 .submitForm:hover{
@@ -191,3 +191,22 @@ input[type=password] {
     width: 30px;
     border: none;
 }
+
+.deleteButton{
+    background-image: url(/assets/delete.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }

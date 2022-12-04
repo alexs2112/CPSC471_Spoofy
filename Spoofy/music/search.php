@@ -144,7 +144,7 @@ if ($isPremium || !$isLoggedIn) {
 
                 if ($isLoggedIn) {
                     echo "<td><form method=\"post\">
-                        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+                        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"playButton\" value=\"Play\" />
                     </form></td>";
                 }
                 echo "</tr>";

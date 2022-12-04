@@ -99,7 +99,7 @@ while($row = mysqli_fetch_array($result)) {
     
     if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         echo "<td><form method=\"post\">
-            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"playButton\" value=\"Play\" />
         </form></td>
         <td><form method=\"post\">
             <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />

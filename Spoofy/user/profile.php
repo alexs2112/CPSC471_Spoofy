@@ -79,13 +79,13 @@ if ($isPremium) {
                 <td>" . $song_count . "</td>
                 <td><a href='/music/playlist.php?PlaylistID=" . $playlist["PlaylistID"] . "'>View</a></td>
                 <td><form method=\"post\">
-                    <input type=\"submit\" name=\"clear_playlist_" . $playlist["PlaylistID"] . "\"
-                        onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
-                        class=\"button\" value=\"Delete\" />
+                    <input type=\"submit\" name=\"play_playlist_" . $playlist["PlaylistID"] . "\"
+                        class=\"playButton\" value=\"Play Playlist\" />
                 </form></td>
                 <td><form method=\"post\">
-                    <input type=\"submit\" name=\"play_playlist_" . $playlist["PlaylistID"] . "\"
-                        class=\"button\" value=\"Play Playlist\" />
+                    <input type=\"submit\" name=\"clear_playlist_" . $playlist["PlaylistID"] . "\"
+                        onclick=\"return confirm('Are you sure you would like to delete " . $playlist["PlaylistName"] . "?');\"
+                        class=\"deleteButton\" value=\"Delete\" />
                 </form></td>
                 </tr>";
             $prepare -> close();
@@ -111,7 +111,7 @@ if ($isUser) {
                 <input type=\"text\" name=\"create_playlist_name\" class=\"form-control\">
             </div>
             <div class=\"form-group\">
-                <input type=\"submit\" class=\"btn btn-primary\" value=\"Create\">
+                <input type=\"submit\" class=\"submitForm\" value=\"Create\">
             </div>
         </form>";
     }
