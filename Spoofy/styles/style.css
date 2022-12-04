@@ -170,20 +170,24 @@ input[type=password] {
 
 .playButton{
     background-image: url(/assets/play.png);
+    background-color: transparent;
+    color: transparent;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     /* put the height and width of your image here */
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     border: none;
 }
 
 .addButton{
     background-image: url(/assets/plus.png);
+    background-color: transparent;
+    color: transparent;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     /* put the height and width of your image here */
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     border: none;
 }
