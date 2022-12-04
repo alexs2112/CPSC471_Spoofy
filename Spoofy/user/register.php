@@ -97,22 +97,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                </div>    
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" name="password2" class="form-control" value="<?php echo $password2; ?>">
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <input type="reset" class="btn btn-secondary ml-2" value="Reset">
-                </div>
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+
+                <label>Confirm Password</label>
+                <input type="password" name="password2" class="form-control" value="<?php echo $password2; ?>">
+                
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
                 <p>Already have an account? <a href="/user/login.php">Login here</a>.</p>
             </form>
