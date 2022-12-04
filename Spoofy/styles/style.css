@@ -94,9 +94,10 @@ tr:nth-child(odd) {background-color: #303031;}
 .flex_container {
     display: flex;
     align-items: center;
+}
 
 /*style of text form fields*/
-input[type=text]{
+input[type=text] {
     width: 10%;
     padding: 5px 10px;
     margin: 3px 0;
@@ -107,7 +108,7 @@ input[type=text]{
 }
 
 /*style of password form fields*/
-input[type=password]{
+input[type=password] {
     width: 10%;
     padding: 5px 10px;
     margin: 3px 0;
