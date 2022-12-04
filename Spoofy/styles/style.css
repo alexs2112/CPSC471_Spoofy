@@ -6,6 +6,8 @@ body {
     padding-right: 32;
     padding-top: 8;
     padding-bottom: 32;
+    max-width: 1280px;
+    margin: auto;
 }
 
 /*global text*/
@@ -50,6 +52,31 @@ a:hover, a:active { text-decoration: none; color:#e63939a6}
 table {
     border-collapse: collapse;
     border: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.centered_table {
+    border-collapse: collapse;
+    border: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered_text {
+    text-align: center;
+}
+
+div.wrap_form {
+    display: block;
+    text-align: center;
+}
+
+.centered_form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
 
 /*th is the title row*/

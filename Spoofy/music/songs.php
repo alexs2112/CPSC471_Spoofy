@@ -31,15 +31,14 @@ $prepare = mysqli_prepare($con, "SELECT * FROM SONG");
 $prepare -> execute();
 $result = $prepare -> get_result();
 
-echo "<h1>Song List</h1>";
-echo "<table border='1'>
+echo "<h1 class='centered_text'>Song List</h1>";
+echo "<table border='1' class='centered_table'>
 <tr>
 <th></th>
 <th>Title</th>
 <th>Duration</th>
 </tr>";
 
-// @todo: don't display the SongID here once managing songs is good to go
 while($row = mysqli_fetch_array($result)) {
     echo "<tr>
         <td><img id='cover_thumb' src='/resources/" . song_cover($con, $row['SongID']) . "' alt='cover'></td>

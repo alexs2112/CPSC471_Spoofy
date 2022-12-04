@@ -56,15 +56,16 @@ include "../modules/menubar.php";
 
 // Display the search form
 echo '
-<form action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'" method="post">
+<div class="wrap_form">
+<form action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'" class="centered_form" method="post">
     <div class="form-group">
-        <label>Search</label>
-        <input type="text" name="query" class="form-control" value="'.$query.'">
+        <label><h2 class="centered_text">Search</h2></label>
+        <input type="text" name="query" class="form-control" value="'.$query.'" style="min-width:192px;" ">
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Submit">
     </div>
-</form>';
+</form></div>';
 
 $query = "%".$query."%";
 
@@ -77,12 +78,12 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h1>Songs</h1>";
+        echo "<h1 class='centered_text'>Songs</h1>";
         if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
+            echo "<p class='centered_text'>No Results</p>";
         } else {
             // Display table information for songs
-            echo "<table border='1'>
+            echo "<table border='1' class='centered_table'>
             <tr>
             <th></th>
             <th>Title</th>
@@ -121,12 +122,12 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h1>Albums</h1>";
+        echo "<h1 class='centered_text'>Albums</h1>";
         if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
+            echo "<p class='centered_text'>No Results</p>";
         } else {
-            // Display table information for songs
-            echo "<table border='1'>
+            // Display table information for albums
+            echo "<table border='1' class='centered_table'>
             <tr>
             <th></th>
             <th>Title</th>
@@ -160,13 +161,13 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h1>Artists</h1>";
+        echo "<h1 class='centered_text'>Artists</h1>";
 
         if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
+            echo "<p class='centered_text'>No Results</p>";
         } else {
-            // Display table information for songs
-            echo "<table border='1'>
+            // Display table information for artists
+            echo "<table border='1' class='centered_table'>
             <tr>
             <th>Name</th>
             </tr>";
@@ -190,12 +191,12 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h1>Advertisements</h1>";
+        echo "<h1 class='centered_text'>Advertisements</h1>";
         if (mysqli_num_rows($result) < 1) {
-            echo "<p>No Results</p>";
+            echo "<p class='centered_text'>No Results</p>";
         } else {
             // Display table information for songs
-            echo "<table border='1'>
+            echo "<table border='1' class='centered_table'>
             <tr>
             <th>ID</th>
             <th>Company</th>
