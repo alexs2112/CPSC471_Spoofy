@@ -74,8 +74,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 				<label>Duration</label>
 				<input type="text" name="duration" placeholder="hh:mm:ss" class="form-control" value="<?php echo $duration; ?>">
 				<label>Song File Path</label>
-				<input type="text" name="filepath" placeholder="songs/<artist>/<song_file>.mp3" class="form-control" value="<?php echo $filepath; ?>">
-				<input type="submit" class="btn btn-primary" value="Submit">
+				<input type="text" name="filepath" placeholder="ex. music/song.mp3" class="form-control" value="<?php echo $filepath; ?>">
+				<input type="submit" class="submitForm" value="Submit">
 				<input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
 				<button onclick='location.href="manage_songs.php"' type='button'>

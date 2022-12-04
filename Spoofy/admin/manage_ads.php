@@ -62,7 +62,7 @@ else {
 
 <html>
     <head>
-        <link href="../styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Manage Advertisements - Spoofy</title>
     </head>
     <body>
@@ -78,7 +78,7 @@ else {
                 <label>SoundFile</label>
                 <input type="text" name="soundfile" placeholder="ex. ads/ad.mp3" class="form-control" value="<?php echo $soundfile; ?>">
                 
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="submitForm" value="Submit">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
             </form>
             <?php 

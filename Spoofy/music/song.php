@@ -154,8 +154,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
     // Buttons to Play, Add to Queue, Add to Playlist
     echo '
     <form method="post">
-        <input type="submit" name="PlaySong" class="button" value="Play Song" />
-        <input type="submit" name="AddToQueue" class="button" value="Add to Queue" />
+        <input type="submit" name="PlaySong" class="playButton" value="Play Song" />
+        <input type="submit" name="AddToQueue" class="addButton" value="Add to Queue" />
         <input type="submit" name="AddToPlaylist" class="button" value="Add to Playlist" />
     </form>
     ';
@@ -189,7 +189,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $songTitle; ?> - Spoofy</title>
     </head>
 </html>

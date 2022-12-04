@@ -63,7 +63,7 @@ echo '
         <input type="text" name="query" class="form-control" value="'.$query.'" style="min-width:192px;" ">
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="submitButton" value="Submit">
     </div>
 </form></div>';
 
@@ -101,10 +101,10 @@ if ($isPremium || !$isLoggedIn) {
                 if ($isLoggedIn) {
                     echo "<td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
                     <td><form method=\"post\">
-                        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+                        <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"playButton\" value=\"Play\" />
                     </form></td>
                     <td><form method=\"post\">
-                        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+                        <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"addButton\" value=\"Add to Queue\" />
                     </form></td>";
                 }
                 
@@ -144,7 +144,7 @@ if ($isPremium || !$isLoggedIn) {
 
                 if ($isLoggedIn) {
                     echo "<td><form method=\"post\">
-                        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+                        <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"playButton\" value=\"Play\" />
                     </form></td>";
                 }
                 echo "</tr>";
@@ -230,7 +230,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Search - Spoofy</title>
     </head>
 </html>

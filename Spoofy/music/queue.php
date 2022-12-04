@@ -71,12 +71,12 @@ if ($numSongs > 0) {
         if ($isPremium) { echo "<td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>"; }
         echo "<td>
             <form method=\"post\">
-                <input type=\"submit\" name=\"Play".$i."\" class=\"button\" value=\"Play\" />
+                <input type=\"submit\" name=\"Play".$i."\" class=\"playButton\" value=\"Play\" />
             </form>
         </td>
         <td>
             <form method=\"post\">
-                <input type=\"submit\" name=\"Remove".$i."\" class=\"button\" value=\"Remove\" />
+                <input type=\"submit\" name=\"Remove".$i."\" class=\"deleteButton\" value=\"Remove\" />
             </form>
         </td>
         </tr>";
@@ -87,8 +87,8 @@ if ($numSongs > 0) {
     echo "
     <div class=\"wrap_form\">
     <form method=\"post\" class=\"centered_form\">
-        <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
-        <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
+        <input type=\"submit\" name=\"ClearQueue\" class=\"deleteButton\" value=\"Clear Queue\" />
+        <input type=\"submit\" name=\"Shuffle\" class=\"shuffleButton\" value=\"Shuffle Queue\" />
     </form></div>";
 
     $prepare -> close();
@@ -100,7 +100,7 @@ if ($numSongs > 0) {
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Queue - Spoofy</title>
     </head>
 </html>

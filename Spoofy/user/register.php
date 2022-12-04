@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Register - Spoofy</title>
     </head>
     <body>
@@ -106,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label>Confirm Password</label>
                 <input type="password" name="password2" class="form-control" value="<?php echo $password2; ?>">
                 
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="submitForm" value="Submit">
                 <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
                 <p>Already have an account? <a href="/user/login.php">Login here</a>.</p>

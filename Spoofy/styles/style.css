@@ -128,6 +128,18 @@ tr:nth-child(odd) {background-color: #303031;}
     align-items: center;
 }
 
+button{
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+button:hover {
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
 /*style of text form fields*/
 input[type=text] {
     width: 20%;
@@ -151,3 +163,120 @@ input[type=password] {
     box-sizing: border-box;
     font-size: small;
 }
+
+/*style of form submit buttons*/
+.submitForm {
+    width: 20%;
+    padding: 5px 10px;
+    display: block;
+    font-size: medium;
+    color: rgb(224, 224, 224);
+    border: 0px;
+    background-color: #404041;
+}
+
+.submitForm:hover{
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+/*style of reset buttons*/
+input[type=reset] {
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+input[type=reset]:hover{
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+.playButton{
+    background-image: url(/assets/play.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.addButton{
+    background-image: url(/assets/plus.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.deleteButton{
+    background-image: url(/assets/delete.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.shuffleButton{
+    background-image: url(/assets/shuffle.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.nextButton{
+    background-image: url(/assets/next.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+.prevButton{
+    background-image: url(/assets/prev.png);
+    background-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 30px;
+    border: none;
+}
+
+/*this is just for the submit button on the search page*/
+.submitButton{
+    width: 100%;
+    background-color: #404041;
+    color: lightgrey;
+    border: 2px solid;
+    border-color: #202021;
+}
+
+.submitButton:hover {
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }

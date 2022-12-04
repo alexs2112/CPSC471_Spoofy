@@ -23,7 +23,7 @@ $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 $loggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
 
 echo '<ul class="topnav ul_menubar">';
-echo '<li class="li_menubar"><a href="/index.php">Home</a></li>&nbsp';
+echo '<li class="li_menubar"><a href="/index.php"><img src="/assets/spoofySmall.png" style="position: relative; top:-5px; width:30"></a></li>&nbsp';
 if ($isPremium || !$loggedIn) { echo '<li class="li_menubar"><a href="/music/songs.php">Songs</a></li>&nbsp'; }
 else { echo '<li class="li_menubar"><a href="/music/advertisements.php">Advertisements</a></li>&nbsp'; }
 echo '<li class="li_menubar"><a href="/music/search.php">Search</a></li>&nbsp';
@@ -109,10 +109,10 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
             echo '</div>';
             echo "
             <form method=\"post\">
-                <input type=\"submit\" name=\"PrevSong\" class=\"button\" value=\"Previous\" />
-                <input type=\"submit\" name=\"NextSong\" class=\"button\" value=\"Next\" />
-                <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
-                <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
+                <input type=\"submit\" name=\"PrevSong\" class=\"prevButton\" value=\"Previous\" />
+                <input type=\"submit\" name=\"NextSong\" class=\"nextButton\" value=\"Next\" />
+                <input type=\"submit\" name=\"ClearQueue\" class=\"deleteButton\" value=\"Clear Queue\" />
+                <input type=\"submit\" name=\"Shuffle\" class=\"shuffleButton\" value=\"Shuffle Queue\" />
             </form>
             ";
             $prepare -> close();

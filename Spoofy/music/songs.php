@@ -49,10 +49,10 @@ while($row = mysqli_fetch_array($result)) {
         if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
             echo "<td><a href='/music/add_song.php?SongID=" . $row['SongID'] . "'>Add to Playlist</a></td>
             <td><form method=\"post\">
-                <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+                <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"playButton\" value=\"Play\" />
             </form></td>
             <td><form method=\"post\">
-                <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+                <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"addButton\" value=\"Add to Queue\" />
             </form></td>";
         }
         echo "</tr>";
@@ -65,7 +65,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Songs - Spoofy</title>
     </head>
 </html>

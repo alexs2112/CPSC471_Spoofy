@@ -3,6 +3,7 @@ include "modules/menubar.php";
 include "modules/mysql_connect.php";
 
 if(!isset($_SESSION)) { session_start(); }
+echo '<img src="/assets/spoofylogo.png" class="center">';
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) { 
     echo "<h1 class='centered_text'>Welcome ".$_SESSION["Username"]."!</h1>";
 } else {
@@ -26,7 +27,7 @@ if ($isPremium) {
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>CPSC 471 - Spoofy</title>
     </head>
 </html>
