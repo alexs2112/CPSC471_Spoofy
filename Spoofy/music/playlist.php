@@ -132,7 +132,7 @@ if (mysqli_num_rows($result) < 1) {
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $playlistName; ?> - Spoofy</title>
     </head>
 </html>

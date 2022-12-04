@@ -132,7 +132,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title>Profile - Spoofy</title>
     </head>
 </html>

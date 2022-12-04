@@ -151,3 +151,39 @@ input[type=password] {
     box-sizing: border-box;
     font-size: small;
 }
+
+/*style of form submit buttons*/
+.submitForm {
+    width: 20%;
+    padding: 5px 10px;
+    display: block;
+    font-size: medium;
+    color: rgb(224, 224, 224);
+    border: 0px;
+    background-color: #303031;
+}
+
+.submitForm:hover{
+    background-color: #8a0e0e5d;
+    color: white;
+}
+
+.playButton{
+    background-image: url(/assets/play.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.addButton{
+    background-image: url(/assets/plus.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* put the height and width of your image here */
+    height: 50px;
+    width: 50px;
+    border: none;
+}

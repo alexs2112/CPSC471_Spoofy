@@ -25,6 +25,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 ?>
 <html>
     <head>
+	<link href="/styles/style.css" rel="stylesheet" />
         <title>Add Song to Album - Spoofy</title>
     </head>
     <body>
@@ -39,7 +40,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 <input type="text" name="AlbumID" class="form-control">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Add to Album">
+                <input type="submit" class="submitForm" value="Add to Album">
             </div>
 			<button onclick='location.href="manage_songs.php"' type='button'>
 				Return to Manage Songs

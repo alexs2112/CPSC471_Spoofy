@@ -25,6 +25,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 ?>
 <html>
     <head>
+	<link href="/styles/style.css" rel="stylesheet" />
         <title>Add Artist Credit - Spoofy</title>
     </head>
     <body>
@@ -39,7 +40,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 <input type="text" name="ArtistID" class="form-control">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Add Credit">
+                <input type="submit" class="submitForm" value="Add Credit">
             </div>
 			<button onclick='location.href="manage_songs.php"' type='button'>
 				Return to Manage Songs

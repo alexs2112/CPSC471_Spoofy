@@ -78,6 +78,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
+	<link href="/styles/style.css" rel="stylesheet" />
         <title>Add an Album - Spoofy</title>
     </head>
     <body>
@@ -106,7 +107,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                     <input type="text" name="genre" class="form-control" value="<?php echo $genre; ?>">
                 </div> 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="submitForm" value="Submit">
                     <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 </div>
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>

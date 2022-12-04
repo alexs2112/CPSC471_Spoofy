@@ -189,7 +189,7 @@ mysqli_close($con);
 
 <html>
     <head>
-        <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $songTitle; ?> - Spoofy</title>
     </head>
 </html>
