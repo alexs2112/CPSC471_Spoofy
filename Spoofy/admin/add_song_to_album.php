@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/menubar.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
@@ -46,22 +47,35 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 				Return to Manage Songs
 			</button><br>
         </form>
-		<?php echo "<h3>Songs:</h3>";
+		<?php
 		
-		$result = mysqli_query($con, "SELECT * FROM Song");
+		echo "<table><tr><td>";
+
+		echo "<h3>Songs:</h3>";
+		$result = mysqli_query($con, "SELECT SongID, Title FROM SONG");
 		echo "<table border='1'>
 		<th>ID</th>
 		<th>Title</th>
+		<th>Album</th>
 		</tr>";
 
 		while($row = mysqli_fetch_array($result)) {
 			echo "<tr>
 			<td>" . $row['SongID'] . "</td>
 			<td>" . $row['Title'] . "</td>";
-			
-			"</tr>";
+
+			$prepare = mysqli_prepare($con, "SELECT Title FROM ALBUM, ALBUM_CONTAINS WHERE ALBUM.AlbumID = ALBUM_CONTAINS.AlbumID AND ALBUM_CONTAINS.SongID = ?");
+			$prepare -> bind_param("s", $row['SongID']);
+			$prepare -> execute();
+			$album_result = $prepare -> get_result();
+			if (mysqli_num_rows($album_result) == 0) { echo "<td></td>"; }
+			else { echo "<td>".mysqli_fetch_array($album_result)["Title"]."</td>"; }
+
+			echo "</tr>";
 		}
 		echo "</table>";
+
+		echo "</td><td>";
 		
 		echo "<h3>Albums:</h3>";
 		
@@ -79,6 +93,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 			"</tr>";
 		}
 		echo "</table>";
+
+		echo "</td></tr></table>";
 		
 		mysqli_close($con);
 		?>

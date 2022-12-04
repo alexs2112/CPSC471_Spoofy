@@ -1,20 +1,5 @@
 # Unfinished
 *Note: These are in no particular order, although some tasks will rely on the completion of other tasks*
- - Admin pages
-    - List ads, add/approve ads
-    - A way to add stems to songs, probably also in the edit song page
-    - The following pages still need CSS implemented:
-        - add_song_to_album.php
-        - add_credit.php
-        - add_artist.php
-        - edit_artist.php
-        - add_album.php
-        - add_album_credit.php
-        - edit_album.php
- - Clean up all things tagged with `@todo` in the Admin module
-    - Not done yet due to active work
-    - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
-    - Make sure all `$prepare`s and `mysqli` connections are closed
  - Final Changes
     - CSS styles for buttons and text input fields
     - Make the menubar look better
@@ -35,6 +20,9 @@
     - Admin menubar for special actions
     - Delete users
     - List and view users
+    - Add/Delete songs, albums, artists
+    - Add/Remove artist credit to songs, albums
+    - Add/Remove songs to albums
  - User Profile Page:
     - Display user details
     - Upgrade to Premium, Downgrade to Free

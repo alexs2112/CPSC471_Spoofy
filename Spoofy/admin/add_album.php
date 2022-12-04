@@ -24,7 +24,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		
 		// Validate issingle
 		$single = trim($_POST["single"]);
-		if(empty($single)){
+		if(empty($single) && !is_numeric($single)){	// empty() evaluates "0" to true for some reason: https://www.php.net/manual/en/function.empty.php
 			$error_string = "Single can't be empty.";
 		} elseif(!preg_match('/^[0-1]+$/', trim($_POST["single"]))){
 			$error_string = "Single must be either 0 (not a single) or 1 (is a single).";
@@ -53,7 +53,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		if(empty($error_string)) {
 			
 			// Prepare an insert statement
-			$sql = "INSERT INTO ALBUM (Title, IsSingle, CoverArt, ReleaseDate, Genre, NumSongs, TotalDuration) VALUES (?, ?, ?, ?, ?, 0, '00:00:00')";
+			$sql = "INSERT INTO ALBUM (Title, IsSingle, CoverArt, ReleaseDate, Genre) VALUES (?, ?, ?, ?, ?)";
 			$prepare = mysqli_prepare($con, $sql);
 			if($prepare) {
 				
@@ -78,7 +78,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
-	<link href="/styles/style.css" rel="stylesheet" />
+	      <link href="/styles/style.css" rel="stylesheet" /
         <title>Add an Album - Spoofy</title>
     </head>
     <body>
@@ -96,11 +96,11 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 </div>
 				<div class="form-group">
                     <label>Path to Cover Art</label>
-                    <input type="text" name="cover" class="form-control" value="<?php echo $cover; ?>">
+                    <input type="text" name="cover" class="form-control" placeholder="covers/<album>.png" value="<?php echo $cover; ?>">
                 </div> 
 				<div class="form-group">
                     <label>Release Date</label>
-                    <input type="text" name="release" class="form-control" value="<?php echo $release; ?>">
+                    <input type="text" name="release" class="form-control" placeholder="yyyy-mm-dd" value="<?php echo $release; ?>">
                 </div> 
 				<div class="form-group">
                     <label>Genre</label>

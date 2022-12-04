@@ -64,7 +64,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
-	<link href="/styles/style.css" rel="stylesheet" />
+	      <link href="/styles/style.css" rel="stylesheet" />
         <title>Add Artist - Spoofy</title>
     </head>
     <body>
@@ -75,18 +75,18 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 <div class="form-group">
                     <label>Artist Name</label>
                     <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
-                </div>    
+                </div>
+				<label for="about">About</label>
                 <div class="form-group">
-                    <label>About</label>
-                    <input type="text" name="about" class="form-control" value="<?php echo $about; ?>">
+					<textarea name="about" rows="4" cols="80"><?php echo $about; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Path to Profile Picture</label>
-                    <input type="text" name="pfp" class="form-control" value="<?php echo $pfp; ?>">
+                    <input type="text" name="pfp" class="form-control" placeholder="profiles/<artist>.png" value="<?php echo $pfp; ?>">
                 </div>
 				<div class="form-group">
                     <label>Path to Banner Picture</label>
-                    <input type="text" name="bp" class="form-control" value="<?php echo $bp; ?>">
+                    <input type="text" name="bp" class="form-control" placeholder="banners/<artist>.png" value="<?php echo $bp; ?>">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="submitForm" value="Submit">

@@ -31,7 +31,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		echo "<tr>
 		<td>" . $details['SongID'] . "</td>
 		<td>" . $details['Title'] . "</td>
-		<td><a href='/admin/remove_song_from_album.php?SongID=" . $row['SongID'] . "&AlbumID=" . $AlbumID . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>
+		<td><a href='/admin/remove_song_from_album.php?SongID=" . $row['SongID'] . "&AlbumID=" . $AlbumID . "' onclick=\"return confirm('Are you sure?')\";>Remove</a></td>
 		</tr>";
 	}
 	echo "</table>";

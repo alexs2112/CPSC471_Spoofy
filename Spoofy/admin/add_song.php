@@ -72,7 +72,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 				<label>Song Title</label>
 				<input type="text" name="title" placeholder="ex. YYZ" class="form-control" value="<?php echo $title; ?>"> 
 				<label>Duration</label>
-				<input type="text" name="duration" placeholder="ex. 03:50" class="form-control" value="<?php echo $duration; ?>">
+				<input type="text" name="duration" placeholder="hh:mm:ss" class="form-control" value="<?php echo $duration; ?>">
 				<label>Song File Path</label>
 				<input type="text" name="filepath" placeholder="ex. music/song.mp3" class="form-control" value="<?php echo $filepath; ?>">
 				<input type="submit" class="submitForm" value="Submit">

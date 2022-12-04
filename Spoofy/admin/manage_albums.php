@@ -1,6 +1,7 @@
 <?php
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
@@ -31,10 +32,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	<th>Artist Name</th>
 	<th>Single?</th>
 	<th>Cover Art</th>
-	<th>Release Data</th>
+	<th>Release Date</th>
 	<th>Genre</th>
-	<th>Number of Songs</th>
-	<th>Duration</th>
 	</tr>";
 
 	while($row = mysqli_fetch_array($result)) {
@@ -52,17 +51,16 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 			$row2 = mysqli_fetch_array($album);
 			echo"<td>".$row2['Name']."</td>";
 		}
-		
+
 		echo "<td>" . $row['IsSingle'] . "</td>
-		<td>" . $row['CoverArt'] . "</td>
+		<td><p>" . $row['CoverArt'] . "</p>
+		<img id='cover_thumb' src='/resources/" . album_cover($con, $row['AlbumID']) . "' alt='cover'></td>
 		<td>" . $row['ReleaseDate'] . "</td>
-		<td>" . $row['Genre'] . "</td>
-		<td>" . $row['NumSongs'] . "</td>
-		<td>" . $row['TotalDuration'] . "</td>";
+		<td>" . $row['Genre'] . "</td>";
 		
 		echo "<td><a href='/admin/delete_album.php?AlbumID= " . $row['AlbumID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		echo "<td><a href='/admin/edit_album.php?AlbumID=" . $row['AlbumID'] . "'>Edit</a></td>";
-		echo "<td><a href='/admin/remove_album_contains.php?AlbumID=" . $row['AlbumID'] . "'>Remove a Song</a></td>";
+		echo "<td><a href='/admin/remove_album_contains.php?AlbumID=" . $row['AlbumID'] . "'>Remove Song</a></td>";
 		"</tr>";
 	}
 	echo "</table>";
