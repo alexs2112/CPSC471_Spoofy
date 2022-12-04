@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     include "../modules/queue_functions.php";
@@ -56,6 +57,7 @@ $result = $prepare -> get_result();
 // Display Song Information
 echo "<table border='1'>
 <tr>
+<th></th>
 <th>Song</th>
 <th>Duration</th>
 </tr>";
@@ -67,15 +69,16 @@ while($row = mysqli_fetch_array($result)) {
     $details = mysqli_fetch_array($song);
 
     echo "<tr>
+    <td><img id='cover_thumb' src='/resources/" . song_cover($con, $details['SongID']) . "' alt='cover'></td>
     <td>" . $details['Title'] . "</td>
     <td>" . $details['Duration'] . "</td>
     <td><a href='/music/song.php?SongID= " . $details['SongID'] . "'>View</a></td>";
     if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         echo "<td><form method=\"post\">
-            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+            <input type=\"submit\" name=\"play" . $details["SongID"] . "\" class=\"button\" value=\"Play\" />
         </form></td>
         <td><form method=\"post\">
-            <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+            <input type=\"submit\" name=\"queue" . $details["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
         </form></td>";
     }
     echo "</tr>";
@@ -90,6 +93,7 @@ $result = $prepare -> get_result();
 
 echo "<table border='1'>
 <tr>
+<th></th>
 <th>Album</th>
 <th>Release</th>
 </tr>";
@@ -104,12 +108,13 @@ while($row = mysqli_fetch_array($result)) {
     $details = mysqli_fetch_array($album);
 
     echo "<tr>
+    <td><img id='cover_thumb' src='/resources/" . album_cover($con, $details['AlbumID']) . "' alt='cover'></td>
     <td>" . $details['Title'] . "</td>
     <td>" . $details['ReleaseDate'] . "</td>
     <td><a href='/music/album.php?AlbumID= " . $albumID . "'>View</a></td>";
     if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         echo "<td><form method=\"post\">
-            <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+            <input type=\"submit\" name=\"play_album" . $details["AlbumID"] . "\" class=\"button\" value=\"Play\" />
         </form></td>";
     }
     echo "</tr>";

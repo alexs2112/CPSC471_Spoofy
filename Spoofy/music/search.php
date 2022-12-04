@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 
 $query = "";
 if (array_key_exists("query", $_GET)) { $query = $_GET["query"]; }
@@ -76,13 +77,14 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h3>Songs</h3>";
+        echo "<h1>Songs</h1>";
         if (mysqli_num_rows($result) < 1) {
             echo "<p>No Results</p>";
         } else {
             // Display table information for songs
             echo "<table border='1'>
             <tr>
+            <th></th>
             <th>Title</th>
             <th>Duration</th>
             </tr>";
@@ -90,6 +92,7 @@ if ($isPremium || !$isLoggedIn) {
             // For each song, display their information
             while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>
+                <td><img id='cover_thumb' src='/resources/" . song_cover($con, $row['SongID']) . "' alt='cover'></td>
                 <td>" . $row['Title'] . "</td>
                 <td>" . $row['Duration'] . "</td>
                 <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>";
@@ -118,13 +121,14 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h3>Albums</h3>";
+        echo "<h1>Albums</h1>";
         if (mysqli_num_rows($result) < 1) {
             echo "<p>No Results</p>";
         } else {
             // Display table information for songs
             echo "<table border='1'>
             <tr>
+            <th></th>
             <th>Title</th>
             <th>Release Date</th>
             </tr>";
@@ -132,6 +136,7 @@ if ($isPremium || !$isLoggedIn) {
             // For each song, display their information
             while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>
+                <td><img id='cover_thumb' src='/resources/" . album_cover($con, $row['AlbumID']) . "' alt='cover'></td>
                 <td>" . $row['Title'] . "</td>
                 <td>" . $row['ReleaseDate'] . "</td>
                 <td><a href='/music/album.php?AlbumID= " . $row['AlbumID'] . "'>View</a></td>";
@@ -155,7 +160,7 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h3>Artists</h3>";
+        echo "<h1>Artists</h1>";
 
         if (mysqli_num_rows($result) < 1) {
             echo "<p>No Results</p>";
@@ -185,7 +190,7 @@ if ($isPremium || !$isLoggedIn) {
         $prepare -> execute();
         $result = $prepare -> get_result();
 
-        echo "<h3>Advertisements</h3>";
+        echo "<h1>Advertisements</h1>";
         if (mysqli_num_rows($result) < 1) {
             echo "<p>No Results</p>";
         } else {

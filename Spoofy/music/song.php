@@ -1,6 +1,7 @@
 <?php
 $SongID = $_GET["SongID"];
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 if(!isset($_SESSION)) { session_start(); }
 
 // Some functions to enable and disable functions
@@ -94,10 +95,20 @@ $result = $prepare -> get_result();
 // Display Song Details
 $row = mysqli_fetch_array($result);
 $songTitle = $row["Title"];
-echo "<h1>".$songTitle."</h1>";
-echo "<p><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</p>";
-echo "<p><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</p>";
-echo "<p><b>Duration:</b> ".$row["Duration"]."</p>";
+
+echo "
+<div class='flex_container'>
+    <div>
+        <ul class='invisible'>
+            <li><h1>".$songTitle."</h1></li>
+            <li><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</li>
+            <li><b>Duration:</b> ".$row["Duration"]."</li>
+        </ul>
+    </div>
+    <div>
+        <img id='cover_header' src='/resources/" . song_cover($con, $SongID) . "' alt='cover' />
+    </div>
+</div>";
 echo "<p><b>Music File:</b> ".$row["MusicFile"]."</p>";
 
 // Retrieve Artist Details

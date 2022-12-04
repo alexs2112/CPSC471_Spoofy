@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 
 if(!isset($_SESSION)) { session_start(); }
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
@@ -33,6 +34,7 @@ if ($numSongs > 0) {
     if ($isPremium) {
         echo "<table border='1'>
         <tr>
+        <th></th>
         <th>Title</th>
         <th>Duration</th>
         </tr>";
@@ -63,6 +65,7 @@ if ($numSongs > 0) {
         echo "<tr>";
 
         // Bold the title if it is currently playing
+        if ($isPremium) { echo "<td><img id='cover_thumb' src='/resources/" . song_cover($con, $row['SongID']) . "' alt='cover'></td>"; }
         echo $i == $_SESSION["SongIndex"] ? "<td><b>" . $title . "</b></td>" : "<td>" . $title . "</td>";
         echo "<td>" . $row['Duration'] . "</td>";
         if ($isPremium) { echo "<td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>"; }
