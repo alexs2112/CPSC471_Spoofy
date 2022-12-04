@@ -3,6 +3,14 @@
  - Admin pages
     - List ads, add/approve ads
     - A way to add stems to songs, probably also in the edit song page
+    - The following pages still need CSS implemented:
+        - add_song_to_album.php
+        - add_credit.php
+        - add_artist.php
+        - edit_artist.php
+        - add_album.php
+        - add_album_credit.php
+        - edit_album.php
  - Clean up all things tagged with `@todo` in the Admin module
     - Not done yet due to active work
     - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
