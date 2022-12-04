@@ -18,6 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 include "../modules/menubar.php";
+include "../modules/image_functions.php";
 
 if(!isset($_SESSION)) { session_start(); }
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
@@ -30,9 +31,10 @@ $prepare = mysqli_prepare($con, "SELECT * FROM SONG");
 $prepare -> execute();
 $result = $prepare -> get_result();
 
+echo "<h1>Song List</h1>";
 echo "<table border='1'>
 <tr>
-<th>ID</th>
+<th></th>
 <th>Title</th>
 <th>Duration</th>
 </tr>";
@@ -40,7 +42,7 @@ echo "<table border='1'>
 // @todo: don't display the SongID here once managing songs is good to go
 while($row = mysqli_fetch_array($result)) {
     echo "<tr>
-        <td>" . $row['SongID'] . "</td>
+        <td><img id='cover_thumb' src='/resources/" . song_cover($con, $row['SongID']) . "' alt='cover'></td>
         <td>" . $row['Title'] . "</td>
         <td>" . $row['Duration'] . "</td>
         <td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>";

@@ -6,26 +6,26 @@ if(!isset($_SESSION)) { session_start(); }
 $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 $loggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
 
-echo '<ul class="topnav">';
-echo '<li><a href="/index.php">Home</a>&nbsp';
-if ($isPremium || !$loggedIn) { echo '<li><a href="/music/songs.php">Songs</a>&nbsp'; }
-else { echo '<li><a href="/music/advertisements.php">Advertisements</a>&nbsp'; }
-echo '<li><a href="/music/search.php">Search</a>&nbsp';
+echo '<ul class="topnav ul_menubar">';
+echo '<li class="li_menubar"><a href="/index.php">Home</a></li>&nbsp';
+if ($isPremium || !$loggedIn) { echo '<li class="li_menubar"><a href="/music/songs.php">Songs</a></li>&nbsp'; }
+else { echo '<li class="li_menubar"><a href="/music/advertisements.php">Advertisements</a></li>&nbsp'; }
+echo '<li class="li_menubar"><a href="/music/search.php">Search</a></li>&nbsp';
 
 if ($loggedIn) { 
-    echo "<li><td><a href='/user/profile.php?UserID=" . $_SESSION['UserID'] . "'>Profile</a>&nbsp</td>";
-    echo '<li style="float:right"><a href="/user/logout.php">Logout</a>&nbsp';
+    echo '<li class="li_menubar"><td><a href="/user/profile.php?UserID=' . $_SESSION['UserID'] . '">Profile</a></li>&nbsp</td>';
+    echo '<li class="li_menubar" style="float:right"><a href="/user/logout.php">Logout</a></li>&nbsp';
 } else {
-    echo '<li><a href="/user/login.php">Login</a>&nbsp';
-    echo '<li><a href="/user/register.php">Register</a>&nbsp';
+    echo '<li class="li_menubar"><a href="/user/login.php">Login</a></li>&nbsp';
+    echo '<li class="li_menubar"><a href="/user/register.php">Register</a></li>&nbsp';
 }
 
 // Admin Menubar
 if ($loggedIn && $_SESSION["Admin"]) {
     echo '
-        <li><a href="/admin/manage_users.php">Manage Users</a>&nbsp
-        <li><a href="/admin/manage_songs.php">Manage Music</a>&nbsp
-        <li><a href="/admin/manage_ads.php">Manage Advertisements</a>&nbsp';
+        <li class="li_menubar"><a href="/admin/manage_users.php">Manage Users</a></li>&nbsp
+        <li class="li_menubar"><a href="/admin/manage_songs.php">Manage Music</a></li>&nbsp
+        <li class="li_menubar"><a href="/admin/manage_ads.php">Manage Advertisements</a></li>&nbsp';
 }
 echo '</ul>';
 

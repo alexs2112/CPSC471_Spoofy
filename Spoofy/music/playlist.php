@@ -1,6 +1,7 @@
 <?php
 include "../modules/mysql_connect.php";
 include "../modules/playlist_functions.php";
+include "../modules/image_functions.php";
 
 $PlaylistID = $_GET["PlaylistID"];
 if (!isset($_SESSION)) { session_start(); }
@@ -56,7 +57,8 @@ if (mysqli_num_rows($result) < 1) {
     echo "<h3>Could not find playlist.</h3>";
 } else {
     $playlist = mysqli_fetch_array($result);
-    echo "<h1>".$playlist["PlaylistName"]."</h1>";
+    $playlistName = $playlist["PlaylistName"];
+    echo "<h1>".$playlistName."</h1>";
 
     // List off each song in the playlist
     $prepare = mysqli_prepare($con, "SELECT SongID FROM PLAYLIST_CONTAINS WHERE PlaylistID=?");
@@ -69,6 +71,7 @@ if (mysqli_num_rows($result) < 1) {
     } else {
         echo "<table border='1'>
         <tr>
+        <th></th>
         <th>Title</th>
         <th>Duration</th>
         </tr>";
@@ -82,18 +85,19 @@ if (mysqli_num_rows($result) < 1) {
             $song = mysqli_fetch_array($song_details);
 
             echo "<tr>
+            <td><img id='cover_thumb' src='/resources/" . song_cover($con, $row['SongID']) . "' alt='cover'></td>
             <td>" . $song['Title'] . "</td>
             <td>" . $song['Duration'] . "</td>
             <td><a href='/music/song.php?SongID= " . $song['SongID'] . "'>View</a></td>";
 
             if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["UserID"] == $playlist["CreatorID"]) {
-                "<td><form method=\"post\">
+                echo "<td><form method=\"post\">
                     <input type=\"submit\" name=\"remove" . $song["SongID"] . "\" class=\"button\" value=\"Remove\" />
                 </form></td>";
             }
 
             if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
-                "<td><form method=\"post\">
+                echo "<td><form method=\"post\">
                     <input type=\"submit\" name=\"play" . $song["SongID"] . "\" class=\"button\" value=\"Play\" />
                 </form></td>
                 <td><form method=\"post\">
@@ -101,7 +105,7 @@ if (mysqli_num_rows($result) < 1) {
                 </form></td>";
             }
 
-            "</tr>";
+            echo "</tr>";
         }
         echo "</table>";
     }
@@ -128,6 +132,6 @@ if (mysqli_num_rows($result) < 1) {
 <html>
     <head>
         <link href="/styles/style.css" rel="stylesheet" />
-        <title>Playlist - Spoofy</title>
+        <title><?php echo $playlistName; ?> - Spoofy</title>
     </head>
 </html>

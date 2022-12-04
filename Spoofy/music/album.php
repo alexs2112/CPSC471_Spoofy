@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 $AlbumID = $_GET["AlbumID"];
 
 // Button to Play Album
@@ -35,11 +36,22 @@ $result = $prepare -> get_result();
 // Display Album Details
 $row = mysqli_fetch_array($result);
 $albumTitle = $row["Title"];
-echo "<h1>".$albumTitle."</h1>";
-echo "<p>Cover Art: ".$row["CoverArt"]."</p>";
-if ($row["IsSingle"]) { echo "<p>Single</p>"; }
-echo "<p>Genre: ".$row["Genre"]."</p>";
-echo "<p>Release Date: ".$row["ReleaseDate"]."</p>";
+
+echo "
+<div class='flex_container'>
+    <div>
+        <ul class='invisible'>
+            <li><h1>".$albumTitle."</h1></li>
+            <li><p><b>Genre:</b> ".$row["Genre"]."</p></li>";
+if ($row["IsSingle"]) { echo "<p><b>Single</b></p>"; }        
+echo       "<li><p><b>Release Date:</b> ".$row["ReleaseDate"]."</p></li>
+        </ul>
+    </div>
+    <div>
+        <img id='cover_header' src='/resources/" . album_cover($con, $AlbumID) . "' alt='cover' />
+    </div>
+</div>
+";
 
 // Retrieve Artist Details
 $prepare = mysqli_prepare($con, "SELECT ArtistID FROM HAS WHERE AlbumID=?");
