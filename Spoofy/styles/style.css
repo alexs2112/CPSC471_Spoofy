@@ -94,4 +94,25 @@ tr:nth-child(odd) {background-color: #303031;}
 .flex_container {
     display: flex;
     align-items: center;
+
+/*style of text form fields*/
+input[type=text]{
+    width: 10%;
+    padding: 5px 10px;
+    margin: 3px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*style of password form fields*/
+input[type=password]{
+    width: 10%;
+    padding: 5px 10px;
+    margin: 3px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }

@@ -1,16 +1,33 @@
 <?php
-	include "../modules/menubar.php";
-	include "../modules/mysql_connect.php";
-	
-	//links to artists and albums pages
-	
-	//list the songs
+include "../modules/menubar.php";
+include "../modules/mysql_connect.php";
+
+if(!isset($_SESSION)) { session_start(); }
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {	
+	//title
 	echo "<h2>Manage Songs:</h2>";
 	
+	//links to artists and albums pages
+	echo "<button onclick='location.href=\"manage_artists.php\"' type='button'>
+		Manage Artists
+	</button>&nbsp;";
+	echo "<button onclick='location.href=\"manage_albums.php\"' type='button'>
+		Manage Albums
+	</button><br><br>";
+
+	//add a song
 	echo "<button onclick='location.href=\"add_song.php\"' type='button'>
 		Add Song
+	</button>&nbsp;";
+	echo "<button onclick='location.href=\"add_song_to_album.php\"' type='button'>
+		Add Song to Album
+	</button>&nbsp;";
+	echo "<button onclick='location.href=\"add_credit.php\"' type='button'>
+		Add Artist Credit
 	</button><br>";
+	
 
+	//fetch all songs
 	$result = mysqli_query($con, "SELECT * FROM Song");
 	echo "<table border='1'>
 	<tr>
@@ -56,11 +73,15 @@
 		
 		echo "<td><a href='/admin/delete_song.php?SongID= " . $row['SongID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		echo "<td><a href='/admin/clear_monthly.php?SongID= " . $row['SongID'] . "' onclick=\"return confirm('Are you sure?')\";>Reset Monthly Plays</a></td>";
+		//echo "<td><a href='/admin/add_credit.php?SongID=" . $row['SongID'] . "&Title=" . $row['Title'] . "'>Add Artist Credit</a></td>";
 		"</tr>";
 	}
 	echo "</table>";
 
 	mysqli_close($con);
+} else {
+    header("location: ../error.php");
+}
 ?>
 
 <html>
