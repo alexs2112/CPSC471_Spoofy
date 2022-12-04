@@ -56,6 +56,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
+		<link href="../styles/style.css" rel="stylesheet" />
         <title>Manage Music - Spoofy</title>
     </head>
 </html>
