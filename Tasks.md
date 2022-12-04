@@ -20,7 +20,6 @@
  - Actually being able to play music...
     - Yeah this isn't going to happen lol, last stretch goal
  - Fix songs having multiple albums/artists
- - Display album covers whenever album info is displayed. This can get the cover art path from the DB, and then load the image stored in the repo locally. With a default image if the expected image is not found.
  - We have a bunch of places that user redirections to other php files to call functionalities (the old admin functions mostly). These should be cleaned up to use buttons that call POST. Instead of redirecting to a page and relying on GET.
     - We can simple refactor the php functions into actual functions, then button presses will include the file and call the function
 

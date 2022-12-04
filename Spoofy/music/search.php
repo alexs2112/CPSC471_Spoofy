@@ -175,6 +175,7 @@ if ($isPremium || !$isLoggedIn) {
             // For each song, display their information
             while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>
+                <td><img id='cover_thumb' src='/resources/" . artist_profile($con, $row['ArtistID']) . "' alt='profile'></td>
                 <td>" . $row['Name'] . "</td>
                 <td><a href='/music/artist.php?ArtistID= " . $row['ArtistID'] . "'>View</a></td>
                 </tr>";
