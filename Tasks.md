@@ -2,12 +2,7 @@
 *Note: These are in no particular order, although some tasks will rely on the completion of other tasks*
  - Admin pages
     - List ads, add/approve ads
-    - List songs, add songs and remove songs
-        - Edit song page, to add `WRITES` and `ALBUM_CONTAINS` relations
-        - A way to add stems to songs, probably also in the edit song page
-    - List albums, add albums and remove albums
-    - List artists, add artists and remove artists
-    - The three music things should all be in the same page, under different tabs?
+    - A way to add stems to songs, probably also in the edit song page
  - Clean up all things tagged with `@todo` in the Admin module
     - Not done yet due to active work
     - Make sure all `href` and `header location` tags are pointing to the absolute filepath, not the relative one (their paths should always start with `/`)
