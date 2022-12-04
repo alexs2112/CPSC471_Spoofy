@@ -109,10 +109,10 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
             echo '</div>';
             echo "
             <form method=\"post\">
-                <input type=\"submit\" name=\"PrevSong\" class=\"button\" value=\"Previous\" />
-                <input type=\"submit\" name=\"NextSong\" class=\"button\" value=\"Next\" />
-                <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
-                <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
+                <input type=\"submit\" name=\"PrevSong\" class=\"prevButton\" value=\"Previous\" />
+                <input type=\"submit\" name=\"NextSong\" class=\"nextButton\" value=\"Next\" />
+                <input type=\"submit\" name=\"ClearQueue\" class=\"deleteButton\" value=\"Clear Queue\" />
+                <input type=\"submit\" name=\"Shuffle\" class=\"shuffleButton\" value=\"Shuffle Queue\" />
             </form>
             ";
             $prepare -> close();
