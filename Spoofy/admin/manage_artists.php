@@ -1,6 +1,7 @@
 <?php
 include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
+include "../modules/image_functions.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
@@ -28,7 +29,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 	<th>Name</th>
 	<th>About</th>
 	<th>Profile Picture</th>
-	<th>Banner Picture</th>
+	<th>File Paths</th>
 	</tr>";
 
 	while($row = mysqli_fetch_array($result)) {
@@ -37,8 +38,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		<td>" . $row['ArtistID'] . "</td>
 		<td>" . $row['Name'] . "</td>
 		<td>" . $row['About'] . "</td>
-		<td>" . $row['ProfilePicture'] . "</td>
-		<td>" . $row['BannerPicture'] . "</td>";
+		<td><img id='cover_header' src='/resources/" . artist_profile($con, $row['ArtistID']) . "' alt='profile'></td>
+		<td>" . $row['ProfilePicture'] . "\n" . $row['BannerPicture'] . "</td>";
 		
 		echo "<td><a href='/admin/delete_artist.php?ArtistID=" . $row['ArtistID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		echo "<td><a href='/admin/edit_artist.php?ArtistID=" . $row['ArtistID'] . "'>Edit</a></td>";
