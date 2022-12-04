@@ -95,17 +95,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <body>
         <h1>User Login</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control">
+            <input type="submit" class="btn btn-primary" value="Login">
             <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
             <p>Don't have an account? <a href="/user/register.php">Register</a>.</p>
         </form>

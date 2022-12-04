@@ -73,22 +73,16 @@ else {
         <div class="wrapper">
         <p>Manage Advertisements...</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" name="duration" class="form-control" value="<?php echo $duration; ?>">
-                </div>    
-                <div class="form-group">
-                    <label>Company</label>
-                    <input type="text" name="company" class="form-control" value="<?php echo $company; ?>">
-                </div>
-                <div class="form-group">
-                    <label>SoundFile</label>
-                    <input type="text" name="soundfile" class="form-control" value="<?php echo $soundfile; ?>">
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <input type="reset" class="btn btn-secondary ml-2" value="Reset">
-                </div>
+                <label>Duration</label>
+                <input type="text" name="duration" placeholder="ex. 03:50" class="form-control" value="<?php echo $duration; ?>">
+
+                <label>Company</label>
+                <input type="text" name="company" placeholder="ex. E Corp" class="form-control" value="<?php echo $company; ?>">
+
+                <label>SoundFile</label>
+                <input type="text" name="soundfile" placeholder="ex. ads/ad.mp3" class="form-control" value="<?php echo $soundfile; ?>">
+                
+                <input type="submit" class="btn btn-primary" value="Submit">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
             </form>
             <?php 

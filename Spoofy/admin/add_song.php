@@ -69,22 +69,14 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         <h2>Add a Song</h2>
         <p>Fill in song information:</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group">
-                    <label>Song Title</label>
-                    <input type="text" name="title" class="form-control" value="<?php echo $title; ?>">
-                </div>    
-                <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" name="duration" class="form-control" value="<?php echo $duration; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Song File Path</label>
-                    <input type="text" name="filepath" class="form-control" value="<?php echo $filepath; ?>">
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <input type="reset" class="btn btn-secondary ml-2" value="Reset">
-                </div>
+				<label>Song Title</label>
+				<input type="text" name="title" placeholder="ex. YYZ" class="form-control" value="<?php echo $title; ?>"> 
+				<label>Duration</label>
+				<input type="text" name="duration" placeholder="ex. 03:50" class="form-control" value="<?php echo $duration; ?>">
+				<label>Song File Path</label>
+				<input type="text" name="filepath" placeholder="ex. music/song.mp3" class="form-control" value="<?php echo $filepath; ?>">
+				<input type="submit" class="btn btn-primary" value="Submit">
+				<input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
 				<button onclick='location.href="/admin/add_song.php"' type='button'>
 					Return to Manage Songs
