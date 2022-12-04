@@ -4,8 +4,9 @@ include "../modules/mysql_connect.php";
 
 
 if(!isset($_SESSION)) { session_start(); }
-if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]){
+if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
 
+	// @todo: This throws a php notice if POST is called, as GET has no ArtistID index
 	$ArtistID = $_GET["ArtistID"];
 
 	$prepare = mysqli_prepare($con, "SELECT * FROM ARTIST WHERE ArtistID=?");
@@ -81,6 +82,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
 <html>
     <head>
+		<link href="/styles/style.css" rel="stylesheet" />
         <title>Edit Artist - Spoofy</title>
     </head>
     <body>
@@ -95,10 +97,10 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 <div class="form-group">
                     <label>Artist Name</label>
                     <input type="text" name="name" class="form-control" value="<?php echo $nameDef; ?>">
-                </div>    
+                </div>
+				<label for="about">About</label>
                 <div class="form-group">
-                    <label>About</label>
-                    <input type="text" name="about" size=128 class="form-control" value="<?php echo $aboutDef; ?>">
+					<textarea name="about" rows="4" cols="80"><?php echo $aboutDef; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Path to Profile Picture</label>

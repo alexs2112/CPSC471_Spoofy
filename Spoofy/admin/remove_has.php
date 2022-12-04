@@ -32,7 +32,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		echo "<tr>
 		<td>" . $details['AlbumID'] . "</td>
 		<td>" . $details['Title'] . "</td>
-		<td><a href='/admin/remove_album_from_artist.php?ArtistID=" . $ArtistID . "&AlbumID=" .  $details['AlbumID'] . "&ArtistName=" . $ArtistName . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>
+		<td><a href='/admin/remove_album_from_artist.php?ArtistID=" . $ArtistID . "&AlbumID=" .  $details['AlbumID'] . "&ArtistName=" . $ArtistName . "' onclick=\"return confirm('Are you sure?')\";>Remove</a></td>
 		</tr>";
 	}
 	echo "</table>";
@@ -61,7 +61,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		echo "<tr>
 		<td>" . $details['SongID'] . "</td>
 		<td>" . $details['Title'] . "</td>
-		<td><a href='/admin/remove_song_from_artist.php?ArtistID=" . $ArtistID . "&SongID=" . $details['SongID'] . "&ArtistName=" . $ArtistName . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>
+		<td><a href='/admin/remove_song_from_artist.php?ArtistID=" . $ArtistID . "&SongID=" . $details['SongID'] . "&ArtistName=" . $ArtistName . "' onclick=\"return confirm('Are you sure?')\";>Remove</a></td>
 		</tr>";
 	}
 	echo "</table>";
@@ -75,11 +75,11 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 <html>
     <head>
 		<link href="../styles/style.css" rel="stylesheet" />
-        <title>Manage Music - Spoofy</title>
+        <title>Edit Artist - Spoofy</title>
     </head>
 	<body>
 		<button onclick='location.href="manage_artists.php"' type='button'>
-			Return to Manage Albums
+			Return to Manage Artists
 		</button><br>
 	</body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
+include "../modules/menubar.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
@@ -25,6 +26,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 ?>
 <html>
     <head>
+		<link href="/styles/style.css" rel="stylesheet" />
         <title>Add Artist Credit - Spoofy</title>
     </head>
     <body>
@@ -45,22 +47,35 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 				Return to Manage Songs
 			</button><br>
         </form>
-		<?php echo "<h3>Songs:</h3>";
+		<?php 
+		
+		echo "<table><tr><td>";
+		echo "<h3>Songs:</h3>";
 		
 		$result = mysqli_query($con, "SELECT * FROM Song");
 		echo "<table border='1'>
 		<th>ID</th>
 		<th>Title</th>
+		<th>Artist</th>
 		</tr>";
 
 		while($row = mysqli_fetch_array($result)) {
 			echo "<tr>
 			<td>" . $row['SongID'] . "</td>
 			<td>" . $row['Title'] . "</td>";
+
+			$prepare = mysqli_prepare($con, "SELECT Name FROM ARTIST, WRITES WHERE ARTIST.ArtistID = WRITES.ArtistID AND WRITES.SongID = ?");
+			$prepare -> bind_param("s", $row['SongID']);
+			$prepare -> execute();
+			$artist = $prepare -> get_result();
+			if (mysqli_num_rows($artist) == 0) { echo "<td></td>"; }
+			else { echo "<td>".mysqli_fetch_array($artist)["Name"]."</td>"; }
 			
-			"</tr>";
+			echo "</tr>";
 		}
 		echo "</table>";
+
+		echo "</td><td>";
 		
 		echo "<h3>Artists:</h3>";
 		
@@ -78,6 +93,8 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 			"</tr>";
 		}
 		echo "</table>";
+
+		echo "</td></tr></table>";
 		
 		mysqli_close($con);
 		?>

@@ -15,18 +15,16 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 
         // Validate duration
         $duration = trim($_POST["duration"]);
-        if(empty($duration)) {
-            $error_string = "duration can't be empty.";
-        } elseif(!preg_match('/^[0-9:]+$/', trim($_POST["duration"]))) {
-            $error_string = "duration can only contain numbers and colons.";
-        }
-        
+		if(empty($duration)) {
+			$error_string = "Duration can't be empty.";     
+		} elseif(!preg_match('/^[0-5][0-9]:[0-5][0-9]:[0-5][0-9]$/', trim($_POST["duration"]))) {
+			$error_string = "Duration should be formatted as 'hh:mm:ss'";
+		}
+
         // Validate company
         $company = trim($_POST["company"]);
         if(empty($company)) {
             $error_string = "company can't be empty.";
-        } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["company"]))) {
-            $error_string = "company can only contain letters and numbers";
         }
         
         // Validate soundfile
@@ -53,9 +51,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
                 $prepare -> close();
             }
         }
-        
-        // Close connection
-        mysqli_close($con);
+
     }
 } 
 else {
@@ -71,10 +67,10 @@ else {
     </head>
     <body>
         <div class="wrapper">
-        <p>Manage Advertisements...</p>
+        <h1>Manage Advertisements</h1>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <label>Duration</label>
-                <input type="text" name="duration" placeholder="ex. 03:50" class="form-control" value="<?php echo $duration; ?>">
+                <input type="text" name="duration" placeholder="ex. 00:03:50" class="form-control" value="<?php echo $duration; ?>">
 
                 <label>Company</label>
                 <input type="text" name="company" placeholder="ex. E Corp" class="form-control" value="<?php echo $company; ?>">
