@@ -4,8 +4,7 @@ include "../modules/mysql_connect.php";
 
 if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
-    // @todo send to user profile
-    header("location: ../index.php");
+    header("location: /user/profile.php?UserID=".$_SESSION["UserID"]);
  }
  
 // Define variables and initialize with empty values
@@ -31,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if(empty($error_string)) {
         // Prepare a select statement
-        $sql = "SELECT UserID, Username, PasswordHash FROM USER WHERE Username = ?";
+        $sql = "SELECT * FROM USER WHERE Username = ?";
         $prepare = mysqli_prepare($con, $sql);
         if($prepare) {
             $prepare -> bind_param("s", $username);
@@ -43,13 +42,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_array($result);
                     if ($row["PasswordHash"] == hash("sha256", $password)) {
+
+                        // Basic user info
                         $_SESSION["LoggedIn"] = true;
                         $_SESSION["UserID"] = $row["UserID"];
                         $_SESSION["Username"] = $row["Username"];
+                        $_SESSION["IsPremium"] = boolval($row["IsPremium"]);
 
                         // Set up the playlist
                         $_SESSION["Queue"] = null;
                         $_SESSION["SongIndex"] = 0;
+
+                        // Set up the list of disabled stems
+                        // This is an associative array, of [song_id => [array_of_stems]]
+                        $_SESSION["DisabledStems"] = array();
 
                         // Set the session variable Admin if the user is an administrator
                         $_SESSION["Admin"] = false;
@@ -64,9 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                         }
 
-                        // @todo header("location: user.php?UserID=". $row['UserID']);
-                        // Get rid of this below header when you do that
-                        header("location: ../index.php");
+                        header("location: /index.php");
                     } else {
                         $error_string = "Invalid username or password.";
                     }
@@ -85,24 +89,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <html>
     <head>
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Login - Spoofy</title>
     </head>
     <body>
         <h1>User Login</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control">
+            <input type="submit" class="btn btn-primary" value="Login">
             <?php if ($error_string) echo "<p style=\"color:red;\">".$error_string."</p>";?>
-            <p>Don't have an account? <a href="register.php">Register</a>.</p>
+            <p>Don't have an account? <a href="/user/register.php">Register</a>.</p>
         </form>
     </body>
 </html>

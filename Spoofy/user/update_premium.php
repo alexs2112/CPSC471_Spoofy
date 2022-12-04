@@ -13,6 +13,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
             $renew_date = date("Y-m-d", strtotime("+1 month"));
             $prepare -> bind_param("ss", $renew_date, $UserID);
             $prepare -> execute();
+            $_SESSION["IsPremium"] = true;
         }
         $prepare -> close();
     } else {
@@ -21,12 +22,16 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
         if ($prepare) {
             $prepare -> bind_param("s", $UserID);
             $prepare -> execute();
+            $_SESSION["IsPremium"] = false;
         }
         $prepare -> close();
     }
-    header("location: profile.php?UserID=".$UserID);
+
+    $_SESSION["Queue"] = null;
+    $_SESSION["SongIndex"] = 0;
+    header("location: /user/profile.php?UserID=".$UserID);
 } else {
     // Someone not logged in is trying to update premium
-    header("location: login.php");
+    header("location: /user/login.php");
 }
 ?>

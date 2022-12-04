@@ -11,13 +11,22 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
             <a href=\"/user/register.php\">Register</a>";
 }
 
-// Display songs
-$result = mysqli_query($con, "SELECT * FROM Song");
-echo "<h3>Your gateway to ".(string)mysqli_num_rows($result)." songs!</h3";
+$isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
+
+if ($isPremium) {
+    // Display songs
+    $result = mysqli_query($con, "SELECT * FROM Song");
+    echo "<h3>Your gateway to ".(string)mysqli_num_rows($result)." songs!</h3";
+} else {
+    // Display ads
+    $result = mysqli_query($con, "SELECT * FROM Advertisement");
+    echo "<h3>Your gateway to ".(string)mysqli_num_rows($result)." advertisements!</h3";
+}
 ?>
 
 <html>
     <head>
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>CPSC 471 - Spoofy</title>
     </head>
 </html>

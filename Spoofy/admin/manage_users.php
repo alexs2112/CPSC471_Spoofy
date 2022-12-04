@@ -46,6 +46,7 @@ mysqli_close($con);
 
 <html>
     <head>
+        <link href="../styles/style.css" rel="stylesheet" />
         <title>Manage Users - Spoofy</title>
     </head>
 </html>

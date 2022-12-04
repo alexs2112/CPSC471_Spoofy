@@ -1,9 +1,6 @@
 <?php
 include "../modules/mysql_connect.php";
 
-// Title
-echo "<h1>Music Queue</h1>";
-
 if(!isset($_SESSION)) { session_start(); }
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
 
@@ -24,32 +21,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 include "../modules/menubar.php";
 
+// Title
+echo "<h1>Music Queue</h1>";
+
 // Do this again after menubar, clearing the queue in menubar can do weird stuff
 $numSongs = (!isset($_SESSION["Queue"]) || $_SESSION["Queue"] == null) ? 0 : count($_SESSION["Queue"]);
+$isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 
 // Display song information
 if ($numSongs > 0) {
-    echo "<table border='1'>
-    <tr>
-    <th>Title</th>
-    <th>Duration</th>
-    </tr>";
+    if ($isPremium) {
+        echo "<table border='1'>
+        <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        </tr>";
+    } else {
+        echo "<table border='1'>
+        <tr>
+        <th>Company</th>
+        <th>Duration</th>
+        </tr>";
+    }
 
     for ($i = 0; $i < $numSongs; $i++) {
         // Get the songs information
         $songID = $_SESSION["Queue"][$i];
-        $prepare = mysqli_prepare($con, "SELECT * FROM SONG WHERE SongID=?");
+
+        // Free users can only play ads, premium users can play songs
+        if ($isPremium) {
+            $prepare = mysqli_prepare($con, "SELECT * FROM SONG WHERE SongID=?");
+        } else {
+            $prepare = mysqli_prepare($con, "SELECT * FROM ADVERTISEMENT WHERE AdID=?");
+        }
         $prepare -> bind_param("s", $songID);
         $prepare -> execute();
         $result = $prepare -> get_result();
         $row = mysqli_fetch_array($result);
+
+        $title = $isPremium ? $row['Title'] : $row['Company'];
         echo "<tr>";
 
         // Bold the title if it is currently playing
-        echo $i == $_SESSION["SongIndex"] ? "<td><b>" . $row['Title'] . "</b></td>" : "<td>" . $row['Title'] . "</td>";
-        echo "<td>" . $row['Duration'] . "</td>
-        <td><a href='/music/song.php?SongID= " . $row['SongID'] . "'>View</a></td>
-        <td>
+        echo $i == $_SESSION["SongIndex"] ? "<td><b>" . $title . "</b></td>" : "<td>" . $title . "</td>";
+        echo "<td>" . $row['Duration'] . "</td>";
+        if ($isPremium) { echo "<td><a href='/music/song.php?SongID=" . $row['SongID'] . "'>View</a></td>"; }
+        echo "<td>
             <form method=\"post\">
                 <input type=\"submit\" name=\"Play".$i."\" class=\"button\" value=\"Play\" />
             </form>
@@ -69,6 +86,9 @@ if ($numSongs > 0) {
         <input type=\"submit\" name=\"ClearQueue\" class=\"button\" value=\"Clear Queue\" />
         <input type=\"submit\" name=\"Shuffle\" class=\"button\" value=\"Shuffle Queue\" />
     </form>";
+
+    $prepare -> close();
+    mysqli_close($con);
 } else {
     echo "<h3>No songs playing.</h3>";
 }
@@ -76,6 +96,7 @@ if ($numSongs > 0) {
 
 <html>
     <head>
+        <link href="/styles/style.css" rel="stylesheet" />
         <title>Queue - Spoofy</title>
     </head>
 </html>

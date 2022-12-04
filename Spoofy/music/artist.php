@@ -1,6 +1,33 @@
 <?php
-include "../modules/menubar.php";
 include "../modules/mysql_connect.php";
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    include "../modules/queue_functions.php";
+
+    // See if a song is being interacted with
+    $prepare = mysqli_prepare($con, "SELECT SongID FROM SONG");
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    while ($row = mysqli_fetch_array($result)) {
+        if (array_key_exists("play".$row["SongID"], $_POST)) {
+            play_song($row["SongID"]);
+            increment_song_plays($con, $row["SongID"]);
+        } else if (array_key_exists("queue".$row["SongID"], $_POST)) {
+            add_song_to_queue($row["SongID"]);
+        }
+    }
+
+    // See if an album is being interacted with
+    $prepare = mysqli_prepare($con, "SELECT AlbumID FROM ALBUM");
+    $prepare -> execute();
+    $result = $prepare -> get_result();
+    while ($row = mysqli_fetch_array($result)) {
+        if (array_key_exists("play_album".$row["AlbumID"], $_POST)) {
+            play_album($con, $row["AlbumID"]);
+        }
+    }
+}
+include "../modules/menubar.php";
 
 $ArtistID = $_GET["ArtistID"];
 
@@ -14,9 +41,11 @@ $result = $prepare -> get_result();
 $row = mysqli_fetch_array($result);
 $artistName = $row["Name"];
 echo "<h1>".$artistName."</h1>";
-echo "<p>Profile Picture: ".$row["ProfilePicture"]."</p>";
-echo "<p>Banner Picture: ".$row["BannerPicture"]."</p>";
-echo "<p>About: ".$row["About"]."</p>";
+echo "<p><b>Profile Picture:</b> ".$row["ProfilePicture"]."</p>";
+echo "<p><b>Banner Picture:</b> ".$row["BannerPicture"]."</p>";
+echo "<p><b>About:</b> ".$row["About"]."</p>";
+echo "<p><b>Total Plays:</b> ".($row["TotalPlays"] ?? "0")."</p>";
+echo "<p><b>Monthly Plays:</b> ".($row["MonthlyPlays"] ?? "0")."</p>";
 
 // Get all song IDs
 $prepare = mysqli_prepare($con, "SELECT SongID FROM WRITES WHERE ArtistID=?");
@@ -40,8 +69,16 @@ while($row = mysqli_fetch_array($result)) {
     echo "<tr>
     <td>" . $details['Title'] . "</td>
     <td>" . $details['Duration'] . "</td>
-    <td><a href='/music/song.php?SongID= " . $details['SongID'] . "'>View</a></td>
-    </tr>";
+    <td><a href='/music/song.php?SongID= " . $details['SongID'] . "'>View</a></td>";
+    if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+        echo "<td><form method=\"post\">
+            <input type=\"submit\" name=\"play" . $row["SongID"] . "\" class=\"button\" value=\"Play\" />
+        </form></td>
+        <td><form method=\"post\">
+            <input type=\"submit\" name=\"queue" . $row["SongID"] . "\" class=\"button\" value=\"Add to Queue\" />
+        </form></td>";
+    }
+    echo "</tr>";
 }
 echo "</table>";
 
@@ -69,8 +106,13 @@ while($row = mysqli_fetch_array($result)) {
     echo "<tr>
     <td>" . $details['Title'] . "</td>
     <td>" . $details['ReleaseDate'] . "</td>
-    <td><a href='/music/album.php?AlbumID= " . $albumID . "'>View</a></td>
-    </tr>";
+    <td><a href='/music/album.php?AlbumID= " . $albumID . "'>View</a></td>";
+    if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"]) {
+        echo "<td><form method=\"post\">
+            <input type=\"submit\" name=\"play_album" . $row["AlbumID"] . "\" class=\"button\" value=\"Play\" />
+        </form></td>";
+    }
+    echo "</tr>";
 }
 
 $prepare -> close();
@@ -79,6 +121,7 @@ mysqli_close($con);
 
 <html>
     <head>
+        <link href="/styles/style.css" rel="stylesheet" />
         <title><?php echo $artistName; ?> - Spoofy</title>
     </head>
 </html>

@@ -22,8 +22,8 @@ def create_tables(cursor):
     print("Creating tables in SpoofyDB.")
     cursor.execute("""CREATE TABLE SONG 
         (SongID INT NOT NULL AUTO_INCREMENT,
-        TotalPlays INT,
-        MonthlyPlays INT,
+        TotalPlays INT DEFAULT 0,
+        MonthlyPlays INT DEFAULT 0,
         Title VARCHAR(32),
         Duration VARCHAR(32),
         MusicFile VARCHAR(255),
@@ -34,8 +34,8 @@ def create_tables(cursor):
         About VARCHAR(1500),
         ProfilePicture VARCHAR(255),
         BannerPicture VARCHAR(255),
-        TotalPlays INT,
-        MonthlyPlays INT,
+        TotalPlays INT DEFAULT 0,
+        MonthlyPlays INT DEFAULT 0,
         PRIMARY KEY (ArtistID)) """)
     cursor.execute("""CREATE TABLE ALBUM
         (AlbumID INT NOT NULL AUTO_INCREMENT,
@@ -43,8 +43,6 @@ def create_tables(cursor):
         CoverArt VARCHAR(255),
         ReleaseDate DATE,
         Genre VARCHAR(255),
-        NumSongs INT,
-        TotalDuration VARCHAR(32),
         Title VARCHAR(32),
         PRIMARY KEY (AlbumID)) """)
     cursor.execute("""CREATE TABLE USER
