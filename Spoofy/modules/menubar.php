@@ -23,6 +23,7 @@ $isPremium = array_key_exists("IsPremium", $_SESSION) && $_SESSION["IsPremium"];
 $loggedIn = isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"];
 
 echo '<ul class="topnav ul_menubar">';
+echo '<li class="li_menubar"><img src="/assets/spoofySmall.png" width="45"><a href="/index.php"></a></li>&nbsp';
 echo '<li class="li_menubar"><a href="/index.php">Home</a></li>&nbsp';
 if ($isPremium || !$loggedIn) { echo '<li class="li_menubar"><a href="/music/songs.php">Songs</a></li>&nbsp'; }
 else { echo '<li class="li_menubar"><a href="/music/advertisements.php">Advertisements</a></li>&nbsp'; }
