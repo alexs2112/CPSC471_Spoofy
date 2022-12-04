@@ -42,6 +42,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
 		
 		echo "<td><a href='/admin/delete_artist.php?ArtistID=" . $row['ArtistID'] . "' onclick=\"return confirm('Are you sure?')\";>Delete</a></td>";
 		echo "<td><a href='/admin/edit_artist.php?ArtistID=" . $row['ArtistID'] . "'>Edit</a></td>";
+		echo "<td><a href='/admin/remove_has.php?ArtistID=" . $row['ArtistID'] . "&ArtistName=" . $row['Name'] . "'>Remove Songs or Albums</a></td>";
 		"</tr>";
 	}
 	echo "</table>";

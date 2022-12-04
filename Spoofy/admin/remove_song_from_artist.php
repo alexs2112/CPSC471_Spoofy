@@ -6,6 +6,7 @@ if(!isset($_SESSION)) { session_start(); }
 if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"]) {
     $SongID = $_GET["SongID"];
 	$ArtistID = $_GET["ArtistID"];
+	$ArtistName = $_GET["ArtistName"];
     $sql = "DELETE FROM WRITES WHERE SongID=? AND ArtistID=?";
     $prepare = mysqli_prepare($con, $sql);
     if ($prepare) {
@@ -13,7 +14,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         $prepare -> execute();
     }
     $prepare -> close();
-    header("location: edit_artist.php?ArtistID=" . $ArtistID . "");
+    header("location: remove_has.php?ArtistID=" . $ArtistID . "&ArtistName=" . $ArtistName . "");
 } else {
     header("location: ../error.php");
 }

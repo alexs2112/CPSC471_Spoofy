@@ -13,7 +13,7 @@ if (isset($_SESSION["LoggedIn"]) && $_SESSION["LoggedIn"] && $_SESSION["Admin"])
         $prepare -> execute();
     }
     $prepare -> close();
-    header("location: edit_album.php?AlbumID=" . $AlbumID . "");
+    header("location: remove_album_contains.php?AlbumID=" . $AlbumID . "");
 } else {
     header("location: ../error.php");
 }
