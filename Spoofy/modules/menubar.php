@@ -87,34 +87,34 @@ if (isset($_SESSION["Queue"]) && $_SESSION["Queue"] != null) {
 
             $title = $isPremium ? $row["Title"] : $row["Company"];
             echo '
-            <div class="topnav">
-                <a><strong>Current Song:</strong></a>';
+            <ul class="topnav ul_queue">
+                <li class="li_menubar"><p><b>Current Song:</b>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</p></li>';
             if ($isPremium) {
-                echo '<a href="/music/song.php?SongID='.$SID.'">'.$title.'</a>';
+                echo '<li class="li_menubar"><a href="/music/song.php?SongID='.$SID.'">'.$title.'</a></li>';
             } else {
-                echo '<a href="/music/advertisement.php?AdID='.$SID.'">'.$title.'</a>';
+                echo '<li class="li_menubar"><a href="/music/advertisement.php?AdID='.$SID.'">'.$title.'</a></li>';
             }
-            echo '<a>('.($_SESSION["SongIndex"] + 1).'/'.count($_SESSION["Queue"]).')</a>
-                <a href="/music/queue.php">Queue</a>';
+            echo '<li class="li_menubar"><p></p></li>
+                <li class="li_menubar"><a href="/music/queue.php">Queue</a></li>';
 
             if ($isPremium) {
                 $path = get_song($con, $SID);
                 if ($path != false) {
-                    echo '<audio controls>
+                    echo '<li class="li_menubar"><audio controls>
                         <source src="/resources/'.$path.'" type="audio/mpeg">
-                    </audio>';
+                    </audio></li>';
                 }
             }
             
-            echo '</div>';
             echo "
-            <form method=\"post\">
+            <li class=\"li_menubar\"><form method=\"post\">
                 <input type=\"submit\" name=\"PrevSong\" class=\"prevButton\" value=\"Previous\" />
                 <input type=\"submit\" name=\"NextSong\" class=\"nextButton\" value=\"Next\" />
                 <input type=\"submit\" name=\"ClearQueue\" class=\"deleteButton\" value=\"Clear Queue\" />
                 <input type=\"submit\" name=\"Shuffle\" class=\"shuffleButton\" value=\"Shuffle Queue\" />
-            </form>
+            </form></li>
             ";
+            echo '</ul>';
             $prepare -> close();
         }
     }
