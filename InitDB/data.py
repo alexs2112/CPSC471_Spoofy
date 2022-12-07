@@ -244,12 +244,12 @@ def initialize_data(cursor, db):
         ("Ice Nine Kills", "Diztributor"),
     ])
     d.add_users([
-        ("Alex", sha256(b'1qaz@WSX').hexdigest(), False),
-        ("AlexAdmin", sha256(b'1qaz@WSX').hexdigest(), True, datetime(2025, 1, 1)),
-        ("RyanAdmin", "06c0bf82cee370b32ab6194299edc8231350d8effbe96cb7f904a47d3188baa1", True, datetime(2023, 1, 4)),
+        ("Free", sha256(b'test').hexdigest(), False),
+        ("Admin", sha256(b'test').hexdigest(), True, datetime(2025, 1, 1)),
+        ("Free2", "06c0bf82cee370b32ab6194299edc8231350d8effbe96cb7f904a47d3188baa1", True, datetime(2023, 1, 4)),
     ])
     d.add_admins([
-        "AlexAdmin",
+        "Admin",
     ])
     d.add_ads([
         ("01:00:01", "Live Nation", "ads/live_nation_0.mp3"),
