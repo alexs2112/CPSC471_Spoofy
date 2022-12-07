@@ -126,6 +126,12 @@ class DataAdder:
             if u[0] == username: return i
             i += 1
         return -1
+    
+    def create_admin_playlist(self):
+        self.cursor.execute("INSERT INTO PLAYLIST (PlaylistName, CreatorID) VALUES (%s, %s)", ("Playlist", "2"))
+        self.cursor.execute("INSERT INTO PLAYLIST_CONTAINS (PlaylistID, SongID) VALUES (%s, %s)", ("1", "3"))
+        self.cursor.execute("INSERT INTO PLAYLIST_CONTAINS (PlaylistID, SongID) VALUES (%s, %s)", ("1", "5"))
+        self.cursor.execute("INSERT INTO PLAYLIST_CONTAINS (PlaylistID, SongID) VALUES (%s, %s)", ("1", "8"))
 
 def initialize_data(cursor, db):
     print("Populating tables with default data.")
@@ -256,4 +262,5 @@ def initialize_data(cursor, db):
         ("00:04:21", "Spotify", "ads/spotify_0.mp3"),
         ("00:03:51", "Apple Music", "ads/apple_music_0.mp3"),
     ])
+    d.create_admin_playlist();
     d.commit()
